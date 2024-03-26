@@ -14,6 +14,8 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include "ft_format.h"
+// # include "get_next_line/get_next_line.h"
+// # include "ft_printf/ft_printf.h"
 
 # ifndef FAILURE
 #  define FAILURE 1
@@ -63,6 +65,7 @@ char	*ft_strrchr(const char *s, int c);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strlcmp(const char *s1, const char *s2);
+int		ft_strrcmp(const char *s1, const char *s2);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
@@ -98,6 +101,9 @@ void	ft_nl(void);
 char	*ft_skip_chr_ptr(char *str);
 int		ft_skip_chr_i(char *str, int i);
 void	ft_free_array(char **array);
+void	ft_free_array_r(char **array, int i);
+int		ft_file_lines(int fd);
+char	**ft_store_file(int fd, int lines);
 
 // ft_printf
 int		ft_printf(const char *format, ...);

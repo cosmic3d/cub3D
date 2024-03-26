@@ -1,5 +1,8 @@
 NAME	=	libft.a
 
+### FIX THIS:
+# NO RECOMPILE WHEN TOUCH GET_NEXT_LINE.H or FT_PRINTF.H OR LIBFT.H
+
 ### Source files
 # ft_printf files
 FT_PRINTF_DIR = ft_printf/
@@ -16,7 +19,8 @@ FT_PRINTF_SRC = $(FT_PRINTF_DIR)ft_printf.c \
 
 # get_next_line files
 GNL_DIR = get_next_line/
-GNL_SRC = $(GNL_DIR)get_next_line.c
+GNL_SRC =	$(GNL_DIR)get_next_line.c \
+			$(GNL_DIR)get_next_line_utils.c
 
 FT_TYPE_DIR = ft_type/
 FT_TYPE_SRC =	$(FT_TYPE_DIR)ft_isdigit.c \
@@ -30,7 +34,8 @@ FT_TYPE_SRC =	$(FT_TYPE_DIR)ft_isdigit.c \
 				$(FT_TYPE_DIR)ft_tolower.c
 
 FT_OTHER_DIR = ft_other/
-FT_OTHER_SRC =	$(FT_OTHER_DIR)ft_split.c
+FT_OTHER_SRC =	$(FT_OTHER_DIR)ft_split.c \
+				$(FT_OTHER_DIR)ft_store_file.c
 
 FT_STDLIB_DIR = ft_stdlib/
 FT_STDLIB_SRC =	$(FT_STDLIB_DIR)ft_free_array.c \
@@ -94,7 +99,8 @@ FT_STRING_SRC =	$(FT_STRING_DIR)ft_strlcpy.c \
 				$(FT_STRING_DIR)ft_low_strlen.c \
 				$(FT_STRING_DIR)ft_strnstr.c \
 				$(FT_STRING_DIR)ft_match_ch.c \
-				$(FT_STRING_DIR)ft_strlcmp.c
+				$(FT_STRING_DIR)ft_strlcmp.c \
+				$(FT_STRING_DIR)ft_strrcmp.c
 
 FT_MATH_DIR = ft_math/
 FT_MATH_SRC =	$(FT_MATH_DIR)ft_abs.c \

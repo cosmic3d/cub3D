@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:33:50 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/21 13:26:47 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:58:38 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ void	ft_free_array(char **array)
 	{
 		free(array[i]);
 		i++;
+	}
+	free(array);
+	return ;
+}
+
+void	ft_free_array_r(char **array, int i)
+{
+	while (i >= 0)
+	{
+		free(array[i]);
+		i--;
 	}
 	free(array);
 	return ;

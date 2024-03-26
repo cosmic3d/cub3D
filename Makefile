@@ -36,14 +36,14 @@ $(info Dependency full: [ $(DEPS) ])
 # Libraries
 LIBS_DIR = libs/
 
-LIBFT_DIR = $(LIBS_DIR)/libft
+LIBFT_DIR = $(LIBS_DIR)libft/
 LIBFT_LIB = libft.a
-LIBFT = $(LIBFT_DIR)/$(LIBFT_LIB)
+LIBFT = $(LIBFT_DIR)$(LIBFT_LIB)
 
 ifeq ($(OS),Linux)
-	MLX_DIR = $(LIBS_DIR)minilibx_linux
+	MLX_DIR = $(LIBS_DIR)minilibx_linux/
 else ifeq ($(OS),Darwin)
-	MLX_DIR = $(LIBS_DIR)minilibx_macos
+	MLX_DIR = $(LIBS_DIR)minilibx_macos/
 endif
 MLX_LIB = libmlx.a
 MLX = $(MLX_DIR)/$(MLX_LIB)
@@ -52,18 +52,18 @@ MLX = $(MLX_DIR)/$(MLX_LIB)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -MD -MF
-INCLUDE = -I $(LIBFT_DIR) $(MLX_DIR)
+INCLUDE = -I include/ $(LIBFT_DIR) $(MLX_DIR)
 X11_FLAGS = -lXext -lX11
 FRAMEWORK_FLAGS = -framework OpenGL -framework Appkit
 MATH_FLAGS = -lm
-LINUX_FLAGS = $(INCLUDE) $(X11_FLAGS) $(MATH_FLAGS)
-MAC_FLAGS = $(INCLUDE) $(FRAMEWORK_FLAGS) $(MATH_FLAGS)
+LINUX_FLAGS = $(INCLUDE) $(MATH_FLAGS) $(X11_FLAGS)
+MACOS_FLAGS = $(INCLUDE) $(MATH_FLAGS) $(FRAMEWORK_FLAGS)
 FLAGS =
 
 ifeq ($(OS),Linux)
 	FLAGS = $(LINUX_FLAGS)
 else ifeq ($(OS),Darwin)
-	FLAGS = $(MAC_FLAGS)
+	FLAGS = $(MACOS_FLAGS)
 endif
 
 $(info OS = $(OS))

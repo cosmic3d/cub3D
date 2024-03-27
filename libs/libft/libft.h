@@ -100,6 +100,7 @@ void	ft_putaddress(unsigned long long address);
 void	ft_nl(void);
 char	*ft_skip_chr_ptr(char *str);
 int		ft_skip_chr_i(char *str, int i);
+void	ft_skip_char(char *str, int *i, char c);
 void	ft_free_array(char **array);
 void	ft_free_array_r(char **array, int i);
 int		ft_file_lines(int fd);

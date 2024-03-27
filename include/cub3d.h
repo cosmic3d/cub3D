@@ -13,7 +13,7 @@
 #include "../libs/libft/libft.h"
 #ifdef __linux__
 	#include "../libs/minilibx_linux/mlx.h"
-#elif defined __APPLE__
+#elif defined __APPLE__ // Change this for norminette
 	#include "../libs/minilibx_macos/mlx.h"
 #endif
 
@@ -37,7 +37,12 @@ int	rgb_floor(int range)
 #define ERR_INVALID_FILE_EXTENSION "The file provided is not a .cub file"
 #define ERR_CANNOT_OPEN_FILE "Failure to open the file provided"
 #define ERR_CANNOT_CLOSE_FILE "Failure to close the file provided"
-#define ERR_INVALID_FILE_FORMAT "The file provided doesn't follow the guidelines"
+#define ERR_INVALID_FILE_FORMAT "The file provided doesn't follow the \
+guidelines"
+#define ERR_FILE_REPEATED_ELEMENT "Incorrect file format, repeated element \
+found"
+#define ERR_FILE_FORMAT_ELEMENT "Incorrect file format, an element was \
+incorrectly formatted"
 // Fatal errors
 #define ERR_MALLOC "Memory allocation failed"
 

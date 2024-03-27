@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr_i.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/27 13:31:16 by apresas-         ###   ########.fr       */
+/*   Created: 2024/03/27 14:49:51 by apresas-          #+#    #+#             */
+/*   Updated: 2024/03/27 14:53:39 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_strrchr_i(const char *str, int chr)
 {
-	t_data	data;
+	int	len;
 
-	if (verify_arguments(argc, argv) == FAILURE)
-		return (1);
-
-	parse_argument(&data, argv[1]);
-
-	return (0);
+	len = ft_strlen(str);
+	if ((char)chr == 0)
+		return (len);
+	while (len >= 0)
+	{
+		if (str[len] == (char)chr)
+			return (len);
+		len--;
+	}
+	return (-1);
 }

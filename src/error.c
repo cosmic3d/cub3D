@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:33:53 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/26 18:10:59 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:38:49 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	c3d_error(char *error)
 	ft_printf_fd(2, "%sError\n%s%s\n", F_RED, RESET, error);
 	return (FAILURE);
 }
+
+// int	c3d_perror(int errno) //? To use perror, maybe this or something else
+// for strerror too
 
 /* If an error is provided, c3d_error() will display it. Then, exit(1) is called
 If no error is provided, then exit(0) is called */

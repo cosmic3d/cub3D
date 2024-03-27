@@ -2,11 +2,12 @@ NAME = cub3D
 
 # OS
 OS = $(shell uname -s)
+$(info $(OS))
 
 ### Files
 # Source files
 SRC_DIR = src/
-SRC_FILES =	main.c \
+SRC_FILES =	main.c error.c parser.c verify_arguments.c \
 
 # Format: subdir/file.c | For example: main.c map/init.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -50,7 +51,7 @@ MLX = $(MLX_DIR)/$(MLX_LIB)
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3 #Puede que el 02 sea mejor
 DFLAGS = -MD -MF
 INCLUDE = -I include/ $(LIBFT_DIR) $(MLX_DIR)
 X11_FLAGS = -lXext -lX11

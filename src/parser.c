@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:52:17 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/26 18:25:06 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:15:32 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,23 @@ int	parse_argument(t_data *data, char *filepath)
 		c3d_exit(ERR_CANNOT_OPEN_FILE);
 	data->file = store_file(filepath);
 	parse_file(data);
-	data->map.height = measure_map_height(data)
+	data->map.size[Y] = measure_map_height(data);
 }
 
 void	parse_file(t_data *data)
 {
-	int	i = 0;
+	int	i;
 
-	// Skip empty lines
-	while (data->file[i] && data->file[i][0] == '\n')
+	i = 0;
+	while (i < 6) //EST MAL XD
+	{
+		if (!get_file_elements(data))
+			c3d_exit(ERR_INVALID_FILE_FORMAT);
 		i++;
+	}
 
-	// Check texture rule
-	if (data->file[i] && !ft_strcmp(data->file[i], "NO "))
+	/* // Check texture rule
+	if (data->file[i] && !ft_strcmp(data->file[i], "NO ")) //Está mal creo
 	{
 		data->textures.north = ft_strdup(data->file[i] + 3);
 		if (!data->textures.north)
@@ -49,7 +53,20 @@ void	parse_file(t_data *data)
 			
 		}
 		data->textures.floor = tal;
-	}
+	} */
+}
+
+int get_file_elements(t_data *data)
+{
+	int	i = 0;
+
+	if (!data->file[i])
+		return (FALSE);
+	while (data->file[i][0] == '\n' || data->file[i][0] == SPACE)
+		i++;
+	if (!data->file[i])
+		return (FALSE);
+	
 }
 
 char	**store_file(char *filepath)
@@ -73,9 +90,9 @@ char	**store_file(char *filepath)
 	return (file);
 }
 
-int	measure_map_height(t_data *data)
+/* int	measure_map_height(t_data *data)
 {
 	char	*auxline;
 	int		height;
 
-}
+} */

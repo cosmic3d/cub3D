@@ -18,12 +18,6 @@
 #endif
 
 // Textures
-#define NO "../textures/north.png"
-#define SO "../textures/south.png"
-#define WE "../textures/west.png"
-#define EA "../textures/east.png"
-#define FLOOR 7368816
-#define CEILING 7368816
 /*
 int	rgb_floor(int range)
 {
@@ -47,20 +41,29 @@ int	rgb_floor(int range)
 // Fatal errors
 #define ERR_MALLOC "Memory allocation failed"
 
+//Useful macros
+#define TRUE 1
+#define FALSE 0
+#define X 0
+#define Y 1
+#define WALL 1
+#define EMPTY 0
+#define SPACE 32
+
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
+	double pos[2]; //Puede que venga mejor float
+	double dir[2];
+	double plane[2];
 }				t_player;
 
 typedef struct s_map
 {
-	int**	grid;
-	int		width;
-	int		height;
-	int		spawn_x; // ?
-	int		spawn_y; // ?
+	int		**grid;
+	int		size[2];
+	int		spawn[2];
+	
 	// textures // ?
 }				t_map;
 
@@ -73,7 +76,7 @@ typedef struct s_mlx_data
 
 typedef struct s_texture
 {
-	char	*north;
+	char	*north; //Maybe change to void because of mlx return value when retrieving textures
 	char	*south;
 	char	*east;
 	char	*west;

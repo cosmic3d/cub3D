@@ -34,6 +34,7 @@ int	rgb_floor(int range)
 #define ERR_TOO_FEW_ARGS "Too few arguments provided, one argument is needed"
 #define ERR_TOO_MANY_ARGS "Too many arguments provided, only argument is needed"
 // File errors
+#define ERR_INVALID_FILEPATH "The argument provided has an invalid path"
 #define ERR_INVALID_FILE_EXTENSION "The file provided is not a .cub file"
 #define ERR_CANNOT_OPEN_FILE "Failure to open the file provided"
 #define ERR_CANNOT_CLOSE_FILE "Failure to close the file provided"
@@ -43,6 +44,8 @@ guidelines"
 found"
 #define ERR_FILE_FORMAT_ELEMENT "Incorrect file format, an element was \
 incorrectly formatted"
+#define ERR_NOT_ENOUGH_ELEMENTS "Incorrect file format, not enough elements \
+were provided"
 // Fatal errors
 #define ERR_MALLOC "Memory allocation failed"
 
@@ -87,6 +90,7 @@ typedef struct s_texture
 	char	*west;
 	int		floor;
 	int		ceiling;
+	int		stored_values;
 }				t_texture;
 
 typedef struct s_data
@@ -98,5 +102,20 @@ typedef struct s_data
 	t_map		map;
 	t_player	player;
 }				t_data;
+
+// functions:
+
+int	parse_argument(t_data *data, char *filepath);
+void	clear_newlines(char **file);
+void	parse_file(t_data *data);
+void	get_texture_element(char *line, t_data *data, char **path);
+void	get_color_element(char *line, t_data *data, int *color);
+int	rgb_to_int(int red, int green, int blue);
+int	get_file_elements(t_data *data);
+char	**store_file(char *filepath);
+int	verify_arguments(int argc, char **argv);
+int	c3d_error(char *error);
+void	c3d_exit(char *error);
+char	*get_color_str(char *token);
 
 #endif // CUB3D_H

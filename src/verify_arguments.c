@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:18:25 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/27 13:37:04 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:41:54 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,9 @@ int	verify_arguments(int argc, char **argv)
 		return (c3d_error(ERR_TOO_MANY_ARGS));
 	else if (argc < 2)
 		return (c3d_error(ERR_TOO_FEW_ARGS));
+	if (ft_strlen(argv[1]) <= 4)
+		return (c3d_error(ERR_INVALID_FILEPATH));
 	if (ft_strrcmp(argv[1], ".cub") != 0)
 		return (c3d_error(ERR_INVALID_FILE_EXTENSION));
-	if (ft_strlen(argv[1]) <= 4)
-		return (c3d_error(errorxd));
-/* 	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		return (!c3d_error(ERR_CANNOT_OPEN_FILE));
-	}
-	close(fd); */
 	return (SUCCESS);
 }

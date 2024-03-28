@@ -1,0 +1,19 @@
+Things to do:
+
+	1. Check arguments
+
+	2. Store file
+
+	3. Parse file contents
+
+>1: Check arguments
+-
+
+>3: Parse file contents
+- Iterate through every line of the file
+- Check if line is empty ("")
+	empty: skip
+	!empty: check if line contains element
+		!element: error invalid format
+		element: parse element
+	Stop, when all elements are parsed

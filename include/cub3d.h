@@ -116,6 +116,5 @@ char	**store_file(char *filepath);
 int	verify_arguments(int argc, char **argv);
 int	c3d_error(char *error);
 void	c3d_exit(char *error);
-char	*get_color_str(char *token);
 
 #endif // CUB3D_H

@@ -100,7 +100,12 @@ FT_STRING_SRC =	$(FT_STRING_DIR)ft_strlcpy.c \
 				$(FT_STRING_DIR)ft_strnstr.c \
 				$(FT_STRING_DIR)ft_match_ch.c \
 				$(FT_STRING_DIR)ft_strlcmp.c \
-				$(FT_STRING_DIR)ft_strrcmp.c
+				$(FT_STRING_DIR)ft_strrcmp.c \
+				$(FT_STRING_DIR)ft_strtok.c \
+				$(FT_STRING_DIR)ft_strtok_r.c \
+				$(FT_STRING_DIR)ft_strspn.c \
+				$(FT_STRING_DIR)ft_strcspn.c \
+				$(FT_STRING_DIR)ft_strpbrk.c
 
 FT_MATH_DIR = ft_math/
 FT_MATH_SRC =	$(FT_MATH_DIR)ft_abs.c \

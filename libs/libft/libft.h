@@ -21,7 +21,7 @@
 #  define FAILURE 1
 # endif
 # ifndef SUCCESS
-#  define SUCCESS 1
+#  define SUCCESS 0
 # endif
 
 typedef unsigned int	t_uint;
@@ -43,7 +43,7 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_isspace(int c);
-int		ft_isiter(const char *s, int (*f)(int));
+int		ft_istype_iter(const char *s, int (*f)(int));
 int		ft_match_ch(int c, const char *pattern);
 int		ft_match_str(char *str, const char *pattern);
 int		ft_chrcount(char *str, int c);
@@ -81,6 +81,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strljoin(char const *s1, long s1_n, char const *s2, long s2_n);
 char	*ft_strtrim(char const *s1, char const *set);
+size_t	ft_strspn(const char *str, const char *accept);
+size_t	ft_strcspn(const char *str, const char *reject);
+char	*ft_strtok(char *str, const char *delim);
+char	*ft_strtok_r(char *str, const char *delim, char **saveptr);
+char	*ft_strpbrk(const char *s, const char *accept);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -99,9 +104,10 @@ void	ft_puthex_case_fd(size_t hex, int letter_case, int fd);
 void	ft_puthex_case(size_t hex, int letter_case);
 void	ft_putaddress(unsigned long long address);
 void	ft_nl(void);
-char	*ft_skip_chr_ptr(char *str);
+// char	*ft_skip_chr_ptr(char *str);
+void	ft_skip_char_ptr(char **str, int ch);
 int		ft_skip_chr_i(char *str, int i);
-void	ft_skip_char(char *str, int *i, char c);
+int		ft_skip_char(char *str, int *i, char c);
 void	ft_free_array(char **array);
 void	ft_free_array_r(char **array, int i);
 int		ft_file_lines(int fd);

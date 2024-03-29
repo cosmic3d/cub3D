@@ -60,6 +60,18 @@ were provided"
 #define EMPTY 0
 #define SPACE 32
 
+//COLORS IN INT
+#define RED 0xFF0000
+#define GREEN 0x00FF00
+#define BLUE 0x0000FF
+#define WHITE 0xFFFFFF
+#define BLACK 0x000000
+#define YELLOW 0xFFFF00
+#define CYAN 0x00FFFF
+#define MAGENTA 0xFF00FF
+#define FLOOR WHITE
+#define CEILING CYAN
+
 //Macros for calculation values
 #define WINX 1920
 #define WINY 1080
@@ -78,6 +90,7 @@ typedef struct s_player
 {
 	double pos[2]; //Puede que venga mejor float
 	double dir[2];
+	double angle;
 	double plane[2];
 }				t_player;
 
@@ -95,6 +108,8 @@ typedef struct s_mlx_data
 {
 	void	*mlx;
 	void	*window;
+	t_img	*win_img;
+	t_img	*fc_img; //Floor and ceiling
 	int		texture_size;
 }				t_mlx;
 
@@ -145,4 +160,7 @@ int		keypressed(int keycode, t_data *data);
 t_img	*get_img(t_data *data, int width, int height);
 void	put_pixel(t_img *img, int x, int y, int color);
 
+// render.c
+void	render(t_data *data);
+void	set_floor_ceiling(t_data *data);
 #endif // CUB3D_H

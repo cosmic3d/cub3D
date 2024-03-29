@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/03/29 11:39:28 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:13:13 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@ void	initialize_variables(t_data *data)
 	data->player.dir[X] = data->map.player_dir[X];
 	data->player.dir[Y] = data->map.player_dir[Y];
 	data->player.plane[X] = abs(data->player.dir[Y]) * 0.66;
-	data->player.plane[Y] = abs(data->player.dir[X]) * 0.66;
+	data->player.plane[Y] = abs(data->player.dir[X]) * 0.66; //TENER CUIDADO LUEGO CUANDO SE UTILIZE EL PLANE PORQUE EL EJE VERTICAL VA AL REVES
+	if (data->player.dir[Y] == -1)
+		data->player.angle = 0;
+	else if (data->player.dir[X] == 1)
+		data->player.angle = 90;
+	else if (data->player.dir[Y] == 1)
+		data->player.angle = 180;
+	else if (data->player.dir[X] == -1)
+		data->player.angle = 270;
 }
 
 void	rotate_player(t_data *data, double angle)

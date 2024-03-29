@@ -7,7 +7,7 @@ $(info $(OS))
 ### Files
 # Source files
 SRC_DIR = src/
-SRC_FILES =	main.c error.c parser.c verify_arguments.c \
+SRC_FILES =	main.c error.c parser.c verify_arguments.c pixels.c raycaster.c hooks.c render.c\
 
 # Format: subdir/file.c | For example: main.c map/init.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))

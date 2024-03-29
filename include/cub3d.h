@@ -11,6 +11,8 @@
 #include <fcntl.h>
 #include <stdbool.h>
 #include "../libs/libft/libft.h"
+#include "eventcodes.h"
+#include "keycodes.h"
 #ifdef __linux__
 	#include "../libs/minilibx_linux/mlx.h"
 #elif defined __APPLE__ // Change this for norminette
@@ -58,6 +60,19 @@ were provided"
 #define EMPTY 0
 #define SPACE 32
 
+//Macros for calculation values
+#define WINX 1920
+#define WINY 1080
+#define ROTATE_SPEED 0.1
+
+typedef struct s_img
+{
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line;
+	int				endian;
+}					t_img;
 
 typedef struct s_player
 {
@@ -71,6 +86,7 @@ typedef struct s_map
 	int		**grid;
 	int		size[2];
 	int		spawn[2];
+	int		player_dir[2]; // [0] = x, [1] = y
 	
 	// textures // ?
 }				t_map;
@@ -116,5 +132,17 @@ char	**store_file(char *filepath);
 int	verify_arguments(int argc, char **argv);
 int	c3d_error(char *error);
 void	c3d_exit(char *error);
+
+// raycaster.c
+void	initialize_variables(t_data *data);
+void	rotate_player(t_data *data, double angle);
+
+// hooks.c
+void	hook(t_data *data);
+int		keypressed(int keycode, t_data *data);
+
+// pixels.c
+t_img	*get_img(t_data *data, int width, int height);
+void	put_pixel(t_img *img, int x, int y, int color);
 
 #endif // CUB3D_H

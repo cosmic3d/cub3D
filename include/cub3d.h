@@ -29,7 +29,7 @@ int	rgb_floor(int range)
 */
 
 // Redefining macros that for some reason in my case are wanky
-#define O_RDONLY 00
+/* #define O_RDONLY 00  CAUSES COMPILATION ERROR DUE TO MACRO REDEFINED*/
 
 /* Macros for errors */
 // Argc errors
@@ -146,7 +146,7 @@ int	get_file_elements(t_data *data);
 char	**store_file(char *filepath);
 int	verify_arguments(int argc, char **argv);
 int	c3d_error(char *error);
-void	c3d_exit(char *error);
+int	c3d_exit(char *error);
 
 // raycaster.c
 void	initialize_variables(t_data *data);

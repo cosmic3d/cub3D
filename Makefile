@@ -1,5 +1,18 @@
 NAME = cub3D
 
+# -=-=-=-=-	CLRS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+
+RESET		:= \033[0;39m
+BLACK		:= \033[0;30m
+RED			:= \033[0;91m
+GREEN		:= \033[0;92m
+YELLOW		:= \033[0;93m
+BLUE		:= \033[0;94m
+MAGENTA		:= \033[0;95m
+CYAN		:= \033[0;96m
+GRAY		:= \033[0;90m
+WHITE		:= \033[0;97m
+
 # OS
 OS = $(shell uname -s)
 $(info $(OS))
@@ -20,7 +33,8 @@ $(info Source full: [ $(SRC) ])
 
 # Object files
 OBJ_DIR = obj/
-OBJ = $(addprefix $(OBJ_DIR),$(SRC_FILES:%.c=%.o))
+OBJ    = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
+
 
 $(info >	Object files info:)
 $(info Object directory: [ $(OBJ_DIR) ])
@@ -30,7 +44,7 @@ $(info Object full: [ $(OBJ) ])
 DEPS = $(addprefix $(OBJ_DIR),$(SRC_FILES:%.c=%.d))
 
 $(info >	Dependencies info:)
-$(info Dependency directory: [ $(DEPS_DIR) ])
+# $(info Dependency directory: [ $(DEPS_DIR) ])
 $(info Dependency full: [ $(DEPS) ])
 # $(info [  ])
 
@@ -47,19 +61,23 @@ else ifeq ($(OS),Darwin)
 	MLX_DIR = $(LIBS_DIR)minilibx_macos/
 endif
 MLX_LIB = libmlx.a
-MLX = $(MLX_DIR)/$(MLX_LIB)
+MLX = $(MLX_DIR)$(MLX_LIB)
+LIBS += $(LIBFT)
+LIBS += $(MLX)
 
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -O3 #Puede que el 02 sea mejor
 DFLAGS = -MD -MF
-INCLUDE = -I include/ $(LIBFT_DIR) $(MLX_DIR)
+INCLUDE = -I include/ -I $(LIBFT_DIR) -I $(MLX_DIR)
 X11_FLAGS = -lXext -lX11
 FRAMEWORK_FLAGS = -framework OpenGL -framework Appkit
 MATH_FLAGS = -lm
 LINUX_FLAGS = $(INCLUDE) $(MATH_FLAGS) $(X11_FLAGS)
 MACOS_FLAGS = $(INCLUDE) $(MATH_FLAGS) $(FRAMEWORK_FLAGS)
 FLAGS =
+
+$(info Libs = $(LIBS))
 
 ifeq ($(OS),Linux)
 	FLAGS = $(LINUX_FLAGS)
@@ -75,24 +93,34 @@ MKDIR = mkdir -p
 MUTE = &> /dev/null
 MK = Makefile
 
-all: $(NAME)
+all: make_libs $(NAME)
+
+make_libs:
+	@$(MAKE) -sC $(LIBFT_DIR)
+	@$(MAKE) -sC $(MLX_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) $(FLAGS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MK)
-	@$(MKDIR) $(@D)
-	$(CC) $(CFLAGS) $(DFLAGS) $(OBJ_DIR)/$*.d -c $< -o $@
-
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(MK)
+	@$(MKDIR) $(dir $@)
+##	$(CC) $(CFLAGS)  $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@ 
+	$(CC) -MT $@ -MMD -MP $(CFLAGS) $(INCLUDE) -c $< -o $@
+##La madre que te parió con los wildcards xd
 
 
 clean:
 	@$(RM) $(OBJ)
 	@$(RM) $(DEPS)
 	@$(RM) $(OBJ_DIR)
+	@make clean -sC $(LIBFT_DIR)
+	@make clean -sC $(MLX_DIR)
+	@echo "$(CYAN)Dependencies and objects removed$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
+	@make fclean -sC $(LIBFT_DIR)
+	@echo "$(RED)$(NAME) Removed$(RESET)"
 
 re: fclean all
 

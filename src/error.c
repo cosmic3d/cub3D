@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:33:53 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/28 17:24:51 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:48:21 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ int	c3d_error(char *error)
 
 /* If an error is provided, c3d_error() will display it. Then, exit(1) is called
 If no error is provided, then exit(0) is called */
-void	c3d_exit(char *error)
+int	c3d_exit(char *error) //Needs to be int porque la tengo que llamar en el hooks coño y sino no va
 {
 	if (!error)
 		exit(EXIT_SUCCESS);
 	c3d_error(error);
 	exit(EXIT_FAILURE);
+	return (FAILURE);
 }

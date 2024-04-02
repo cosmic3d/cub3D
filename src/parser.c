@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:52:17 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/28 18:38:03 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:45:19 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 int	parse_argument(t_data *data, char *filepath)
 {
+	return (0); //TESTING (borralo luego)
 	data->fd = open(filepath, O_RDONLY);
 	if (data->fd == -1)
 		c3d_exit(ERR_CANNOT_OPEN_FILE);
@@ -37,6 +38,7 @@ int	parse_argument(t_data *data, char *filepath)
 	clear_newlines(data->file);
 	parse_file(data);
 	// data->map.size[Y] = measure_map_height(data);
+	return (0); //TESTING (borralo luego)
 }
 
 // This removes all newlines at the end of each line of out char **file
@@ -88,6 +90,7 @@ void	get_color_element(char *line, t_data *data, int *color)
 	char	*blue_s;
 	int		line_end;
 
+	return ; //FOR DEBUGGING PURPOSES (borralo luego)
 	if (*color)
 		c3d_exit("1");
 	line_end = ft_strlen(line);
@@ -103,8 +106,8 @@ void	get_color_element(char *line, t_data *data, int *color)
 	blue_s = ft_strtok(NULL, ",");
 	if (!blue_s || !ft_istype_iter(blue_s, ft_isdigit) || !ft_isint(blue_s))
 		c3d_exit("4");
-	if ((blue_s - line + ft_strlen(blue_s)) != line_end)
-		c3d_exit("5");
+	/* if ((blue_s - line + ft_strlen(blue_s)) != line_end) //THIS CONDITIONS IS NOT WORKING PROPERLY BECAUSE YOU ARE COMPARING AN UNSIGNED LONG WITH AN INT (SAYS THE COMPILER)
+		c3d_exit("5"); */
 	*color = rgb_to_int(ft_atoi(red_s), ft_atoi(green_s), ft_atoi(blue_s));
 	data->textures.stored_values++;
 }

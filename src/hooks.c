@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/03/29 11:50:16 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:43:29 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	keypressed(int keycode, t_data *data)
 		rotate_player(data, ROTATE_SPEED);
 	if (keycode == KEY_ESC)
 		c3d_exit(NULL);
+	render(data);
 	return (0);
 }

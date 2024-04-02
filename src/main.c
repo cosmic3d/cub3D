@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/29 14:55:30 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:35:58 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_mlx(t_data *data)
 		c3d_exit("Error\nFailed to create window\n");
 	data->mlx.texture_size = 64;
 	data->mlx.win_img = get_img(data, WINX, WINY);
-	hook(&data);
+	hook(data);
 }
 
 int	main(int argc, char **argv)

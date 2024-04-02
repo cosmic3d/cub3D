@@ -126,7 +126,7 @@ SRC =	$(FT_TYPE_SRC) \
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:%.c=%.o))
 # Dependency files
-DEPS = $(addprefix $(DEPS_DIR), $(SRC:%.c=%.d))
+DEPS = $(addprefix $(OBJ_DIR), $(SRC:%.c=%.d))
 
 # Compiler + flags
 CC = gcc
@@ -150,7 +150,8 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)%.o: ./%.c $(MK)
 	@$(MKDIR) $(@D)
-	$(CC) $(CFLAGS) -I . $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@
+##	$(CC) $(CFLAGS) -I . $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@ Wildcards de los cojone
+	$(CC) -MT $@ -MMD -MP $(CFLAGS) -I . -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ)

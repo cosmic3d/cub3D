@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_skip_chr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:05:07 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/28 18:37:31 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:23:01 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ If the character is not found again, returns a NULL pointer. */
 // 	return (NULL);
 // }
 
-void	ft_skip_char_ptr(char **str, int ch)
+/* void	ft_skip_char_ptr(char **str, int ch)
 {
 	while (**str)
 	{
@@ -44,7 +44,7 @@ void	ft_skip_char_ptr(char **str, int ch)
 			return (str);
 		*str++;
 	}
-}
+} */
 
 /* Receives a string and an index, keeps track of the character at str[i]
 then travels the string until that character is found again. Returns the 

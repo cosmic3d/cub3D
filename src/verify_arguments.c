@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_arguments.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:18:25 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/28 17:41:54 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:45:38 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ argument that is provided ends in ".cub"
 */
 int	verify_arguments(int argc, char **argv)
 {
-	int	fd;
+	//int	fd;
 
 	if (argc > 2)
 		return (c3d_error(ERR_TOO_MANY_ARGS));

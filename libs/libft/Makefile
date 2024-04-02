@@ -122,11 +122,14 @@ SRC =	$(FT_TYPE_SRC) \
 		$(FT_PRINTF_SRC) \
 		$(GNL_SRC)
 
+LAST_SRC = $(lastword $(SRC))
+
 # Object files
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:%.c=%.o))
 # Dependency files
 DEPS = $(addprefix $(DEPS_DIR), $(SRC:%.c=%.d))
+OBJ_COUNT = 0
 
 # Compiler + flags
 CC = gcc
@@ -141,16 +144,21 @@ MKDIR = mkdir -p
 MUTE = &> /dev/null
 MK = Makefile
 
-# Rules
+# ANSI codes
+ESC = \033[
+RESET = $(ESC)0m
+ITALIC = $(ESC)3m
+DIM = $(ESC)2m
 
+# Rules
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar $(ARFLAGS) $(NAME) $(OBJ)
+	@ar $(ARFLAGS) $(NAME) $(OBJ)
 
 $(OBJ_DIR)%.o: ./%.c $(MK)
 	@$(MKDIR) $(@D)
-	$(CC) $(CFLAGS) -I . $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@
+	@$(CC) $(CFLAGS) -I . $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ)

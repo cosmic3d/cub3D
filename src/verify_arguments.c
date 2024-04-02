@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:18:25 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/28 17:41:54 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:16:22 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ argument that is provided ends in ".cub"
 */
 int	verify_arguments(int argc, char **argv)
 {
-	int	fd;
-
 	if (argc > 2)
 		return (c3d_error(ERR_TOO_MANY_ARGS));
 	else if (argc < 2)

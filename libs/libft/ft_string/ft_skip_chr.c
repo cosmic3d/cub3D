@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:05:07 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/28 18:37:31 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:59:00 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,17 @@ If the character is not found again, returns a NULL pointer. */
 // 	return (NULL);
 // }
 
-void	ft_skip_char_ptr(char **str, int ch)
+// DO NOT USE WITHOUT VERIFYING THAT THE FUNCTION WORKS
+// THIS IS A WIP
+char	*ft_skip_char_ptr(char **str, int ch)
 {
 	while (**str)
 	{
 		if (**str == ch)
-			return (str);
-		*str++;
+			return (*str);
+		*str += 1;
 	}
+	return (*str); // ?
 }
 
 /* Receives a string and an index, keeps track of the character at str[i]

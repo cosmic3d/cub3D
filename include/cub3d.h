@@ -73,8 +73,8 @@ were provided"
 #define CEILING CYAN
 
 //Macros for calculation values
-#define WINX 1920
-#define WINY 1080
+#define WINX 1280
+#define WINY 720
 #define ROTATE_SPEED 0.1
 
 typedef struct s_img

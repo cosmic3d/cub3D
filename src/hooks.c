@@ -28,10 +28,10 @@ int	keypressed(int keycode, t_data *data)
 {
 	ft_printf("Keycode: %d\n", keycode);
 	// c3d_exit(NULL);
-	if (keycode == KEY_A)
+	/* if (keycode == KEY_A)
 		rotate_player(data, -ROTATE_SPEED);
 	if (keycode == KEY_D)
-		rotate_player(data, ROTATE_SPEED);
+		rotate_player(data, ROTATE_SPEED); */
 	if (keycode == KEY_ESC)
 		c3d_exit(NULL);
 	render(data);

@@ -155,6 +155,7 @@ void	rotate_player(t_data *data, double angle);
 // hooks.c
 void	hook(t_data *data);
 int		keypressed(int keycode, t_data *data);
+int		mousedown(int keycode, int x, int y, t_data *data);
 
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);

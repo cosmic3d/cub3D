@@ -73,8 +73,8 @@ were provided"
 #define CEILING CYAN
 
 //Macros for calculation values
-#define WINX 1280
-#define WINY 720
+#define WINX 640
+#define WINY 360
 #define ROTATE_SPEED 0.1
 
 typedef struct s_img
@@ -100,16 +100,29 @@ typedef struct s_map
 	int		size[2];
 	int		spawn[2];
 	int		player_dir[2]; // [0] = x, [1] = y
-	
+
 	// textures // ?
 }				t_map;
+
+typedef struct s_ray
+{
+	double	camera[2];
+	double	ray_dir[2];
+	int		map[2];
+	double	side_dist[2];
+	double	delta_dist[2];
+	double	perp_wall_dist;
+	int		step[2];
+	int		hit;
+	int		side;
+}				t_ray;
 
 typedef struct s_mlx_data
 {
 	void	*mlx;
 	void	*window;
 	t_img	*win_img;
-	t_img	*fc_img; //Floor and ceiling
+	//t_img	*fc_img; //Floor and ceiling
 	int		texture_size;
 }				t_mlx;
 
@@ -132,6 +145,7 @@ typedef struct s_data
 	t_texture	textures;
 	t_map		map;
 	t_player	player;
+	t_ray		ray;
 }				t_data;
 
 // functions:
@@ -150,7 +164,6 @@ int	c3d_exit(char *error);
 
 // raycaster.c
 void	initialize_variables(t_data *data);
-void	rotate_player(t_data *data, double angle);
 
 // hooks.c
 void	hook(t_data *data);
@@ -164,4 +177,7 @@ void	put_pixel(t_img *img, int x, int y, int color);
 // render.c
 void	render(t_data *data);
 void	set_floor_ceiling(t_data *data);
+
+// movement.c
+void	rotate_player(t_data *data, double angle);
 #endif // CUB3D_H

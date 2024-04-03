@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/02 12:46:51 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/04 01:08:47 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,35 @@ void	initialize_variables(t_data *data)
 		data->player.angle = 270;
 }
 
-void	rotate_player(t_data *data, double angle)
+void	init_raycasting(t_data *data)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	int	x;
 
-	old_dir_x = data->player.dir[X];
-	data->player.dir[X] = data->player.dir[X] * cos(angle) - \
-	data->player.dir[Y] * sin(angle);
-	data->player.dir[Y] = old_dir_x * sin(angle) + \
-	data->player.dir[Y] * cos(angle);
-	old_plane_x = data->player.plane[X];
-	data->player.plane[X] = data->player.plane[X] * cos(angle) - \
-	data->player.plane[Y] * sin(angle);
-	data->player.plane[Y] = old_plane_x * sin(angle) + \
-	data->player.plane[Y] * cos(angle);
+	x = -1;
+	// Inializamos las variables de la estructura ray
+	while (++x < WINX)
+	{
+		// Calculamos la dirección de la cámara
+		data->ray.camera[X] = 2 * x / (double)WINX - 1;
+		// Calculamos la dirección del rayo
+		data->ray.ray_dir[X] = data->player.dir[X] + data->player.plane[X] * data->ray.camera[X];
+		data->ray.ray_dir[Y] = data->player.dir[Y] + data->player.plane[Y] * data->ray.camera[X];
+		// Calculamos la posición del jugador en el mapa (este valor es un entero porque luego así determinaremos si hay una pared o no)
+		data->ray.map[X] = (int)data->player.pos[X];
+		data->ray.map[Y] = (int)data->player.pos[Y];
+		// Calculamos la distancia que recorre el rayo hasta la siguiente pared en ambas direcciones (es la inversa de la dirección del rayo)
+		data->ray.delta_dist[X] = fabs(1 / data->ray.ray_dir[X]);
+		data->ray.delta_dist[Y] = fabs(1 / data->ray.ray_dir[Y]);
+		data->ray.hit = 0;
+		// Calculamos la PRIMERA distancia que recorre el rayo hasta la siguiente pared en ambas direcciones
+		if (data->ray.ray_dir[X] < 0 && --data->ray.step[X] != 42)
+			data->ray.side_dist[X] = (data->player.pos[X] - data->ray.map[X]) * data->ray.delta_dist[X];
+		else
+			data->ray.side_dist[X] = (data->ray.map[X] + 1.0 - data->player.pos[X]) * data->ray.delta_dist[X];
+		if (data->ray.ray_dir[Y] < 0 && --data->ray.step[Y] != 42)
+			data->ray.side_dist[Y] = (data->player.pos[Y] - data->ray.map[Y]) * data->ray.delta_dist[Y];
+		else
+			data->ray.side_dist[Y] = (data->ray.map[Y] + 1.0 - data->player.pos[Y]) * data->ray.delta_dist[Y];
+	}
 }
+

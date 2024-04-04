@@ -56,8 +56,8 @@ were provided"
 #define FALSE 0
 #define X 0
 #define Y 1
-#define WALL 1
-#define EMPTY 0
+#define WALL '1'
+#define EMPTY '0'
 #define SPACE 32
 
 //COLORS IN INT
@@ -114,7 +114,7 @@ typedef struct s_ray
 	double	perp_wall_dist;
 	int		step[2];
 	int		hit;
-	int		side;
+	int		side[2];
 }				t_ray;
 
 typedef struct s_mlx_data
@@ -162,8 +162,16 @@ int	verify_arguments(int argc, char **argv);
 int	c3d_error(char *error);
 int	c3d_exit(char *error);
 
-// raycaster.c
+// main.c
 void	initialize_variables(t_data *data);
+void	init_mlx(t_data *data);
+
+// raycaster.c
+void	init_raycasting(t_data *data);
+void	calculate_step(t_data *data);
+void 	check_hit(t_data *data);
+void 	calculate_perp_dist(t_data *data);
+void 	draw_vert_stripe(t_data *data, int x);
 
 // hooks.c
 void	hook(t_data *data);

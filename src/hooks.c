@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/03 23:51:07 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:01:17 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ int	keypressed(int keycode, t_data *data)
 		data->player.angle += ROTATE_SPEED;
 		if (data->player.angle >= 360)
 			data->player.angle -= 360;
-		rotate_player(data, data->player.angle);
+		rotate_player(data, ROTATE_SPEED);
 	}
 	else if (keycode == KEY_LEFT)
 	{
 		data->player.angle -= ROTATE_SPEED;
 		if (data->player.angle < 0)
 			data->player.angle += 360;
-		rotate_player(data, data->player.angle);
+		rotate_player(data, -ROTATE_SPEED);
 	}
 	else if (keycode == KEY_ESC)
 		c3d_exit(NULL);
@@ -54,6 +54,10 @@ int	keypressed(int keycode, t_data *data)
 
 int	mousedown(int keycode, int x, int y, t_data *data)
 {
-	ft_printf("Mouse Keycode: %d\n Mouse [X, Y]: [%d,%d]\nData pointer: %p\n", keycode, x, y, data);
+	(void)x;
+	(void)y;
+	(void)data;
+	(void)keycode;
+	//ft_printf("Mouse Keycode: %d\n Mouse [X, Y]: [%d,%d]\nData pointer: %p\n", keycode, x, y, data);
 	return (0);
 }

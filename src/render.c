@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:43:23 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/02 12:43:45 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:07:44 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,7 @@
 void	render(t_data *data)
 {
 	set_floor_ceiling(data);
-	/* SE REALIZAN LOS CÁLCULOS PARA DIBUJAR EN LA */
-	/* int		x;
-
-	x = 0;
-	while (x < WINX)
-	{
-		cast_ray(data, x);
-		x++;
-	} */
+	init_raycasting(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.window, data->mlx.win_img->img, 0, 0);
 }
 

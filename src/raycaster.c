@@ -3,35 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/04 01:08:47 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:19:28 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* EN ESTE ARCHIVO SE REALIZARÁN ALGUNAS FUNCIONES QUE CREA UTILES PARA EL RAYCASTER,
 INCLUSO EL PROPIO RAYCASTER */
 
-#include "cub3d.h"
+//TESTING
+/* const int mapa_test[5][5] = {
+	{'1', '1', '1', '1', '1'},
+	{'1', '0', '0', '0', '1'},
+	{'1', '0', '0', '0', '1'},
+	{'1', '0', '0', '0', '1'},
+	{'1', '1', '1', '1', '1'}
+}; */
 
-void	initialize_variables(t_data *data)
-{
-	data->player.pos[X] = data->map.spawn[X] + 0.5;
-	data->player.pos[Y] = data->map.spawn[Y] + 0.5;
-	data->player.dir[X] = data->map.player_dir[X];
-	data->player.dir[Y] = data->map.player_dir[Y];
-	data->player.plane[X] = fabs(data->player.dir[Y]) * 0.66;
-	data->player.plane[Y] = fabs(data->player.dir[X]) * 0.66; //TENER CUIDADO LUEGO CUANDO SE UTILIZE EL PLANE PORQUE EL EJE VERTICAL VA AL REVES
-	if (data->player.dir[Y] == -1)
-		data->player.angle = 0;
-	else if (data->player.dir[X] == 1)
-		data->player.angle = 90;
-	else if (data->player.dir[Y] == 1)
-		data->player.angle = 180;
-	else if (data->player.dir[X] == -1)
-		data->player.angle = 270;
-}
+#include "cub3d.h"
 
 void	init_raycasting(t_data *data)
 {
@@ -53,15 +44,93 @@ void	init_raycasting(t_data *data)
 		data->ray.delta_dist[X] = fabs(1 / data->ray.ray_dir[X]);
 		data->ray.delta_dist[Y] = fabs(1 / data->ray.ray_dir[Y]);
 		data->ray.hit = 0;
-		// Calculamos la PRIMERA distancia que recorre el rayo hasta la siguiente pared en ambas direcciones
-		if (data->ray.ray_dir[X] < 0 && --data->ray.step[X] != 42)
-			data->ray.side_dist[X] = (data->player.pos[X] - data->ray.map[X]) * data->ray.delta_dist[X];
-		else
-			data->ray.side_dist[X] = (data->ray.map[X] + 1.0 - data->player.pos[X]) * data->ray.delta_dist[X];
-		if (data->ray.ray_dir[Y] < 0 && --data->ray.step[Y] != 42)
-			data->ray.side_dist[Y] = (data->player.pos[Y] - data->ray.map[Y]) * data->ray.delta_dist[Y];
-		else
-			data->ray.side_dist[Y] = (data->ray.map[Y] + 1.0 - data->player.pos[Y]) * data->ray.delta_dist[Y];
+		calculate_step(data);
+		check_hit(data);
+		calculate_perp_dist(data);
+		draw_vert_stripe(data, x);
 	}
 }
 
+void	calculate_step(t_data *data)
+{
+	// Calculamos la primera distancia que recorre el rayo hasta la siguiente pared en ambas direcciones
+	if (data->ray.ray_dir[X] < 0)
+	{
+		data->ray.step[X] = -1;
+		data->ray.side_dist[X] = (data->player.pos[X] - data->ray.map[X]) * data->ray.delta_dist[X];
+	}
+	else
+	{
+		data->ray.step[X] = 1;
+		data->ray.side_dist[X] = (data->ray.map[X] + 1.0 - data->player.pos[X]) * data->ray.delta_dist[X];
+	}
+	if (data->ray.ray_dir[Y] < 0)
+	{
+		data->ray.step[Y] = -1;
+		data->ray.side_dist[Y] = (data->player.pos[Y] - data->ray.map[Y]) * data->ray.delta_dist[Y];
+	}
+	else
+	{
+		data->ray.step[Y] = 1;
+		data->ray.side_dist[Y] = (data->ray.map[Y] + 1.0 - data->player.pos[Y]) * data->ray.delta_dist[Y];
+	}
+}
+
+void check_hit(t_data *data)
+{
+	while (data->ray.hit == 0)
+	{
+		if (data->ray.side_dist[X] < data->ray.side_dist[Y])
+		{
+			data->ray.side_dist[X] += data->ray.delta_dist[X];
+			data->ray.map[X] += data->ray.step[X];
+			data->ray.side[Y] = 0;
+			data->ray.side[X] = 1;
+			if (data->ray.step[X] < 0)
+				data->ray.side[X] = -1;
+		}
+		else
+		{
+			data->ray.side_dist[Y] += data->ray.delta_dist[Y];
+			data->ray.map[Y] += data->ray.step[Y];
+			data->ray.side[X] = 0;
+			data->ray.side[Y] = 1;
+			if (data->ray.step[Y] < 0)
+				data->ray.side[Y] = -1;
+		}
+		if (data->map.grid[data->ray.map[Y]][data->ray.map[X]] == WALL)
+			data->ray.hit = 1;
+	}
+}
+
+void calculate_perp_dist(t_data *data)
+{
+	if (data->ray.side[X] != 0)
+		data->ray.perp_wall_dist = data->ray.side_dist[X] - data->ray.delta_dist[X];
+	else
+		data->ray.perp_wall_dist = data->ray.side_dist[Y] - data->ray.delta_dist[Y];
+}
+
+void draw_vert_stripe(t_data *data, int x)
+{
+	int	y;
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+	int	color; //Provisional para ver si se pinta bien la pared
+
+	line_height = (int)(WINY / data->ray.perp_wall_dist);
+	draw_start = WINY / 2 - line_height / 2 ;
+	draw_end = line_height / 2 + WINY / 2;
+	y = draw_start - 1;
+	if (data->ray.side[X] == 1 && data->ray.side[Y] == 0)
+		color = RED;
+	else if (data->ray.side[X] == -1 && data->ray.side[Y] == 0)
+		color = BLUE;
+	else if (data->ray.side[Y] == 1 && data->ray.side[X] == 0)
+		color = GREEN;
+	else if (data->ray.side[Y] == -1 && data->ray.side[X] == 0)
+		color = YELLOW;
+	while (++y < draw_end)
+		put_pixel(data->mlx.win_img, x, y, color);
+}

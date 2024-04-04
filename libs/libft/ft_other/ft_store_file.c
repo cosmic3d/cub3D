@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:08:30 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/26 17:59:00 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:29:16 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_store_file(int fd, int lines)
 		file[i] = get_next_line(fd);
 		if (!file[i])
 		{
-			ft_free_array_r(file, i - 1);
+			ft_free_array_r((void *)file, i - 1);
 			return (free(file), NULL);
 		}
 		i++;

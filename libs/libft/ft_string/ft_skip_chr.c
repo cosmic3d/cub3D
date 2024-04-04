@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_skip_chr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:05:07 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/02 13:23:01 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:48:31 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+//////// W I P ///////// USE STRNCHR OR STRNCHR_I INSTEAD
 // All of these functions are a WIP and I still haven't figured out exactly
 // which versions I want
 
@@ -36,15 +37,17 @@ If the character is not found again, returns a NULL pointer. */
 // 	return (NULL);
 // }
 
-/* void	ft_skip_char_ptr(char **str, int ch)
-{
-	while (**str)
-	{
-		if (**str == ch)
-			return (str);
-		*str++;
-	}
-} */
+// DO NOT USE WITHOUT VERIFYING THAT THE FUNCTION WORKS
+// THIS IS A WIP
+// char	*ft_skip_char_ptr(char **str, int ch)
+// {
+// 	while (**str)
+// 	{
+// 		if (**str == ch)
+// 			return (*str);
+// 		*str += 1;
+// 	}
+// }
 
 /* Receives a string and an index, keeps track of the character at str[i]
 then travels the string until that character is found again. Returns the 
@@ -72,8 +75,9 @@ starting at str[*i], returns the amount of characters that were skipped */
 // WIP
 int	ft_skip_char(char *str, int *i, char c)
 {
-	int	j = 0;
+	int	j;
 
+	j = 0;
 	while (str[*i + j] == c)
 		j++;
 	*i += j;
@@ -85,8 +89,9 @@ int	ft_skip_char(char *str, int *i, char c)
 // etc.
 void	ft_skip_spaces(char *str, int *i)
 {
-	int	j = *i;
+	int	j;
 
+	j = *i;
 	while (str[j] == ' ')
 		j++;
 	*i = j;

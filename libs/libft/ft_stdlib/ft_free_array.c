@@ -6,13 +6,13 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:33:50 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/26 17:58:38 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:28:25 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_array(char **array)
+void	ft_free_array(void **array)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ void	ft_free_array(char **array)
 	return ;
 }
 
-void	ft_free_array_r(char **array, int i)
+void	ft_free_array_r(void **array, int i)
 {
 	while (i >= 0)
 	{

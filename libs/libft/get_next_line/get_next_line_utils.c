@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by apresas-          #+#    #+#             */
-/*   Updated: 2024/03/26 16:03:55 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:05:26 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ char	*gnl_strjoin(char *left_str, char *buff)
 	}
 	if (!left_str || !buff)
 		return (NULL);
-	str = malloc(sizeof(char) * ((gnl_strlen(left_str) + gnl_strlen(buff)) + 1));
+	str = malloc(sizeof(char) * ((gnl_strlen(left_str) + \
+	gnl_strlen(buff)) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;

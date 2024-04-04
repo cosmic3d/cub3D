@@ -61,6 +61,8 @@ int		ft_toupper(int c);
 int		ft_tolower(int c);
 char	*ft_strchr(char *s, int c);
 int		ft_strchr_i(char *str, int chr);
+char	*ft_strnchr(char *str, int chr);
+int		ft_strnchr_i(char *str, int chr);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strrchr_i(const char *str, int chr);
 int		ft_strcmp(const char *s1, const char *s2);
@@ -104,14 +106,15 @@ void	ft_puthex_case_fd(size_t hex, int letter_case, int fd);
 void	ft_puthex_case(size_t hex, int letter_case);
 void	ft_putaddress(unsigned long long address);
 void	ft_nl(void);
-// char	*ft_skip_chr_ptr(char *str);
-void	ft_skip_char_ptr(char **str, int ch);
+char	*ft_skip_char_ptr(char **str, int ch);
+// void	ft_skip_char_ptr(char **str, int ch);
 int		ft_skip_chr_i(char *str, int i);
 int		ft_skip_char(char *str, int *i, char c);
-void	ft_free_array(char **array);
-void	ft_free_array_r(char **array, int i);
+void	ft_free_array(void **array);
+void	ft_free_array_r(void **array, int i);
 int		ft_file_lines(int fd);
 char	**ft_store_file(int fd, int lines);
+void	*ft_alloc_array(size_t size, size_t h, size_t w);
 
 // ft_printf
 int		ft_printf(const char *format, ...);

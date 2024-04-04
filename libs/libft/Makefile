@@ -35,7 +35,8 @@ FT_TYPE_SRC =	$(FT_TYPE_DIR)ft_isdigit.c \
 
 FT_OTHER_DIR = ft_other/
 FT_OTHER_SRC =	$(FT_OTHER_DIR)ft_split.c \
-				$(FT_OTHER_DIR)ft_store_file.c
+				$(FT_OTHER_DIR)ft_store_file.c \
+				$(FT_OTHER_DIR)ft_alloc_array.c
 
 FT_STDLIB_DIR = ft_stdlib/
 FT_STDLIB_SRC =	$(FT_STDLIB_DIR)ft_free_array.c \
@@ -46,7 +47,6 @@ FT_STDLIB_SRC =	$(FT_STDLIB_DIR)ft_free_array.c \
 				$(FT_STDLIB_DIR)ft_atoi.c \
 				$(FT_STDLIB_DIR)ft_itoa.c \
 				$(FT_STDLIB_DIR)ft_intlen.c \
-				$(FT_STDLIB_DIR)ft_atof.c \
 				$(FT_STDLIB_DIR)ft_calloc.c
 
 FT_STDIO_DIR = ft_stdio/
@@ -105,7 +105,9 @@ FT_STRING_SRC =	$(FT_STRING_DIR)ft_strlcpy.c \
 				$(FT_STRING_DIR)ft_strtok_r.c \
 				$(FT_STRING_DIR)ft_strspn.c \
 				$(FT_STRING_DIR)ft_strcspn.c \
-				$(FT_STRING_DIR)ft_strpbrk.c
+				$(FT_STRING_DIR)ft_strpbrk.c \
+				$(FT_STRING_DIR)ft_strnchr.c \
+				$(FT_STRING_DIR)ft_strnchr_i.c
 
 FT_MATH_DIR = ft_math/
 FT_MATH_SRC =	$(FT_MATH_DIR)ft_abs.c \
@@ -121,6 +123,8 @@ SRC =	$(FT_TYPE_SRC) \
 		$(FT_STRING_SRC) \
 		$(FT_PRINTF_SRC) \
 		$(GNL_SRC)
+
+LAST_SRC = $(lastword $(SRC))
 
 # Object files
 OBJ_DIR = obj/
@@ -141,17 +145,21 @@ MKDIR = mkdir -p
 MUTE = &> /dev/null
 MK = Makefile
 
-# Rules
+# ANSI codes
+ESC = \033[
+RESET = $(ESC)0m
+ITALIC = $(ESC)3m
+DIM = $(ESC)2m
 
+# Rules
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar $(ARFLAGS) $(NAME) $(OBJ)
+	@ar $(ARFLAGS) $(NAME) $(OBJ)
 
 $(OBJ_DIR)%.o: ./%.c $(MK)
 	@$(MKDIR) $(@D)
-##	$(CC) $(CFLAGS) -I . $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@ Wildcards de los cojone
-	$(CC) -MT $@ -MMD -MP $(CFLAGS) -I . -c $< -o $@
+	@$(CC) $(CFLAGS) -I . $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ)

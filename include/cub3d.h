@@ -56,8 +56,8 @@ were provided"
 #define FALSE 0
 #define X 0
 #define Y 1
-#define WALL 1
-#define EMPTY 0
+#define WALL '1'
+#define EMPTY '0'
 #define SPACE 32
 
 //COLORS IN INT
@@ -73,8 +73,8 @@ were provided"
 #define CEILING CYAN
 
 //Macros for calculation values
-#define WINX 1920
-#define WINY 1080
+#define WINX 640
+#define WINY 360
 #define ROTATE_SPEED 0.1
 
 typedef struct s_img
@@ -100,16 +100,29 @@ typedef struct s_map
 	int		size[2];
 	int		spawn[2];
 	int		player_dir[2]; // [0] = x, [1] = y
-	
+
 	// textures // ?
 }				t_map;
+
+typedef struct s_ray
+{
+	double	camera[2];
+	double	ray_dir[2];
+	int		map[2];
+	double	side_dist[2];
+	double	delta_dist[2];
+	double	perp_wall_dist;
+	int		step[2];
+	int		hit;
+	int		side[2];
+}				t_ray;
 
 typedef struct s_mlx_data
 {
 	void	*mlx;
 	void	*window;
 	t_img	*win_img;
-	t_img	*fc_img; //Floor and ceiling
+	//t_img	*fc_img; //Floor and ceiling
 	int		texture_size;
 }				t_mlx;
 
@@ -132,6 +145,7 @@ typedef struct s_data
 	t_texture	textures;
 	t_map		map;
 	t_player	player;
+	t_ray		ray;
 }				t_data;
 
 // functions:
@@ -148,13 +162,21 @@ int	verify_arguments(int argc, char **argv);
 int	c3d_error(char *error);
 int	c3d_exit(char *error);
 
-// raycaster.c
+// main.c
 void	initialize_variables(t_data *data);
-void	rotate_player(t_data *data, double angle);
+void	init_mlx(t_data *data);
+
+// raycaster.c
+void	init_raycasting(t_data *data);
+void	calculate_step(t_data *data);
+void 	check_hit(t_data *data);
+void 	calculate_perp_dist(t_data *data);
+void 	draw_vert_stripe(t_data *data, int x);
 
 // hooks.c
 void	hook(t_data *data);
 int		keypressed(int keycode, t_data *data);
+int		mousedown(int keycode, int x, int y, t_data *data);
 
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);
@@ -163,4 +185,7 @@ void	put_pixel(t_img *img, int x, int y, int color);
 // render.c
 void	render(t_data *data);
 void	set_floor_ceiling(t_data *data);
+
+// movement.c
+void	rotate_player(t_data *data, double angle);
 #endif // CUB3D_H

@@ -88,12 +88,12 @@ void	get_color_element(char *line, t_data *data, int *color)
 	char	*red_s;
 	char	*green_s;
 	char	*blue_s;
-	int		line_end;
+	// int		line_end;
 
 	return ; //FOR DEBUGGING PURPOSES (borralo luego)
 	if (*color)
 		c3d_exit("1");
-	line_end = ft_strlen(line);
+	// line_end = ft_strlen(line);
 	i = 1;
 	if (ft_skip_char(line, &i, ' ') == 0)
 		c3d_exit("1.5");

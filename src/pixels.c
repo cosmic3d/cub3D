@@ -21,7 +21,7 @@ t_img	*get_img(t_data *data, int width, int height)
 	img_p->addr = mlx_get_data_addr(img_p->img, \
 	&img_p->bpp, &img_p->line, &img_p->endian);
 	if (!img_p->addr)
-		c3d_exit("Error\nFailed to get image address\n");
+		c3d_exit("Failed to get image address");
 	return (img_p);
 }
 

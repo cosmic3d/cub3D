@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/04 13:19:28 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:25:44 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,11 @@ void draw_vert_stripe(t_data *data, int x)
 		color = GREEN;
 	else if (data->ray.side[Y] == -1 && data->ray.side[X] == 0)
 		color = YELLOW;
+	else // debug
+	{
+		ft_printf("draw_vert_stripe else\n");
+		exit(1);
+	}
 	while (++y < draw_end)
 		put_pixel(data->mlx.win_img, x, y, color);
 }

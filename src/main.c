@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/04 13:47:26 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:54:23 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,6 @@ void	init_data_struct(t_data *data)
 	data->textures.floor = -1;
 	data->textures.ceiling = -1;
 	data->textures.stored_values = 0;
+	data->map.spawn[X] = -1;
+	data->map.spawn[Y] = -1;
 }

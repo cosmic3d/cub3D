@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/04 14:00:18 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:10:51 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_player
 typedef struct	s_map
 {
 	int		file_i; // Line in the file after all elements and before the map
-	int		**grid;
+	char	**grid;
 	int		size[2];
 	int		spawn[2];
 	int		player_dir[2]; // [0] = x, [1] = y
@@ -202,12 +202,13 @@ void	render(t_data *data);
 void	set_floor_ceiling(t_data *data);
 void	parse_map(t_data *data, char **file);
 int		is_tile_external(char **file, int i, int j);
-int		**create_map_from_file(char **file, int size[2]);
+char	**create_map_from_file(char **file, int size[2]);
 
 // debug.c
 void	print_map_grid(t_data *data);
 void	print_map_elements(t_data *data);
 void	debug_check(void);
+void	print_data(t_data *data);
 
 // movement.c
 void	rotate_player(t_data *data, double angle);

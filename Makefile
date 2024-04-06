@@ -80,22 +80,22 @@ LIBS += $(MLX)
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -O3 #Puede que el 02 sea mejor
+CFLAGS = -Wall -Wextra -Werror -O3 -g #Puede que el 02 sea mejor
 DFLAGS = -MD -MF
 INCLUDE = -I include/ -I $(LIBFT_DIR) -I $(MLX_DIR)
 X11_FLAGS = -lXext -lX11
 FRAMEWORK_FLAGS = -framework OpenGL -framework Appkit
 MATH_FLAGS = -lm
-LINUX_FLAGS = $(INCLUDE) $(MATH_FLAGS) $(X11_FLAGS)
+LINUX_MLX_FLAGS = $(INCLUDE) $(MATH_FLAGS) $(X11_FLAGS)
 MACOS_FLAGS = $(INCLUDE) $(MATH_FLAGS) $(FRAMEWORK_FLAGS)
-FLAGS =
+MLX_FLAGS =
 
 # $(info Libs = $(LIBS))
 
 ifeq ($(OS),Linux)
-	FLAGS = $(LINUX_FLAGS)
+	MLX_FLAGS = -L$(MLX_DIR) -lmlx $(X11_FLAGS)
 else ifeq ($(OS),Darwin)
-	FLAGS = $(MACOS_FLAGS)
+	MLX_FLAGS = -L$(MLX_DIR) -lmlx $(FRAMEWORK_FLAGS)
 endif
 
 # Commands and utils
@@ -137,7 +137,7 @@ all: title libft minilibx
 	@$(RM) .tmp_cub3d .tmp_expected_cub3d
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(MATH_FLAGS) $(LIBS) -o $(NAME) -lm
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(MK)
 #	@if [ ! -d $(@D) ]; then \
@@ -167,7 +167,7 @@ libft:
 
 minilibx:
 	@echo "$(BLUE)Make $(HIGHLIGHT)MiniLibX$(RESET)$(BLUE):$(RESET)"
-	@$(MAKE) --no-print-directory -sC $(MLX_DIR) &> /dev/null
+	@$(MAKE) --no-print-directory -sC $(MLX_DIR) > /dev/null
 	@echo "$(GREEN)MiniLibX compiled succesfully$(RESET)";
 
 clean:
@@ -197,6 +197,9 @@ title:
 
 run: all
 	./$(NAME) test.cub
+
+val: all
+	valgrind ./$(NAME) test.cub
 
 .PHONY: all libft minilibx clean fclean re title run
 -include $(DEPS)

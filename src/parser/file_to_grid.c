@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:32:00 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/03 18:33:16 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:49:53 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 
 static int	get_map_height(char **file);
 static int	get_map_width(char **file);
-static void	copy_map(int **grid, char **file, int size[2]);
+static void	copy_map(char **grid, char **file, int size[2]);
 
-int	**create_map_from_file(char **file, int size[2])
+char	**create_map_from_file(char **file, int size[2])
 {
-	int	**grid;
+	char **grid;
 
 	size[Y] = get_map_height(file);
 	size[X] = get_map_width(file);
-	grid = (int **)ft_alloc_array(sizeof(int), size[Y], size[X]);
+	printf("size[X] = %d\n", size[X]);
+	printf("size[Y] = %d\n", size[Y]);
+
+	grid = (char **)ft_alloc_array(sizeof(char), size[Y], size[X]);
 	if (!grid)
 		c3d_exit(ERR_MALLOC);
+
+	write(1, "Check\n", 6);
 	copy_map(grid, file, size);
 	return (grid);
 }
@@ -62,7 +67,7 @@ static int	get_map_width(char **file)
 	return (width);
 }
 
-static void	copy_map(int **grid, char **file, int size[2])
+static void	copy_map(char **grid, char **file, int size[2])
 {
 	int	i;
 	int	j;
@@ -73,12 +78,12 @@ static void	copy_map(int **grid, char **file, int size[2])
 		j = 0;
 		while (j < size[X])
 		{
-			if (file[i][j])
-				grid[i][j] = file[i][j];
-			else
-				grid[i][j] = ' ';
+			grid[i][j] = ' ';
 			j++;
 		}
+		j = -1;
+		while (file[i][++j])
+			grid[i][j] = file[i][j];
 		i++;
 	}
 }

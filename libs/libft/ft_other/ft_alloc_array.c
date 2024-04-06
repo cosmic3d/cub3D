@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:21:41 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/03 17:33:52 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:30:38 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_alloc_array(size_t size, size_t h, size_t w)
 	if (!array)
 		return (NULL);
 	i = 0;
-	while (i < w)
+	while (i < h)
 	{
 		array[i] = malloc(size * w);
 		if (!array[i])

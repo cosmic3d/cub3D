@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:01:28 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/04 12:50:27 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:49:51 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,15 @@ void	debug_check(void)
 
 	n++;
 	ft_printf("Check %d\n", n);
+}
+
+void	print_data(t_data *data)
+{
+	ft_printf("----------------------------\n");
+	ft_printf("DEBUG: Print data\n");
+	print_map_elements(data);
+	print_map_grid(data);
+	ft_printf("Player Position = [%d][%d]\n", data->map.spawn[X], data->map.spawn[Y]);
+	ft_printf("Player direction = [%d][%d]\n", data->map.player_dir[X], data->map.player_dir[Y]);
+	ft_printf("----------------------------\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/05 15:25:44 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:55:20 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void check_hit(t_data *data)
 			if (data->ray.step[Y] < 0)
 				data->ray.side[Y] = -1;
 		}
-		if (data->map.grid[data->ray.map[Y]][data->ray.map[X]] == WALL)
+		//printf("map[X]: %d, map[Y]: %d\n", data->ray.map[X], data->ray.map[Y]);
+		if (data->map.grid[data->ray.map[Y]][data->ray.map[X]] == WALL) //LOL
 			data->ray.hit = 1;
 	}
 }
@@ -119,8 +120,10 @@ void draw_vert_stripe(t_data *data, int x)
 	int	draw_end;
 	int	color; //Provisional para ver si se pinta bien la pared
 
+
+	color = BLACK;
 	line_height = (int)(WINY / data->ray.perp_wall_dist);
-	draw_start = WINY / 2 - line_height / 2 ;
+	draw_start = WINY / 2 - line_height / 2;
 	draw_end = line_height / 2 + WINY / 2;
 	y = draw_start - 1;
 	if (data->ray.side[X] == 1 && data->ray.side[Y] == 0)
@@ -131,11 +134,13 @@ void draw_vert_stripe(t_data *data, int x)
 		color = GREEN;
 	else if (data->ray.side[Y] == -1 && data->ray.side[X] == 0)
 		color = YELLOW;
-	else // debug
+	/* else // debug
 	{
 		ft_printf("draw_vert_stripe else\n");
 		exit(1);
-	}
+	} */
+	//PRINT FOR DEBUGGING
+	//printf("draw_start: %d, draw_end: %d, line_height: %d\n", draw_start, draw_end, line_height);
 	while (++y < draw_end)
 		put_pixel(data->mlx.win_img, x, y, color);
 }

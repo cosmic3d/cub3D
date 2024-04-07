@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 23:51:36 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/04 13:00:33 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/07 17:59:35 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	rotate_player(t_data *data, double angle)
 	data->player.plane[Y] * sin(angle);
 	data->player.plane[Y] = old_plane_x * sin(angle) + \
 	data->player.plane[Y] * cos(angle);
-	/* printf("Player direction: [%f, %f]\n", data->player.dir[X], data->player.dir[Y]);
+	printf("Player direction: [%f, %f]\n", data->player.dir[X], data->player.dir[Y]);
 	printf("Player plane: [%f, %f]\n\n", data->player.plane[X], data->player.plane[Y]);
-	printf("Player angle: %f\n", data->player.angle); */
+	printf("Player position: [%f, %f]\n", data->player.pos[X], data->player.pos[Y]);
 }

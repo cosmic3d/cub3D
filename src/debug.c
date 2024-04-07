@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:01:28 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/05 16:49:51 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/07 17:42:45 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,3 +62,13 @@ void	print_data(t_data *data)
 	ft_printf("Player direction = [%d][%d]\n", data->map.player_dir[X], data->map.player_dir[Y]);
 	ft_printf("----------------------------\n");
 }
+
+/* void imprimirArray2D(t_data *data) {
+    for (int i = 0; i < data->map.size[Y]; i++) {
+        for (int j = 0; j < data->map.size[X]; j++) {
+            printf("%c ", data->map.grid[i][j]);
+        }
+        printf("\n");
+    }
+}
+ */

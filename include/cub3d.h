@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/05 16:10:51 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:25:44 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,7 @@ void	print_map_grid(t_data *data);
 void	print_map_elements(t_data *data);
 void	debug_check(void);
 void	print_data(t_data *data);
+void	imprimirArray2D(t_data *data);
 
 // movement.c
 void	rotate_player(t_data *data, double angle);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:27:03 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/05 16:59:06 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:54:32 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ static void	get_player_spawn_and_dir(t_map *map, char player, int x, int y)
 	}
 	else if (player == 'W')
 	{
-		map->player_dir[X] = 1;
+		map->player_dir[X] = -1;
 		map->player_dir[Y] = 0;
 	}
 	else if (player == 'E')
 	{
-		map->player_dir[X] = -1;
+		map->player_dir[X] = 1;
 		map->player_dir[Y] = 0;
 	}
 }

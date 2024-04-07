@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/07 18:25:44 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/07 21:46:10 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ completely surrounded by walls"
 #define WINX 640
 #define WINY 360
 #define ROTATE_SPEED 0.1
+#define MOVE_SPEED 0.1
 
 typedef struct s_img
 {
@@ -213,4 +214,8 @@ void	imprimirArray2D(t_data *data);
 
 // movement.c
 void	rotate_player(t_data *data, double angle);
+void	move_forward(t_data *d);
+void	move_back(t_data *d);
+void	move_left(t_data *d);
+void	move_right(t_data *d);
 #endif // CUB3D_H

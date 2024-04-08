@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/05 15:54:23 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:54:45 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	initialize_variables(t_data *data)
 {
-	data->player.pos[X] = data->map.spawn[X] + 0.5;
-	data->player.pos[Y] = data->map.spawn[Y] + 0.5;
+	data->player.pos[X] = data->map.spawn[Y] + 0.5;
+	data->player.pos[Y] = data->map.spawn[X] + 0.5;
 	data->player.dir[X] = data->map.player_dir[X];
 	data->player.dir[Y] = data->map.player_dir[Y];
 	data->player.plane[X] = fabs(data->player.dir[Y]) * 0.66;
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 	init_mlx(&data);
 	initialize_variables(&data);
 	render(&data);
+	//print_map_grid(&data);
 	mlx_loop(data.mlx.mlx);
 	return (0);
 }

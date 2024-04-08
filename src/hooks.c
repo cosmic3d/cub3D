@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/04 13:49:08 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/07 21:47:56 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,26 @@ void	hook(t_data *data)
 
 int	keypressed(int keycode, t_data *data)
 {
-	// c3d_exit(NULL);
-	/* if (keycode == KEY_A)
-		rotate_player(data, -ROTATE_SPEED);
-	if (keycode == KEY_D)
-		rotate_player(data, ROTATE_SPEED); */
+	// int	move_dir[2];
+
+	printf("Keycode: %d\n", keycode);
+
 	if (keycode == KEY_RIGHT)
 		rotate_player(data, ROTATE_SPEED);
 	else if (keycode == KEY_LEFT)
 		rotate_player(data, -ROTATE_SPEED);
+	else if (keycode == KEY_W)
+		move_forward(data);
+	else if (keycode == KEY_S)
+		move_back(data);
+	else if (keycode == KEY_A)
+		move_left(data);
+	else if (keycode == KEY_D)
+		move_right(data);
 	else if (keycode == KEY_ESC)
+		c3d_exit(NULL);
+	else
+	if (keycode == KEY_ESC)
 		c3d_exit(NULL);
 	render(data);
 	return (0);

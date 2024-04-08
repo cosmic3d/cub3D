@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/08 13:56:42 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/09 01:25:41 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int	keypressed(int keycode, t_data *data)
 	return (0);
 }
 
-int	mousemove(int keycode, int x, int y, t_data *data)
+int	mousemove(int x, int y, t_data *data)
 {
-	(void)x;
-	(void)y;
-	(void)data;
-	(void)keycode;
-	ft_printf("Mouse Keycode: %d\n Mouse [X, Y]: [%d,%d]\nData pointer: %p\n", keycode, x, y, data);
+	// (void)x;
+	// (void)y;
+	// (void)data;
+	// (void)keycode;
+	ft_printf("Mouse [X, Y]: [%d,%d]\nData pointer: %p\n", x, y, data);
 	return (0);
 }

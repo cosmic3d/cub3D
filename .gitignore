@@ -1,3 +1,5 @@
 .vscode/
 obj/
 libs/libft/obj/
+libs/libft/libft.a
+cub3D

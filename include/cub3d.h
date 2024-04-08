@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/08 13:27:18 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:53:18 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ completely surrounded by walls"
 //Macros for calculation values
 #define WINX 640
 #define WINY 360
-#define ROTATE_SPEED 0.1
-#define MOVE_SPEED 0.1
+#define ROTATE_SPEED 0.05
+#define MOVE_SPEED 0.05
 
 typedef struct s_img
 {
@@ -194,7 +194,7 @@ void 	draw_vert_stripe(t_data *data, int x);
 // hooks.c
 void	hook(t_data *data);
 int		keypressed(int keycode, t_data *data);
-int		mousedown(int keycode, int x, int y, t_data *data);
+int		mousemove(int keycode, int x, int y, t_data *data);
 
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);

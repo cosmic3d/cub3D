@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 23:51:36 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/07 21:46:44 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/08 02:02:23 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ void move_left(t_data *d)
 	if (d->map.grid[(int)(d->player.pos[Y] + d->player.dir[X] * MOVE_SPEED)]\
 	[(int)d->player.pos[X]] != '1')
 	{
-		d->player.pos[Y] += d->player.dir[X] * MOVE_SPEED;
+		d->player.pos[Y] -= d->player.dir[X] * MOVE_SPEED;
 	}
 	if (d->map.grid[(int)d->player.pos[Y]]\
 	[(int)(d->player.pos[X] - d->player.dir[Y] * MOVE_SPEED)] != '1')
 	{
-		d->player.pos[X] -= d->player.dir[Y] * MOVE_SPEED;
+		d->player.pos[X] += d->player.dir[Y] * MOVE_SPEED;
 	}
 }
 
@@ -81,11 +81,11 @@ void move_right(t_data *d)
 	if (d->map.grid[(int)(d->player.pos[Y] - d->player.dir[X] * MOVE_SPEED)]\
 	[(int)d->player.pos[X]] != '1')
 	{
-		d->player.pos[Y] -= d->player.dir[X] * MOVE_SPEED;
+		d->player.pos[Y] += d->player.dir[X] * MOVE_SPEED;
 	}
 	if (d->map.grid[(int)d->player.pos[Y]]\
 	[(int)(d->player.pos[X] + d->player.dir[Y] * MOVE_SPEED)] != '1')
 	{
-		d->player.pos[X] += d->player.dir[Y] * MOVE_SPEED;
+		d->player.pos[X] -= d->player.dir[Y] * MOVE_SPEED;
 	}
 }

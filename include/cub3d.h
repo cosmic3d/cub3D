@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/07 21:46:10 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:27:18 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ typedef struct s_player
 	double pos[2]; //Puede que venga mejor float
 	double dir[2];
 	double plane[2];
+	double move_speed;
+	double rot_speed;
 }				t_player;
 
 typedef struct	s_map

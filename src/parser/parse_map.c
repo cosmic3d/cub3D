@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:27:03 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/07 18:54:32 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:18:17 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	parse_map(t_data *data, char **file)
 		c3d_exit("No map in file");
 	check_valid_map_characters(&data->map, file);
 	data->map.grid = create_map_from_file(file, data->map.size);
-	print_data(data);
 	check_map_is_surrounded(data->map.grid, data->map.size);
 }
 

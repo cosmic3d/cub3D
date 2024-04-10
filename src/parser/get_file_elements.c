@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:07:58 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/09 17:11:44 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:05:57 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ int	get_file_elements(t_mlx *mlx, t_elements *elements, char **file)
 		else if (ft_strncmp(file[i], "C", 1) == 0)
 			count += get_color_element(file[i], &elements->ceiling);
 		else if (file[i][0] != '\0' && count < 6)
-			c3d_exit("yea");
+			c3d_exit(ERR_INVALID_FILE_FORMAT);
 		i++;
 	}
+	ft_printf("Floor = %d\nCeiling = %d\n", elements->floor, elements->ceiling);
 	return (i);
 }
 

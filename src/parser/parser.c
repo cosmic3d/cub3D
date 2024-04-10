@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:52:17 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/09 18:19:19 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:14:18 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,5 @@ int	parser(t_data *data, char *filepath)
 	init_map_variables(&data->map);
 	file_line = get_file_elements(&data->mlx, &data->map.elements, data->file);
 	parse_map(data, data->file + file_line);
-	// print_data(data);
-	// ft_printf("done parsing\n");
 	return (0);
 }

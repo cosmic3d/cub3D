@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/09 18:49:24 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:28:35 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ typedef struct s_data
 	char		**file;
 	int			fd;
 	t_mlx		mlx;
-	t_elements	elements;
+	// t_elements	elements;
 	t_texture	textures;
 	t_map		map;
 	t_player	player;
@@ -209,7 +209,8 @@ int		mousedown(int keycode, int x, int y, t_data *data);
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);
 void	put_pixel(t_img *img, int x, int y, int color);
-int		get_pixel_color(t_img *image, int x, int y);
+// int		get_pixel_color(t_img *image, int x, int y);
+unsigned int get_pixel_color(t_img *image, int x, int y);
 
 // render.c
 void	render(t_data *data);

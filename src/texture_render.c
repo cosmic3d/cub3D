@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/09 18:56:26 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:45:16 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@
 static t_img	*get_wall_texture(t_elements *elements, int side[2])
 {
 	if (side[X] == 1 && side[Y] == 0)
-		return (&elements->east);
-	else if (side[X] == -1 && side[Y] == 0)
 		return (&elements->west);
+	else if (side[X] == -1 && side[Y] == 0)
+		return (&elements->east);
 	else if (side[X] == 0 && side[Y] == 1)
 		return (&elements->south);
 	else if (side[X] == 0 && side[Y] == -1)
 		return (&elements->north);
-	//debug:
-	c3d_exit("get_wall_texture unexpected behavior");
+	c3d_exit("get_wall_texture unexpected behavior");//
 	return (NULL);
 }
 
@@ -46,7 +45,7 @@ void	draw_vert_stripe(t_data *data, int x)
 	draw_start = WINY / 2 - line_height / 2;
 	draw_end = draw_start + line_height;
 
-	if (data->ray.side == 0)
+	if (data->ray.side[Y] == 0)
 		wallX = data->player.pos[Y] + data->ray.perp_wall_dist * data->ray.ray_dir[Y];
 	else
 		wallX = data->player.pos[X] + data->ray.perp_wall_dist * data->ray.ray_dir[X];
@@ -55,7 +54,7 @@ void	draw_vert_stripe(t_data *data, int x)
 	int	texX = (int)(wallX * (double)(data->mlx.texture_size)); // ? casting
 	double	step = 1.0 * data->mlx.texture_size / line_height;
 
-	int color;
+	unsigned int color;
 	y = draw_start;
 	double texPosD = 0.0;
 	int	texPosI = 0;

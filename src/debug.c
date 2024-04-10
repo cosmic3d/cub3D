@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:01:28 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/07 17:42:45 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:56:44 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ void	print_map_grid(t_data *data)
 
 void	print_map_elements(t_data *data)
 {
-	ft_printf("----------------------------\n");
-	ft_printf("DEBUG: Map elements:\n");
-	ft_printf("----------------------------\n");
-	ft_printf("Textures:\n");
-	ft_printf(" North = \"%s\"\n", data->textures.north);
-	ft_printf(" South = \"%s\"\n", data->textures.south);
-	ft_printf(" West = \"%s\"\n", data->textures.west);
-	ft_printf(" East = \"%s\"\n", data->textures.east);
-	ft_printf("Colors:\n");
-	ft_printf(" Floor = %d\n", data->textures.floor);
-	ft_printf(" Ceiling = %d\n", data->textures.ceiling);
-	ft_printf("----------------------------\n");
+	(void)data;
+	// ft_printf("----------------------------\n");
+	// ft_printf("DEBUG: Map elements:\n");
+	// ft_printf("----------------------------\n");
+	// ft_printf("Textures:\n");
+	// ft_printf(" North = \"%s\"\n", data->textures.north);
+	// ft_printf(" South = \"%s\"\n", data->textures.south);
+	// ft_printf(" West = \"%s\"\n", data->textures.west);
+	// ft_printf(" East = \"%s\"\n", data->textures.east);
+	// ft_printf("Colors:\n");
+	// ft_printf(" Floor = %d\n", data->textures.floor);
+	// ft_printf(" Ceiling = %d\n", data->textures.ceiling);
+	// ft_printf("----------------------------\n");
 }
 
 void	debug_check(void)

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/08 18:20:09 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:32:22 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,35 +112,35 @@ void calculate_perp_dist(t_data *data)
 		data->ray.perp_wall_dist = data->ray.side_dist[Y] - data->ray.delta_dist[Y];
 }
 
-void draw_vert_stripe(t_data *data, int x)
-{
-	int	y;
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
-	int	color; //Provisional para ver si se pinta bien la pared
+// void draw_vert_stripe(t_data *data, int x)
+// {
+// 	int	y;
+// 	int	line_height;
+// 	int	draw_start;
+// 	int	draw_end;
+// 	int	color; //Provisional para ver si se pinta bien la pared
 
 
-	color = BLACK;
-	line_height = (int)(WINY / data->ray.perp_wall_dist);
-	draw_start = WINY / 2 - line_height / 2;
-	draw_end = line_height / 2 + WINY / 2;
-	y = draw_start - 1;
-	if (data->ray.side[X] == 1 && data->ray.side[Y] == 0)
-		color = RED;
-	else if (data->ray.side[X] == -1 && data->ray.side[Y] == 0)
-		color = BLUE;
-	else if (data->ray.side[Y] == 1 && data->ray.side[X] == 0)
-		color = GREEN;
-	else if (data->ray.side[Y] == -1 && data->ray.side[X] == 0)
-		color = YELLOW;
-	/* else // debug
-	{
-		ft_printf("draw_vert_stripe else\n");
-		exit(1);
-	} */
-	//PRINT FOR DEBUGGING
-	//printf("draw_start: %d, draw_end: %d, line_height: %d\n", draw_start, draw_end, line_height);
-	while (++y < draw_end)
-		put_pixel(data->mlx.win_img, x, y, color);
-}
+// 	color = BLACK;
+// 	line_height = (int)(WINY / data->ray.perp_wall_dist);
+// 	draw_start = WINY / 2 - line_height / 2;
+// 	draw_end = line_height / 2 + WINY / 2;
+// 	y = draw_start - 1;
+// 	if (data->ray.side[X] == 1 && data->ray.side[Y] == 0)
+// 		color = RED;
+// 	else if (data->ray.side[X] == -1 && data->ray.side[Y] == 0)
+// 		color = BLUE;
+// 	else if (data->ray.side[Y] == 1 && data->ray.side[X] == 0)
+// 		color = GREEN;
+// 	else if (data->ray.side[Y] == -1 && data->ray.side[X] == 0)
+// 		color = YELLOW;
+// 	/* else // debug
+// 	{
+// 		ft_printf("draw_vert_stripe else\n");
+// 		exit(1);
+// 	} */
+// 	//PRINT FOR DEBUGGING
+// 	//printf("draw_start: %d, draw_end: %d, line_height: %d\n", draw_start, draw_end, line_height);
+// 	while (++y < draw_end)
+// 		put_pixel(data->mlx.win_img, x, y, color);
+// }

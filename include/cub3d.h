@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/07 21:46:10 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:49:24 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,12 @@ completely surrounded by walls"
 
 typedef struct s_img
 {
-	void			*img;
-	char			*addr;
-	int				bpp;
-	int				line;
-	int				endian;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line;
+	int		endian;
+	int		size[2];
 }					t_img;
 
 typedef struct s_player
@@ -113,13 +114,23 @@ typedef struct s_player
 	double plane[2];
 }				t_player;
 
+typedef struct s_map_elements
+{
+	t_img	north;
+	t_img	south;
+	t_img	west;
+	t_img	east;
+	int		floor;
+	int		ceiling;
+}				t_elements;
+
 typedef struct	s_map
 {
-	int		file_i; // Line in the file after all elements and before the map
-	char	**grid;
-	int		size[2];
-	int		spawn[2];
-	int		player_dir[2]; // [0] = x, [1] = y
+	char		**grid;
+	t_elements	elements;
+	int			size[2];
+	int			spawn[2];
+	int			player_dir[2]; // [0] = x, [1] = y
 }				t_map;
 
 typedef struct s_ray
@@ -146,13 +157,12 @@ typedef struct s_mlx_data
 
 typedef struct s_texture
 {
-	char	*north; //Maybe change to void because of mlx return value when retrieving textures
-	char	*south;
-	char	*east;
-	char	*west;
-	int		floor;
-	int		ceiling;
-	int		stored_values;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line;
+	int		endian;
+	int		size[2];
 }				t_texture;
 
 typedef struct s_data
@@ -160,6 +170,7 @@ typedef struct s_data
 	char		**file;
 	int			fd;
 	t_mlx		mlx;
+	t_elements	elements;
 	t_texture	textures;
 	t_map		map;
 	t_player	player;
@@ -169,14 +180,15 @@ typedef struct s_data
 // functions:
 
 void	init_data_struct(t_data *data);
-int	parser(t_data *data, int argc, char **argv);
-int	parse_argument(t_data *data, char *filepath);
+int		parser(t_data *data, char *filepath);
+int		parse_argument(t_data *data, char *filepath);
 void	parse_file(t_data *data);
-int	get_file_elements(t_data *data);
+// int		get_file_elements(t_data *data);
+int		get_file_elements(t_mlx *mlx, t_elements *elements, char **file);
 char	**store_file(char *filepath);
-int	verify_arguments(int argc, char **argv);
-int	c3d_error(char *error);
-int	c3d_exit(char *error);
+int		verify_arguments(int argc, char **argv);
+int		c3d_error(char *error);
+int		c3d_exit(char *error);
 
 // main.c
 void	initialize_variables(t_data *data);
@@ -197,6 +209,7 @@ int		mousedown(int keycode, int x, int y, t_data *data);
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);
 void	put_pixel(t_img *img, int x, int y, int color);
+int		get_pixel_color(t_img *image, int x, int y);
 
 // render.c
 void	render(t_data *data);
@@ -218,4 +231,8 @@ void	move_forward(t_data *d);
 void	move_back(t_data *d);
 void	move_left(t_data *d);
 void	move_right(t_data *d);
+
+// texture_render.c
+void	draw_vert_stripe(t_data *data, int x);
+
 #endif // CUB3D_H

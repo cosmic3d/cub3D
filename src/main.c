@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/07 18:54:45 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:17:59 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	init_data_struct(&data);
-	parser(&data, argc, argv);
+	verify_arguments(argc, argv);
 	init_mlx(&data);
+	parser(&data, argv[1]);
 	initialize_variables(&data);
 	render(&data);
 	//print_map_grid(&data);
@@ -49,16 +49,3 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-// provisional:
-void	init_data_struct(t_data *data)
-{
-	data->textures.north = NULL;
-	data->textures.south = NULL;
-	data->textures.west = NULL;
-	data->textures.east = NULL;
-	data->textures.floor = -1;
-	data->textures.ceiling = -1;
-	data->textures.stored_values = 0;
-	data->map.spawn[X] = -1;
-	data->map.spawn[Y] = -1;
-}

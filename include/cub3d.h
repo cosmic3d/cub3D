@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/10 13:56:11 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/11 01:13:37 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,13 @@ typedef struct s_ray
 	int		side[2];
 }				t_ray;
 
+typedef struct s_mouse
+{
+	int	prev_pos[2];
+	int	pressed;
+	double	max_rot;
+}				t_mouse;
+
 typedef struct s_mlx_data
 {
 	void	*mlx;
@@ -166,6 +173,7 @@ typedef struct s_data
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
+	t_mouse		mouse;
 }				t_data;
 
 // functions:

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/08 13:45:21 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/11 01:00:45 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	initialize_variables(t_data *data)
 		data->player.move_speed = -MOVE_SPEED;
 		data->player.rot_speed = -ROTATE_SPEED;;
 	}
-
+	data->mouse.prev_pos[X] = 0;
+	data->mouse.prev_pos[Y] = 0;
+	data->mouse.pressed = 0;
+	data->mouse.max_rot = deg_to_rad(360);
 }
 
 void	init_mlx(t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/09 01:26:39 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:56:11 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,4 +220,7 @@ void	move_forward(t_data *d);
 void	move_back(t_data *d);
 void	move_left(t_data *d);
 void	move_right(t_data *d);
+
+//utils.c
+double	deg_to_rad(double deg);
 #endif // CUB3D_H

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/09 01:25:41 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:02:36 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ int	keypressed(int keycode, t_data *data)
 int	mousemove(int x, int y, t_data *data)
 {
 	// (void)x;
-	// (void)y;
+	(void)y;
 	// (void)data;
 	// (void)keycode;
-	ft_printf("Mouse [X, Y]: [%d,%d]\nData pointer: %p\n", x, y, data);
+	// ft_printf("Mouse [X, Y]: [%d,%d]\nData pointer: %p\n", x, y, data);
+	// int	x_factor = WINX / x;
 	return (0);
 }

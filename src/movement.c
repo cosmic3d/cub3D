@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 23:51:36 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/09 01:29:10 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:54:17 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,22 @@ void	rotate_player(t_data *data, double angle)
 {
 	double	old_dir_x;
 	double	old_plane_x;
+	double	cos_angle;
+	double	sin_angle;
+
+	cos_angle = cos(angle);
+	sin_angle = sin(angle);
 
 	old_dir_x = data->player.dir[X];
-	data->player.dir[X] = data->player.dir[X] * cos(angle) - \
-	data->player.dir[Y] * sin(angle);
-	data->player.dir[Y] = old_dir_x * sin(angle) + \
-	data->player.dir[Y] * cos(angle);
+	data->player.dir[X] = data->player.dir[X] * cos_angle - \
+	data->player.dir[Y] * sin_angle;
+	data->player.dir[Y] = old_dir_x * sin_angle + \
+	data->player.dir[Y] * cos_angle;
 	old_plane_x = data->player.plane[X];
-	data->player.plane[X] = data->player.plane[X] * cos(angle) - \
-	data->player.plane[Y] * sin(angle);
-	data->player.plane[Y] = old_plane_x * sin(angle) + \
-	data->player.plane[Y] * cos(angle);
+	data->player.plane[X] = data->player.plane[X] * cos_angle - \
+	data->player.plane[Y] * sin_angle;
+	data->player.plane[Y] = old_plane_x * sin_angle + \
+	data->player.plane[Y] * cos_angle;
 	/* printf("Player direction: [%f, %f]\n", data->player.dir[X], data->player.dir[Y]);
 	printf("Player plane: [%f, %f]\n\n", data->player.plane[X], data->player.plane[Y]);
 	printf("Player position: [%f, %f]\n", data->player.pos[X], data->player.pos[Y]); */

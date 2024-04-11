@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 23:08:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/11 13:11:41 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:14:25 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	put_pixel(t_img *img, int x, int y, int color)
 {
 	int pixel;
 
-	if (x >= WINX || y >= WINY || x < 0 || y < 0)
-		return ;
+	// if (x >= WINX || y >= WINY || x < 0 || y < 0)
+	// 	return ;
 	pixel = y * (img->line / 4) + x;
 	img->addr[pixel] = color;
 }

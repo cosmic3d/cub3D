@@ -9,3 +9,7 @@ Avg FPS = 205
 Versión 3.0 de put_pixel:
 Avg deltaTime: 4518us
 Avg FPS = 221
+
+Version 4.0 de put_pixel: (Sin out of bounds checks)
+Avg deltaTime: 4388us
+Avg FPS = 227

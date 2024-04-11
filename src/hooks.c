@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/07 21:47:56 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:29:46 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	keypressed(int keycode, t_data *data)
 {
 	// int	move_dir[2];
 
-	printf("Keycode: %d\n", keycode);
+	// printf("Keycode: %d\n", keycode);
 
 	if (keycode == KEY_RIGHT)
 		rotate_player(data, ROTATE_SPEED);

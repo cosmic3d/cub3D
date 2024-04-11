@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 23:51:36 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/08 02:02:23 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:29:22 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	rotate_player(t_data *data, double angle)
 
 void move_forward(t_data *d)
 {
-	printf("Player direction: [%f, %f]\n", d->player.dir[X], d->player.dir[Y]);
-	printf("Player position: [%f, %f]\n", d->player.pos[X], d->player.pos[Y]);
+	// printf("Player direction: [%f, %f]\n", d->player.dir[X], d->player.dir[Y]);
+	// printf("Player position: [%f, %f]\n", d->player.pos[X], d->player.pos[Y]);
 	if (d->map.grid[(int)(d->player.pos[Y] + d->player.dir[Y] * MOVE_SPEED)]\
 	[(int)d->player.pos[X]] != '1')
 	{

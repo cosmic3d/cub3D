@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/10 13:28:35 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:28:40 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ completely surrounded by walls"
 #define CEILING CYAN
 
 //Macros for calculation values
-#define WINX 640
-#define WINY 360
+#define WINX 1920
+#define WINY 1080
 #define ROTATE_SPEED 0.1
 #define MOVE_SPEED 0.1
 

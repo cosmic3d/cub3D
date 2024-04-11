@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/11 11:28:40 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:43:15 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include "libft.h"
 # include "eventcodes.h"
 # include "keycodes.h"
+
+// Debugging libs
+# include <time.h> //
 
 # ifdef __linux__
 #  include "../libs/minilibx_linux/mlx.h"

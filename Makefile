@@ -29,6 +29,7 @@ SRC_FILES =	main.c \
 			render.c \
 			movement.c \
 			utils.c \
+			draw.c \
 			parser/parser.c \
 			parser/verify_arguments.c \
 			parser/store_file.c \

@@ -96,6 +96,7 @@ completely surrounded by walls"
 #define WINY 360
 #define ROTATE_SPEED 0.05
 #define MOVE_SPEED 0.2
+#define TILE_SIZE 16
 
 typedef struct s_img
 {
@@ -231,4 +232,7 @@ void	move_right(t_data *d);
 
 //utils.c
 double	deg_to_rad(double deg);
+
+//draw.c
+void	drawRect(t_data *data, int x, int y, int size, int color);
 #endif // CUB3D_H

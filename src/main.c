@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/09 17:17:59 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:44:06 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int argc, char **argv)
 	parser(&data, argv[1]);
 	initialize_variables(&data);
 	render(&data);
-	//print_map_grid(&data);
 	mlx_loop(data.mlx.mlx);
 	return (0);
 }

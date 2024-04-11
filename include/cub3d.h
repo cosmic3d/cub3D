@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/11 13:06:13 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:27:58 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 // Debugging libs
 # include <time.h> //
+// Debugging macros
+# define FPS_TEST_CYCLES 300
 
 # ifdef __linux__
 #  include "../libs/minilibx_linux/mlx.h"
@@ -202,7 +204,6 @@ void	init_raycasting(t_data *data);
 void	calculate_step(t_data *data);
 void 	check_hit(t_data *data);
 void 	calculate_perp_dist(t_data *data);
-void 	draw_vert_stripe(t_data *data, int x);
 
 // hooks.c
 void	hook(t_data *data);
@@ -237,6 +238,6 @@ void	move_left(t_data *d);
 void	move_right(t_data *d);
 
 // texture_render.c
-void	draw_vert_stripe(t_data *data, int x);
+void	draw_vert_stripe(t_data *data, int x, int texture_size);
 
 #endif // CUB3D_H

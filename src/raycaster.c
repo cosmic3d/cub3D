@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/11 13:08:10 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:26:42 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ INCLUSO EL PROPIO RAYCASTER */
 
 void	init_raycasting(t_data *data)
 {
-	time_t st = clock();
-	static int dt[500];
-	static int count;
+	// time_t st = clock();
+	// static int sum;
+	// static int count;
 	int	x;
 
 	x = -1;
@@ -50,21 +50,18 @@ void	init_raycasting(t_data *data)
 		calculate_step(data);
 		check_hit(data);
 		calculate_perp_dist(data);
-		draw_vert_stripe(data, x);
+		draw_vert_stripe(data, x, data->mlx.texture_size);
 	}
-	time_t nd = clock();
-	dt[count] = (int)(nd - st);
-	count++;
-	int sum = 0;
-	if (count == 500)
-	{
-		for (int i = 0; i < 500; i++)
-			sum += dt[i];
-		sum /= 500;
-		printf("Avg deltaTime: %dus\n", sum);
-		printf("Avg FPS = %d\n", 1000000 / sum);
-		exit(0);
-	}
+	// time_t nd = clock();
+	// sum += (int)(nd - st);
+	// count++;
+	// if (count == FPS_TEST_CYCLES)
+	// {
+	// 	sum /= FPS_TEST_CYCLES;
+	// 	printf("Avg deltaTime: %dus\n", sum);
+	// 	printf("Avg FPS = %d\n", 1000000 / sum);
+	// 	exit(0);
+	// }
 }
 
 void	calculate_step(t_data *data)

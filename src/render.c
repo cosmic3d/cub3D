@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:43:23 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/11 11:43:59 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:55:23 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	render(t_data *data)
 {
 	set_floor_ceiling(data);
-	init_raycasting(data);
+	// for (int i = 0; i < FPS_TEST_CYCLES; i++)
+		init_raycasting(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.window, data->mlx.win_img->img, 0, 0);
+	// exit(0);
 }
 
 void	set_floor_ceiling(t_data *data)

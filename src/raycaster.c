@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/10 12:32:22 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:08:10 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ INCLUSO EL PROPIO RAYCASTER */
 
 void	init_raycasting(t_data *data)
 {
+	time_t st = clock();
+	static int dt[500];
+	static int count;
 	int	x;
 
 	x = -1;
@@ -48,6 +51,19 @@ void	init_raycasting(t_data *data)
 		check_hit(data);
 		calculate_perp_dist(data);
 		draw_vert_stripe(data, x);
+	}
+	time_t nd = clock();
+	dt[count] = (int)(nd - st);
+	count++;
+	int sum = 0;
+	if (count == 500)
+	{
+		for (int i = 0; i < 500; i++)
+			sum += dt[i];
+		sum /= 500;
+		printf("Avg deltaTime: %dus\n", sum);
+		printf("Avg FPS = %d\n", 1000000 / sum);
+		exit(0);
 	}
 }
 

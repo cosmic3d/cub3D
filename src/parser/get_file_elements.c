@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:07:58 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/10 13:05:57 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:06:17 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	get_texture_element(char *line, t_mlx *mlx, t_img *texture)
 	if (!texture->img)
 		c3d_exit("mlx error"); // for now
 	ft_printf("check\n");
-	texture->addr = mlx_get_data_addr(texture->img, &texture->bpp, \
+	texture->addr = (int *)mlx_get_data_addr(texture->img, &texture->bpp, \
 			&texture->line, &texture->endian);
 	return (1);
 }

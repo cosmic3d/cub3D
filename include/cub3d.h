@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/11 11:43:15 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:06:13 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ completely surrounded by walls"
 typedef struct s_img
 {
 	void	*img;
-	char	*addr;
+	int		*addr;
 	int		bpp;
 	int		line;
 	int		endian;

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 23:08:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/11 17:28:54 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:33:53 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	put_pixel(t_img *img, int x, int y, int color)
 	img->addr[pixel] = color;
 }
 
-unsigned int get_pixel_color(t_img *image, int x, int y)
+t_uint	get_pixel_color(t_img *image, int x, int y)
 {
 	// provisional for debugging
 	if (x >= image->size[X] || y >= image->size[Y])

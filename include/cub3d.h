@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/11 17:27:58 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:33:29 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 // Debugging libs
 # include <time.h> //
 // Debugging macros
-# define FPS_TEST_CYCLES 300
+# define FPS_TEST_CYCLES 5000
 
 # ifdef __linux__
 #  include "../libs/minilibx_linux/mlx.h"
@@ -180,6 +180,7 @@ typedef struct s_data
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
+	int			texture_size;//
 }				t_data;
 
 // functions:
@@ -213,8 +214,7 @@ int		mousedown(int keycode, int x, int y, t_data *data);
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);
 void	put_pixel(t_img *img, int x, int y, int color);
-// int		get_pixel_color(t_img *image, int x, int y);
-unsigned int get_pixel_color(t_img *image, int x, int y);
+t_uint	get_pixel_color(t_img *image, int x, int y);
 
 // render.c
 void	render(t_data *data);
@@ -238,6 +238,9 @@ void	move_left(t_data *d);
 void	move_right(t_data *d);
 
 // texture_render.c
-void	draw_vert_stripe(t_data *data, int x, int texture_size);
+int		*get_window(t_data *data, int x);
+t_img	*get_texture(t_data *data);
+int		*get_texture_addr(t_data *data, t_img *texture);
+void	draw_vert_stripe(int *texture, int *win, int tx_size[2], int line_h);
 
 #endif // CUB3D_H

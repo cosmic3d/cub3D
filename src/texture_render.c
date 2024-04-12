@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/11 17:32:03 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:38:54 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,15 @@ static t_img	*get_texture(t_data *data)
 
 	side_x = data->ray.side[X];
 	side_y = data->ray.side[Y];
-	// if (side_x == 0)
-	// {
-	// 	if (side_y == 1)
-	// 		return (&data->map.elements.south);
-	// 	return (&data->map.elements.north);
-	// }
-	// if (side_x == 1)
-	// 	return (&data->map.elements.west);
-	// return (&data->map.elements.east);
-	if (side_x == 1 && side_y == 0)
-		return (&data->map.elements.west);
-	else if (side_x == -1 && side_y == 0)
-		return (&data->map.elements.east);
-	else if (side_x == 0 && side_y == 1)
-		return (&data->map.elements.south);
-	else if (side_x == 0 && side_y == -1)
+	if (side_x == 0)
+	{
+		if (side_y == 1)
+			return (&data->map.elements.south);
 		return (&data->map.elements.north);
+	}
+	if (side_x == 1)
+		return (&data->map.elements.west);
+	return (&data->map.elements.east);
 	c3d_exit("get_wall_texture unexpected behavior");//
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/11 01:13:37 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/12 02:49:46 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ completely surrounded by walls"
 #define WINX 640
 #define WINY 360
 #define ROTATE_SPEED 0.05
-#define MOVE_SPEED 0.2
-#define TILE_SIZE 16
+#define MOVE_SPEED 0.1
+#define TILE_SIZE 2
 
 typedef struct s_img
 {
@@ -212,6 +212,7 @@ void	put_pixel(t_img *img, int x, int y, int color);
 // render.c
 void	render(t_data *data);
 void	set_floor_ceiling(t_data *data);
+void	drawMinimap(t_data *data);
 void	parse_map(t_data *data, char **file);
 int		is_tile_external(char **file, int i, int j);
 char	**create_map_from_file(char **file, int size[2]);

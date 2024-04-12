@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:43:23 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/04 13:07:44 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/12 02:48:45 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	render(t_data *data)
 {
 	set_floor_ceiling(data);
 	init_raycasting(data);
+	drawMinimap(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.window, data->mlx.win_img->img, 0, 0);
 }
 
@@ -44,25 +45,22 @@ void	drawMinimap(t_data *data)
 {
 	int	i;
 	int	j;
-	int	x;
-	int	y;
+	int	tile_size;
 
+	tile_size = fmax(WINX, WINY) / fmax(data->map.size[X], data->map.size[Y]) / 4;
 	i = 0;
-	drawRect(data, 0, 0, max(data->map.size[X], data->map.size[Y]) * TILE_SIZE, BLUE);
-	while (i < data->map.size[X])
+	while (i < data->map.size[Y])
 	{
 		j = 0;
-		while (j < data->map.size[Y])
+		while (j < data->map.size[X])
 		{
 			if (data->map.grid[i][j] == '1')
-				drawRect(data, j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, YELLOW);
-			// else if (data->map.grid[i][j] == '0')
-			// 	drawRect(data, j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, BLUE);
+				drawRect(data, j * tile_size, i * tile_size, tile_size, YELLOW);
+			else if (data->map.grid[i][j] != SPACE)
+				drawRect(data, j * tile_size, i * tile_size, tile_size, BLUE);
 			j++;
 		}
 		i++;
 	}
-	x = data->player.pos[0] * TILE_SIZE;
-	y = data->player.pos[1] * TILE_SIZE;
-	drawRect(data, x, y, 5, 0x00FF00);
+	drawRect(data, data->player.pos[X] * tile_size, data->player.pos[Y] * tile_size, tile_size, 0x00FF00);
 }

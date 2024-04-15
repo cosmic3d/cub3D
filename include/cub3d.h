@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/12 19:33:29 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/12 02:49:46 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,12 @@ completely surrounded by walls"
 #define CEILING CYAN
 
 //Macros for calculation values
+
 #define WINX 1920
 #define WINY 1080
-#define ROTATE_SPEED 0.1
+#define ROTATE_SPEED 0.05
 #define MOVE_SPEED 0.1
+#define TILE_SIZE 2
 
 typedef struct s_img
 {
@@ -117,6 +119,8 @@ typedef struct s_player
 	double pos[2]; //Puede que venga mejor float
 	double dir[2];
 	double plane[2];
+	double move_speed;
+	double rot_speed;
 }				t_player;
 
 typedef struct s_map_elements
@@ -151,6 +155,13 @@ typedef struct s_ray
 	int		side[2];
 }				t_ray;
 
+typedef struct s_mouse
+{
+	int	prev_pos[2];
+	int	pressed;
+	double	max_rot;
+}				t_mouse;
+
 typedef struct s_mlx_data
 {
 	void	*mlx;
@@ -180,6 +191,7 @@ typedef struct s_data
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
+	t_mouse		mouse;
 	int			texture_size;//
 }				t_data;
 
@@ -209,7 +221,7 @@ void 	calculate_perp_dist(t_data *data);
 // hooks.c
 void	hook(t_data *data);
 int		keypressed(int keycode, t_data *data);
-int		mousedown(int keycode, int x, int y, t_data *data);
+int		mousemove(int x, int y, t_data *data);
 
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);
@@ -219,6 +231,7 @@ t_uint	get_pixel_color(t_img *image, int x, int y);
 // render.c
 void	render(t_data *data);
 void	set_floor_ceiling(t_data *data);
+void	drawMinimap(t_data *data);
 void	parse_map(t_data *data, char **file);
 int		is_tile_external(char **file, int i, int j);
 char	**create_map_from_file(char **file, int size[2]);
@@ -236,6 +249,12 @@ void	move_forward(t_data *d);
 void	move_back(t_data *d);
 void	move_left(t_data *d);
 void	move_right(t_data *d);
+
+//utils.c
+double	deg_to_rad(double deg);
+
+//draw.c
+void	drawRect(t_data *data, int x, int y, int size, int color);
 
 // texture_render.c
 int		*get_window(t_data *data, int x);

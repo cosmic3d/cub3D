@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/11 11:44:06 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/12 02:29:04 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ void	initialize_variables(t_data *data)
 	data->player.dir[Y] = data->map.player_dir[Y];
 	data->player.plane[X] = fabs(data->player.dir[Y]) * 0.66;
 	data->player.plane[Y] = fabs(data->player.dir[X]) * 0.66; //TENER CUIDADO LUEGO CUANDO SE UTILIZE EL PLANE PORQUE EL EJE VERTICAL VA AL REVES
+	data->player.move_speed = MOVE_SPEED;
+	data->player.rot_speed = ROTATE_SPEED;
+	if (data->player.dir[X] < 0 || data->player.dir[Y] > 0)
+	{
+		data->player.move_speed = -MOVE_SPEED;
+		data->player.rot_speed = -ROTATE_SPEED;;
+	}
+	data->mouse.prev_pos[X] = 0;
+	data->mouse.prev_pos[Y] = 0;
+	data->mouse.pressed = 0;
+	data->mouse.max_rot = deg_to_rad(360);
 }
 
 void	init_mlx(t_data *data)

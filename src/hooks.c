@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/11 11:29:46 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/12 02:50:50 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	hook(t_data *data)
 {
 	mlx_hook(data->mlx.window, DESTROY_NOTIFY, 0, c3d_exit, NULL);
 	mlx_hook(data->mlx.window, KEY_PRESS, 1L<<0, keypressed, data); //MÁSCARA NECESARIA, SINO NO FUNCIONA EN LINUX PERO EN MAC SÍ
-	mlx_hook(data->mlx.window, BUTTON_MOUSEDOWN, 1L<<2, mousedown, data);
+	// mlx_hook(data->mlx.window, BUTTON_MOUSEDOWN, 1L<<2, mousedown, data);
+	mlx_hook(data->mlx.window, BUTTON_MOUSEMOVE, 1L<<6, mousemove, data); //FUNCIONA RARO, NO DA VALORES CORRECTOS. TRATA DE USAR MLX_MOUSE_HOOK O OTRA COSA QUE FUNCIONE TANTO EN LINUX COMO EN MAC
 	// mlx_hook(data->mlx.window, BUTTON_MOUSEMOVE, 1L<<6, mousemove, data);
 	/* mlx_hook(data->mlx.window, BUTTON_MOUSEDOWN, 0, keypressed, data);
 	mlx_key_hook(data->mlx.window, keypressed, data); */
 	/* mlx_hook(sys->mlx_win, BUTTON_MOUSEDOWN, 0, mousedown, sys);
-	mlx_hook(sys->mlx_win, BUTTON_MOUSEMOVE, 0, mousemove, sys);
 	mlx_hook(sys->mlx_win, BUTTON_MOUSEUP, 0, mouseup, sys); */
 }
 
@@ -32,9 +32,9 @@ int	keypressed(int keycode, t_data *data)
 	// printf("Keycode: %d\n", keycode);
 
 	if (keycode == KEY_RIGHT)
-		rotate_player(data, ROTATE_SPEED);
+		rotate_player(data, data->player.rot_speed);
 	else if (keycode == KEY_LEFT)
-		rotate_player(data, -ROTATE_SPEED);
+		rotate_player(data, -data->player.rot_speed);
 	else if (keycode == KEY_W)
 		move_forward(data);
 	else if (keycode == KEY_S)
@@ -52,12 +52,24 @@ int	keypressed(int keycode, t_data *data)
 	return (0);
 }
 
-int	mousedown(int keycode, int x, int y, t_data *data)
+int	mousemove(int x, int y, t_data *data)
 {
-	(void)x;
+	int		difference;
+
 	(void)y;
-	(void)data;
-	(void)keycode;
-	//ft_printf("Mouse Keycode: %d\n Mouse [X, Y]: [%d,%d]\nData pointer: %p\n", keycode, x, y, data);
+	if (x < 0 || x >= WINX || y < 0 || y >= WINY || \
+	(!data->mouse.pressed && ++data->mouse.pressed))
+	{
+		data->mouse.prev_pos[X] = x;
+		data->mouse.prev_pos[Y] = y;
+		return (0);
+	}
+	difference = x - data->mouse.prev_pos[X];
+	if (difference == 0)
+		return (0);
+	rotate_player(data, (data->player.rot_speed / 4) * difference);
+	data->mouse.prev_pos[X] = x;
+	data->mouse.prev_pos[Y] = y;
+	render(data);
 	return (0);
 }

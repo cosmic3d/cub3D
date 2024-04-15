@@ -28,6 +28,8 @@ SRC_FILES =	main.c \
 			hooks.c \
 			render.c \
 			movement.c \
+			utils.c \
+			draw.c \
 			texture_render.c \
 			parser/parser.c \
 			parser/verify_arguments.c \

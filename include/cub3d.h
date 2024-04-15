@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
 /*   Updated: 2024/04/12 02:49:46 by jenavarr         ###   ########.fr       */
@@ -24,6 +24,11 @@
 # include "libft.h"
 # include "eventcodes.h"
 # include "keycodes.h"
+
+// Debugging libs
+# include <time.h> //
+// Debugging macros
+# define FPS_TEST_CYCLES 5000
 
 # ifdef __linux__
 #  include "../libs/minilibx_linux/mlx.h"
@@ -92,19 +97,21 @@ completely surrounded by walls"
 #define CEILING CYAN
 
 //Macros for calculation values
-#define WINX 640
-#define WINY 360
+
+#define WINX 1920
+#define WINY 1080
 #define ROTATE_SPEED 0.05
 #define MOVE_SPEED 0.1
 #define TILE_SIZE 2
 
 typedef struct s_img
 {
-	void			*img;
-	char			*addr;
-	int				bpp;
-	int				line;
-	int				endian;
+	void	*img;
+	int		*addr;
+	int		bpp;
+	int		line;
+	int		endian;
+	int		size[2];
 }					t_img;
 
 typedef struct s_player
@@ -116,13 +123,23 @@ typedef struct s_player
 	double rot_speed;
 }				t_player;
 
+typedef struct s_map_elements
+{
+	t_img	north;
+	t_img	south;
+	t_img	west;
+	t_img	east;
+	int		floor;
+	int		ceiling;
+}				t_elements;
+
 typedef struct	s_map
 {
-	int		file_i; // Line in the file after all elements and before the map
-	char	**grid;
-	int		size[2];
-	int		spawn[2];
-	int		player_dir[2]; // [0] = x, [1] = y
+	char		**grid;
+	t_elements	elements;
+	int			size[2];
+	int			spawn[2];
+	int			player_dir[2]; // [0] = x, [1] = y
 }				t_map;
 
 typedef struct s_ray
@@ -156,13 +173,12 @@ typedef struct s_mlx_data
 
 typedef struct s_texture
 {
-	char	*north; //Maybe change to void because of mlx return value when retrieving textures
-	char	*south;
-	char	*east;
-	char	*west;
-	int		floor;
-	int		ceiling;
-	int		stored_values;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line;
+	int		endian;
+	int		size[2];
 }				t_texture;
 
 typedef struct s_data
@@ -170,24 +186,27 @@ typedef struct s_data
 	char		**file;
 	int			fd;
 	t_mlx		mlx;
+	// t_elements	elements;
 	t_texture	textures;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
 	t_mouse		mouse;
+	int			texture_size;//
 }				t_data;
 
 // functions:
 
 void	init_data_struct(t_data *data);
-int	parser(t_data *data, int argc, char **argv);
-int	parse_argument(t_data *data, char *filepath);
+int		parser(t_data *data, char *filepath);
+int		parse_argument(t_data *data, char *filepath);
 void	parse_file(t_data *data);
-int	get_file_elements(t_data *data);
+// int		get_file_elements(t_data *data);
+int		get_file_elements(t_mlx *mlx, t_elements *elements, char **file);
 char	**store_file(char *filepath);
-int	verify_arguments(int argc, char **argv);
-int	c3d_error(char *error);
-int	c3d_exit(char *error);
+int		verify_arguments(int argc, char **argv);
+int		c3d_error(char *error);
+int		c3d_exit(char *error);
 
 // main.c
 void	initialize_variables(t_data *data);
@@ -198,7 +217,6 @@ void	init_raycasting(t_data *data);
 void	calculate_step(t_data *data);
 void 	check_hit(t_data *data);
 void 	calculate_perp_dist(t_data *data);
-void 	draw_vert_stripe(t_data *data, int x);
 
 // hooks.c
 void	hook(t_data *data);
@@ -208,6 +226,7 @@ int		mousemove(int x, int y, t_data *data);
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);
 void	put_pixel(t_img *img, int x, int y, int color);
+t_uint	get_pixel_color(t_img *image, int x, int y);
 
 // render.c
 void	render(t_data *data);
@@ -236,4 +255,11 @@ double	deg_to_rad(double deg);
 
 //draw.c
 void	drawRect(t_data *data, int x, int y, int size, int color);
+
+// texture_render.c
+int		*get_window(t_data *data, int x);
+t_img	*get_texture(t_data *data);
+int		*get_texture_addr(t_data *data, t_img *texture);
+void	draw_vert_stripe(int *texture, int *win, int tx_size[2], int line_h);
+
 #endif // CUB3D_H

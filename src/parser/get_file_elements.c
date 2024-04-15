@@ -6,64 +6,72 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:07:58 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/03 18:39:30 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:59:35 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	get_texture_element(char *line, t_data *data, char **path);
-static void	get_color_element(char *line, t_data *data, int *color);
+static int	get_texture_element(char *line, t_mlx *mlx, t_img *texture);
+static int	get_color_element(char *line, int *color);
 static int	rgb_token_check(char *channel);
 static int	rgb_to_int(int red, int green, int blue);
 
 /* Stores in the appropriate pointers the values of all the elements that
 a valid file.cub must have. */
-int	get_file_elements(t_data *data)
+int	get_file_elements(t_mlx *mlx, t_elements *elements, char **file)
 {
-	int		i;
+	int	i;
+	int	count;
 
-	i = -1;
-	while (data->file[++i] && data->textures.stored_values < 6)
+	i = 0;
+	count = 0;
+	while (file[i] && count < 6)
 	{
-		if (data->file[i][0] == '\0')
-			continue ;
-		else if (ft_strncmp(data->file[i], "NO", 2) == 0)
-			get_texture_element(data->file[i], data, &data->textures.north);
-		else if (ft_strncmp(data->file[i], "SO", 2) == 0)
-			get_texture_element(data->file[i], data, &data->textures.south);
-		else if (ft_strncmp(data->file[i], "WE", 2) == 0)
-			get_texture_element(data->file[i], data, &data->textures.west);
-		else if (ft_strncmp(data->file[i], "EA", 2) == 0)
-			get_texture_element(data->file[i], data, &data->textures.east);
-		else if (ft_strncmp(data->file[i], "F", 1) == 0)
-			get_color_element(data->file[i], data, &data->textures.floor);
-		else if (ft_strncmp(data->file[i], "C", 1) == 0)
-			get_color_element(data->file[i], data, &data->textures.ceiling);
-		else
+		printf("Line:\n%s\n", file[i]);
+		if (ft_strncmp(file[i], "NO", 2) == 0)
+			count += get_texture_element(file[i], mlx, &elements->north);
+		else if (ft_strncmp(file[i], "SO", 2) == 0)
+			count += get_texture_element(file[i], mlx, &elements->south);
+		else if (ft_strncmp(file[i], "WE", 2) == 0)
+			count += get_texture_element(file[i], mlx, &elements->west);
+		else if (ft_strncmp(file[i], "EA", 2) == 0)
+			count += get_texture_element(file[i], mlx, &elements->east);
+		else if (ft_strncmp(file[i], "F", 1) == 0)
+			count += get_color_element(file[i], &elements->floor);
+		else if (ft_strncmp(file[i], "C", 1) == 0)
+			count += get_color_element(file[i], &elements->ceiling);
+		else if (file[i][0] != '\0' && count < 6)
 			c3d_exit(ERR_INVALID_FILE_FORMAT);
+		i++;
 	}
-	data->map.file_i = i;
-	return (SUCCESS);
+	ft_printf("Floor = %d\nCeiling = %d\n", elements->floor, elements->ceiling);
+	return (i);
 }
 
 /* Obtains the texture path from the given line and stores it in **path */
-static void	get_texture_element(char *line, t_data *data, char **path)
+static int	get_texture_element(char *line, t_mlx *mlx, t_img *texture)
 {
-	if (*path)
+	if (texture->img)
 		c3d_exit(ERR_FILE_REPEATED_ELEMENT);
 	line = ft_strnchr(line + 2, ' ');
 	if (ft_strrcmp(line, ".xpm") != 0)
 		c3d_exit(ERR_FILE_FORMAT_ELEMENT);
-	*path = ft_strdup(line);
-	if (!*path)
-		c3d_exit(ERR_MALLOC);
-	data->textures.stored_values++;
-	return ;
+	texture->img = mlx_xpm_file_to_image(mlx->mlx, line, \
+			&texture->size[X], &texture->size[Y]);
+	if (!texture->img)
+		c3d_exit("mlx error"); // for now
+	ft_printf("check\n");
+	texture->addr = (int *)mlx_get_data_addr(texture->img, &texture->bpp, \
+			&texture->line, &texture->endian);
+	texture->line >>= 2;
+	if (!texture->addr)
+		c3d_exit("Failed to get image address");
+	return (1);
 }
 
 /* Stores the color rgb values from the given line and stores them in *color */
-static void	get_color_element(char *line, t_data *data, int *color)
+static int	get_color_element(char *line, int *color)
 {
 	int		line_end;
 	char	*red;
@@ -85,7 +93,7 @@ static void	get_color_element(char *line, t_data *data, int *color)
 	if ((int)(blue - line + ft_strlen(blue)) != line_end)
 		c3d_exit(ERR_FILE_FORMAT_ELEMENT);
 	*color = rgb_to_int(ft_atoi(red), ft_atoi(green), ft_atoi(blue));
-	data->textures.stored_values++;
+	return (1);
 }
 
 /* Checks that the given rgb channel token is formatted correctly. */

@@ -6,44 +6,47 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:52:17 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/04 12:51:10 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:14:18 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// TO DO!!
-/*
-	INIT DATA
-		To check if colors were already stored, we have to init them to -1
-		Because an RGB of 0,0,0 has a value of 0.
-		So we can't do if (*color) to check if we had already created them
-		- each of the texture path pointers should be init to NULL
-		- textures.stored_values = 0
-		Etc.
-*/
-
-/* File guidelines:
-
-> TEXTURES:
-	-Any amount of one or more empty lines
-	-Each element can come in any order
-	-Each type of information in an element can be separated by spaces
-	-
-> MAP:
-	- Must only contain 0, 1 and space for the structure
-	- Must contain
-	- Map must be surrounded by walls (1)
-	-
-*/
-
-int	parser(t_data *data, int argc, char **argv)
+static void	init_texture(t_img *texture)
 {
-	verify_arguments(argc, argv);
-	data->file = store_file(argv[1]);
-	get_file_elements(data);
-	parse_map(data, data->file + data->map.file_i);
-	print_map_elements(data);
-	print_map_grid(data);
+	texture->img = NULL;
+	texture->addr = NULL;
+	texture->bpp = 0;
+	texture->line = 0;
+	texture->endian = 0;
+	texture->size[X] = 0;
+	texture->size[Y] = 0;
+}
+
+static void	init_map_variables(t_map *map)
+{
+	init_texture(&map->elements.north);
+	init_texture(&map->elements.south);
+	init_texture(&map->elements.west);
+	init_texture(&map->elements.east);
+	map->elements.ceiling = -1;
+	map->elements.floor = -1;
+	map->grid = NULL;
+	map->spawn[X] = -1;
+	map->spawn[Y] = -1;
+	map->size[X] = -1;
+	map->size[Y] = -1;
+	map->player_dir[X] = -2;
+	map->player_dir[Y] = -2;
+}
+
+int	parser(t_data *data, char *filepath)
+{
+	int	file_line;
+
+	data->file = store_file(filepath);
+	init_map_variables(&data->map);
+	file_line = get_file_elements(&data->mlx, &data->map.elements, data->file);
+	parse_map(data, data->file + file_line);
 	return (0);
 }

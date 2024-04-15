@@ -32,9 +32,9 @@ void	set_floor_ceiling(t_data *data)
 		while (j < WINY)
 		{
 			if (j < WINY / 2)
-				put_pixel(data->mlx.win_img, i, j, CEILING);
+				put_pixel(data->mlx.win_img, i, j, data->map.elements.ceiling);
 			else
-				put_pixel(data->mlx.win_img, i, j, FLOOR);
+				put_pixel(data->mlx.win_img, i, j, data->map.elements.floor);
 			j++;
 		}
 		i++;

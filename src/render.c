@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:43:23 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/12 02:48:45 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/16 00:32:18 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	render(t_data *data)
 {
+	if (!data->frame_done)
+		return ;
+	data->frame_done = 0;
 	set_floor_ceiling(data);
 	init_raycasting(data);
 	drawMinimap(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.window, data->mlx.win_img->img, 0, 0);
+	data->frame_done = 1;
 }
 
 void	set_floor_ceiling(t_data *data)

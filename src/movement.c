@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 23:51:36 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/10 13:54:17 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/16 00:40:22 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	rotate_player(t_data *data, double angle)
 
 void move_forward(t_data *d)
 {
-	printf("Player direction: [%f, %f]\n", d->player.dir[X], d->player.dir[Y]);
-	printf("Player position: [%f, %f]\n", d->player.pos[X], d->player.pos[Y]);
 	if (d->map.grid[(int)(d->player.pos[Y] + d->player.dir[Y] * fabs(d->player.move_speed))]\
 	[(int)d->player.pos[X]] != '1')
 	{
@@ -55,8 +53,6 @@ void move_forward(t_data *d)
 
 void move_back(t_data *d)
 {
-	printf("Player direction: [%f, %f]\n", d->player.dir[X], d->player.dir[Y]);
-	printf("Player position: [%f, %f]\n", d->player.pos[X], d->player.pos[Y]);
 	if (d->map.grid[(int)(d->player.pos[Y] - d->player.dir[Y] * fabs(d->player.move_speed))]\
 	[(int)d->player.pos[X]] != '1')
 	{
@@ -71,8 +67,6 @@ void move_back(t_data *d)
 
 void move_left(t_data *d)
 {
-	printf("Player direction: [%f, %f]\n", d->player.dir[X], d->player.dir[Y]);
-	printf("Player position: [%f, %f]\n", d->player.pos[X], d->player.pos[Y]);
 	if (d->map.grid[(int)(d->player.pos[Y] - d->player.dir[X] * d->player.move_speed)]\
 	[(int)d->player.pos[X]] != '1')
 	{
@@ -87,8 +81,6 @@ void move_left(t_data *d)
 
 void move_right(t_data *d)
 {
-	printf("Player direction: [%f, %f]\n", d->player.dir[X], d->player.dir[Y]);
-	printf("Player position: [%f, %f]\n", d->player.pos[X], d->player.pos[Y]);
 	if (d->map.grid[(int)(d->player.pos[Y] + d->player.dir[X] * d->player.move_speed)]\
 	[(int)d->player.pos[X]] != '1')
 	{

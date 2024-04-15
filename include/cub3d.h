@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/12 02:49:46 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/16 00:37:41 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ completely surrounded by walls"
 
 //Macros for calculation values
 
-#define WINX 1920
-#define WINY 1080
+#define WINX 740 //640
+#define WINY 360 //360
 #define ROTATE_SPEED 0.05
 #define MOVE_SPEED 0.1
 #define TILE_SIZE 2
@@ -193,6 +193,7 @@ typedef struct s_data
 	t_ray		ray;
 	t_mouse		mouse;
 	int			texture_size;//
+	int			frame_done;
 }				t_data;
 
 // functions:

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/12 02:50:50 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/16 00:25:07 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	mousemove(int x, int y, t_data *data)
 {
 	int		difference;
 
-	(void)y;
 	if (x < 0 || x >= WINX || y < 0 || y >= WINY || \
 	(!data->mouse.pressed && ++data->mouse.pressed))
 	{

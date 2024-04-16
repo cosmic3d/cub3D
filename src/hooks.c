@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/16 00:25:07 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:56:09 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	mousemove(int x, int y, t_data *data)
 		data->mouse.prev_pos[Y] = y;
 		return (0);
 	}
+	data->map.offset_y = (2 * y / (double)WINY - 1) * WINY;
 	difference = x - data->mouse.prev_pos[X];
 	if (difference == 0)
 		return (0);

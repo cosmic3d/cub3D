@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:43:23 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/16 00:32:18 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:50:35 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	render(t_data *data)
 {
-	if (!data->frame_done)
+	if (!data->frame_done) //NO SE SI AFECTA O NO A LA PERFORMANCE
 		return ;
 	data->frame_done = 0;
 	set_floor_ceiling(data);
@@ -28,14 +28,16 @@ void	set_floor_ceiling(t_data *data)
 {
 	int	i;
 	int	j;
+	int	limit;
 
 	i = 0;
+	limit = WINY / 2 - data->map.offset_y - 1;
 	while (i < WINX)
 	{
 		j = 0;
 		while (j < WINY)
 		{
-			if (j < WINY / 2)
+			if (j < limit)
 				put_pixel(data->mlx.win_img, i, j, data->map.elements.ceiling);
 			else
 				put_pixel(data->mlx.win_img, i, j, data->map.elements.floor);
@@ -66,5 +68,5 @@ void	drawMinimap(t_data *data)
 		}
 		i++;
 	}
-	drawRect(data, data->player.pos[X] * tile_size, data->player.pos[Y] * tile_size, tile_size, 0x00FF00);
+	drawRect(data, data->player.pos[X] * tile_size - (tile_size / 2), data->player.pos[Y] * tile_size - (tile_size / 2), tile_size, 0x00FF00);
 }

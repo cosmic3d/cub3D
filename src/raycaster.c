@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/12 19:11:47 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:08:01 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_raycasting(t_data *data)
 		calculate_perp_dist(data);
 		texture = get_texture(data);
 		draw_vert_stripe(get_texture_addr(data, texture), window->addr + x, \
-				texture->size, (int)(WINY / data->ray.perp_wall_dist));
+				texture->size, data);
 	}
 }
 

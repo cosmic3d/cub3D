@@ -1,7 +1,7 @@
-NO ./resources/Brick_Wall.xpm
-SO ./resources/Brick_Wall.xpm
-WE ./resources/Brick_Wall.xpm
-EA ./resources/Brick_Wall.xpm
+NO textures/north.xpm
+SO textures/south.xpm
+WE textures/west.xpm
+EA textures/east.xpm
 
 F 136,134,130
 C 165,162,158

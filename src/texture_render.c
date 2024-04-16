@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/12 19:19:54 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:02:42 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	*get_texture_addr(t_data *data, t_img *texture)
 
 t_img	*get_texture(t_data *data)
 {
+	if (data->map.grid[data->ray.map[Y]][data->ray.map[X]] == DOOR)
+		return (&data->map.elements.door);
 	if (data->ray.side[X] == 0)
 	{
 		if (data->ray.side[Y] == 1)

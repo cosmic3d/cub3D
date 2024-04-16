@@ -31,11 +31,15 @@ SRC_FILES =	main.c \
 			utils.c \
 			draw.c \
 			texture_render.c \
+			bonus_sprites.c \
+			bonus_doors.c \
 			parser/parser.c \
 			parser/verify_arguments.c \
 			parser/store_file.c \
 			parser/get_file_elements.c \
+			parser/bonus_get_file_elements.c \
 			parser/parse_map.c \
+			parser/bonus_parse_map.c \
 			parser/file_to_grid.c
 
 # Format: subdir/file.c | For example: main.c map/init.c
@@ -200,6 +204,9 @@ title:
 
 run: all
 	./$(NAME) test.cub
+
+bonus_run: all
+	./$(NAME) bonus_test.cub
 
 val: all
 	valgrind ./$(NAME) test.cub

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:07:58 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/12 18:59:35 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:30:59 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	get_file_elements(t_mlx *mlx, t_elements *elements, char **file)
 	count = 0;
 	while (file[i] && count < 6)
 	{
-		printf("Line:\n%s\n", file[i]);
 		if (ft_strncmp(file[i], "NO", 2) == 0)
 			count += get_texture_element(file[i], mlx, &elements->north);
 		else if (ft_strncmp(file[i], "SO", 2) == 0)
@@ -45,7 +44,6 @@ int	get_file_elements(t_mlx *mlx, t_elements *elements, char **file)
 			c3d_exit(ERR_INVALID_FILE_FORMAT);
 		i++;
 	}
-	ft_printf("Floor = %d\nCeiling = %d\n", elements->floor, elements->ceiling);
 	return (i);
 }
 
@@ -61,7 +59,6 @@ static int	get_texture_element(char *line, t_mlx *mlx, t_img *texture)
 			&texture->size[X], &texture->size[Y]);
 	if (!texture->img)
 		c3d_exit("mlx error"); // for now
-	ft_printf("check\n");
 	texture->addr = (int *)mlx_get_data_addr(texture->img, &texture->bpp, \
 			&texture->line, &texture->endian);
 	texture->line >>= 2;

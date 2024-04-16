@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/12 02:29:04 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:47:53 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	initialize_variables(t_data *data)
 	if (data->player.dir[X] < 0 || data->player.dir[Y] > 0)
 	{
 		data->player.move_speed = -MOVE_SPEED;
-		data->player.rot_speed = -ROTATE_SPEED;;
+		data->player.rot_speed = -ROTATE_SPEED;
 	}
 	data->mouse.prev_pos[X] = 0;
 	data->mouse.prev_pos[Y] = 0;
@@ -58,4 +58,3 @@ int	main(int argc, char **argv)
 	mlx_loop(data.mlx.mlx);
 	return (0);
 }
-

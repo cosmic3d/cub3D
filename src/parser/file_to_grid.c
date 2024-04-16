@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_to_grid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:32:00 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/06 21:07:39 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:51:55 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,13 @@ static void	copy_map(char **grid, char **file, int size[2]);
 
 char	**create_map_from_file(char **file, int size[2])
 {
-	char **grid;
+	char	**grid;
 
 	size[Y] = get_map_height(file);
 	size[X] = get_map_width(file);
-	printf("size[X] = %d\n", size[X]);
-	printf("size[Y] = %d\n", size[Y]);
-
 	grid = (char **)ft_alloc_array(sizeof(char), size[Y], size[X]);
 	if (!grid)
 		c3d_exit(ERR_MALLOC);
-
-	//write(1, "Check\n", 6);
 	copy_map(grid, file, size);
 	return (grid);
 }

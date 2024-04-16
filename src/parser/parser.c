@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:52:17 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/10 13:14:18 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:16:30 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	init_map_variables(t_map *map)
 	init_texture(&map->elements.south);
 	init_texture(&map->elements.west);
 	init_texture(&map->elements.east);
+	init_texture(&map->elements.sprite);
 	map->elements.ceiling = -1;
 	map->elements.floor = -1;
 	map->grid = NULL;
@@ -44,9 +45,17 @@ int	parser(t_data *data, char *filepath)
 {
 	int	file_line;
 
+	data->bonus = 0;
+	if (ft_strncmp(filepath, "bonus_", 6) == 0)
+		data->bonus = 1;
 	data->file = store_file(filepath);
 	init_map_variables(&data->map);
 	file_line = get_file_elements(&data->mlx, &data->map.elements, data->file);
-	parse_map(data, data->file + file_line);
+	if (data->bonus)
+		file_line += get_bonus_elements(data, data->file + file_line);
+	if (data->bonus)
+		bonus_parse_map(data, data->file + file_line);
+	else
+		parse_map(data, data->file + file_line);
 	return (0);
 }

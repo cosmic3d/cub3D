@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/12 02:49:46 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:02:49 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@
 # include "eventcodes.h"
 # include "keycodes.h"
 
-// Debugging libs
-# include <time.h> //
-// Debugging macros
+// For debugging
+# include <time.h>
 # define FPS_TEST_CYCLES 5000
 
 # ifdef __linux__
@@ -83,6 +82,8 @@ completely surrounded by walls"
 #define WALL '1'
 #define EMPTY '0'
 #define SPACE 32
+#define DOOR 'D'
+#define SPRITE 'O'
 
 //COLORS IN INT
 #define RED 0xFF0000
@@ -104,6 +105,12 @@ completely surrounded by walls"
 #define MOVE_SPEED 0.1
 #define TILE_SIZE 2
 
+typedef struct s_sprite
+{
+	double	pos[2];
+	double	dist;
+}				t_sprite;
+
 typedef struct s_img
 {
 	void	*img;
@@ -113,6 +120,14 @@ typedef struct s_img
 	int		endian;
 	int		size[2];
 }					t_img;
+
+typedef struct s_door_data
+{
+	double	step[2];
+	double	side_dist[2];
+	double	delta_dist[2];
+	int		map[2];
+}				t_door_data;
 
 typedef struct s_player
 {
@@ -129,6 +144,8 @@ typedef struct s_map_elements
 	t_img	south;
 	t_img	west;
 	t_img	east;
+	t_img	sprite;
+	t_img	door;
 	int		floor;
 	int		ceiling;
 }				t_elements;
@@ -193,6 +210,9 @@ typedef struct s_data
 	t_ray		ray;
 	t_mouse		mouse;
 	int			texture_size;//
+	int			bonus;
+	int			sprite_count;
+	double		zbuffer[WINX];
 }				t_data;
 
 // functions:
@@ -208,15 +228,22 @@ int		verify_arguments(int argc, char **argv);
 int		c3d_error(char *error);
 int		c3d_exit(char *error);
 
+// bonus_get_file_elements.c
+int	get_bonus_elements(t_data *data, char **file);
+
+// bonus_door.c
+void	open_door(t_data *data);
+
 // main.c
 void	initialize_variables(t_data *data);
 void	init_mlx(t_data *data);
 
 // raycaster.c
 void	init_raycasting(t_data *data);
-void	calculate_step(t_data *data);
-void 	check_hit(t_data *data);
-void 	calculate_perp_dist(t_data *data);
+// void	calculate_step(t_data *data);
+// void 	check_hit(t_data *data);
+// void calculate_perp_dist(t_data *data, int x);
+// void 	calculate_perp_dist(t_data *data);
 
 // hooks.c
 void	hook(t_data *data);
@@ -230,10 +257,15 @@ t_uint	get_pixel_color(t_img *image, int x, int y);
 
 // render.c
 void	render(t_data *data);
-void	set_floor_ceiling(t_data *data);
 void	drawMinimap(t_data *data);
+
+// parse_map.c
 void	parse_map(t_data *data, char **file);
-int		is_tile_external(char **file, int i, int j);
+
+// bonus_parse_map.c
+void	bonus_parse_map(t_data *data, char **file);
+
+// file_to_grid.c
 char	**create_map_from_file(char **file, int size[2]);
 
 // debug.c
@@ -261,5 +293,8 @@ int		*get_window(t_data *data, int x);
 t_img	*get_texture(t_data *data);
 int		*get_texture_addr(t_data *data, t_img *texture);
 void	draw_vert_stripe(int *texture, int *win, int tx_size[2], int line_h);
+
+// bonus_sprites.c
+void	bonus_draw_sprites(t_data *data);
 
 #endif // CUB3D_H

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 15:07:39 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:52:55 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,12 @@ typedef struct s_sprite
 	double	dist;
 }				t_sprite;
 
+typedef struct s_sprite_drawing_data
+{
+	double	transform[2];
+	int		size[2];
+}				t_sprite_data;
+
 typedef struct s_img
 {
 	void	*img;
@@ -251,8 +257,11 @@ int		verify_arguments(int argc, char **argv);
 int		c3d_error(char *error);
 int		c3d_exit(char *error);
 
+// parse_map.c
+void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);
+
 // bonus_get_file_elements.c
-int	get_bonus_elements(t_data *data, char **file);
+int		get_bonus_elements(t_data *data, char **file);
 
 // bonus_door.c
 void	open_door(t_data *data);
@@ -289,7 +298,7 @@ void	parse_map(t_data *data, char **file);
 void	bonus_parse_map(t_data *data, char **file);
 
 // file_to_grid.c
-char	**create_map_from_file(char **file, int size[2]);
+char	**create_map_from_file(t_map *map, char **file);
 
 // debug.c
 void	print_map_grid(t_data *data);

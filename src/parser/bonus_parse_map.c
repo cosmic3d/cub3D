@@ -6,16 +6,16 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:32:37 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 13:29:27 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:08:55 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void	bonus_check_valid_map_characters(t_map *map, char **file);
-static void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);
 static void	bonus_check_map_is_surrounded(char **grid, int size[2]);
 static int	tile_is_exterior(char **grid, int y, int x, int size[2]);
+static int	count_sprites_in_map(int size[2], char **map);
 
 void	bonus_parse_map(t_data *data, char **file)
 {
@@ -24,8 +24,31 @@ void	bonus_parse_map(t_data *data, char **file)
 	if (!file)
 		c3d_exit(ERR_NO_MAP_IN_FILE);
 	bonus_check_valid_map_characters(&data->map, file);
-	data->map.grid = create_map_from_file(file, data->map.size);
+	data->map.grid = create_map_from_file(&data->map, file);
 	bonus_check_map_is_surrounded(data->map.grid, data->map.size);
+	data->sprite_count = count_sprites_in_map(data->map.size, data->map.grid);
+}
+static int	count_sprites_in_map(int size[2], char **map)
+{
+	int	count;
+	int	i;
+	int	j;
+
+	count = 0;
+	i = 0;
+	while (i < size[Y])
+	{
+		j = 0;
+		while (j < size[X])
+		{
+			// printf("map[%d][%d]\n", i, j);
+			if (map[i][j] == 'O')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
 }
 
 static void	bonus_check_valid_map_characters(t_map *map, char **file)
@@ -54,32 +77,6 @@ static void	bonus_check_valid_map_characters(t_map *map, char **file)
 	}
 	if (map->spawn[X] == -1)
 		c3d_exit(ERR_MAP_NO_SPAWN);
-}
-
-static void	get_player_spawn_and_dir(t_map *map, char player, int x, int y)
-{
-	map->spawn[X] = x;
-	map->spawn[Y] = y;
-	if (player == 'N')
-	{
-		map->player_dir[X] = 0;
-		map->player_dir[Y] = -1;
-	}
-	else if (player == 'S')
-	{
-		map->player_dir[X] = 0;
-		map->player_dir[Y] = 1;
-	}
-	else if (player == 'W')
-	{
-		map->player_dir[X] = -1;
-		map->player_dir[Y] = 0;
-	}
-	else if (player == 'E')
-	{
-		map->player_dir[X] = 1;
-		map->player_dir[Y] = 0;
-	}
 }
 
 static void	bonus_check_map_is_surrounded(char **grid, int size[2])

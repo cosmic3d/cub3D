@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 15:17:30 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:28:48 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data)
 	double	texture_iter_d;
 	int		line_h;
 
-
 	line_h = (int)(WINY / data->ray.perp_wall_dist);
 	y = ((WINY - line_h) >> 1) - data->map.offset_y - 1;
 	texture_iter_d = 0.0;
@@ -66,10 +65,10 @@ void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data)
 		texture_iter_d = step * -y;
 		y = -1;
 	}
-	draw_end = y + line_h;
+	draw_end = y + line_h - 1;
 	if (draw_end >= WINY)
-		draw_end = WINY - 1;
-	while (++y < draw_end - 1)
+		draw_end = WINY - 1 - 1;
+	while (++y < draw_end)
 	{
 		if (texture_iter_d >= tx_size[Y] || texture_iter_d < 0)
 			break ;

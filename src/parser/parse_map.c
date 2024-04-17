@@ -6,14 +6,13 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:27:03 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 13:31:55 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:53:20 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void	check_valid_map_characters(t_map *map, char **file);
-static void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);
 static void	check_map_is_surrounded(char **grid, int size[2]);
 static int	tile_is_exterior(char **grid, int y, int x, int size[2]);
 
@@ -24,7 +23,7 @@ void	parse_map(t_data *data, char **file)
 	if (!file)
 		c3d_exit(ERR_NO_MAP_IN_FILE);
 	check_valid_map_characters(&data->map, file);
-	data->map.grid = create_map_from_file(file, data->map.size);
+	data->map.grid = create_map_from_file(&data->map, file);
 	check_map_is_surrounded(data->map.grid, data->map.size);
 }
 
@@ -56,7 +55,7 @@ static void	check_valid_map_characters(t_map *map, char **file)
 		c3d_exit(ERR_MAP_NO_SPAWN);
 }
 
-static void	get_player_spawn_and_dir(t_map *map, char player, int x, int y)
+void	get_player_spawn_and_dir(t_map *map, char player, int x, int y)
 {
 	map->spawn[X] = x;
 	map->spawn[Y] = y;

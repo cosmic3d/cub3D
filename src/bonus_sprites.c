@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:20:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/16 16:01:44 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:18:26 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,38 +27,42 @@ They will be given a certain hardcoded height. Depending on the sprite.
 
 */
 
-static int	get_sprite_count(char **map_grid, int size[2]);
 // static double *get_sprites_proximity(t_data *data, int count);
 static t_sprite	*get_sprites_array(t_data *data, int count);
 // static t_sprite	*get_sprites_in_proximity_order(t_data *data);
 static int	get_furthest_sprite(t_sprite *sprites, int count);
 
+static void	get_sprite_transform(t_sprite_data *d, t_player *p, t_sprite s)
+{
+	double	pos[2];
+	double	invDet;//figure out better name
+
+	pos[X] = s.pos[X] - p->pos[X];
+	pos[Y] = s.pos[Y] - p->pos[Y];
+	invDet = 1.0 / ((p->plane[X] * p->dir[Y]) - (p->dir[X] * p->plane[Y]));
+	d->transform[X] = invDet * ((p->dir[Y] * pos[X]) - (p->dir[X] * pos[Y]));
+	d->transform[Y] = invDet * ((-p->plane[Y] * pos[X]) + (p->plane[X] * pos[Y]));
+	return ;
+}
+
 void	bonus_draw_sprites(t_data *data)
 {
-	t_sprite	*sprites;
+	t_sprite		*sprites;
+	t_sprite_data	d;
 
-	// ft_printf("Bonus_draw_sprites start\n");
-	// THIS SHOULD BE DONE OUTSIDE, BECAUSE ITS THE SAME ALL THE TIME
-	data->sprite_count = get_sprite_count(data->map.grid, data->map.size);
-	if (data->sprite_count == 0)
-		return ;
-	// ft_printf("Sprites counted, %d\n", data->sprite_count);
 	sprites = get_sprites_array(data, data->sprite_count);
-	// ft_printf("got sprite array\n");
-	double	pos[2];
+	// double	pos[2];
 	int		i;
-	double	invDet;
-	double	transform[2];
-	int		spriteScreen[2];
-	int		spriteHeight;
+	// double	invDet;
+	// double	transform[2];
+	int		sprite_px;
 	int		drawStart[2];
 	int		drawEnd[2];
-	int		spriteWidth;
 	int		x;
 	int		y;
 
 	int tex[2];
-	int	d;
+	int	dx;
 	int	color;
 
 	int texWidth = data->map.elements.sprite.size[X];
@@ -66,70 +70,76 @@ void	bonus_draw_sprites(t_data *data)
 
 	int loop_count = 0;
 
-	while (loop_count <= data->sprite_count) // some rule
+	while (loop_count < data->sprite_count) // some rule
 	{
+		debug_check();
 		i = get_furthest_sprite(sprites, data->sprite_count);
 		// ft_printf("furthest sprite = sprite[%d]\n", i);
-		pos[X] = sprites[i].pos[X] - data->player.pos[X];
-		pos[Y] = sprites[i].pos[Y] - data->player.pos[Y];
+		// pos[X] = sprites[i].pos[X] - data->player.pos[X];
+		// pos[Y] = sprites[i].pos[Y] - data->player.pos[Y];
 		// printf("sprite pos[X] = %f\n", sprites[i].pos[X]);
 		// printf("sprite pos[Y] = %f\n", sprites[i].pos[Y]);
 		// printf("corrected pos[X] = %f\n", sprites[i].pos[X]);
 		// printf("corrected pos[Y] = %f\n", sprites[i].pos[Y]);
 
-		invDet = 1.0 / ((data->player.plane[X] * data->player.dir[Y]) - (data->player.dir[X] * data->player.plane[Y]));
+		// invDet = 1.0 / ((data->player.plane[X] * data->player.dir[Y]) - (data->player.dir[X] * data->player.plane[Y]));
 		// printf("invDet = %f\n", invDet);
 
-		transform[X] = invDet * ((data->player.dir[Y] * pos[X]) - (data->player.dir[X] * pos[Y]));
-		transform[Y] = invDet * ((-data->player.plane[Y] * pos[X]) + (data->player.plane[X] * pos[Y]));
+		// transform[X] = invDet * ((data->player.dir[Y] * pos[X]) - (data->player.dir[X] * pos[Y]));
+		// transform[Y] = invDet * ((-data->player.plane[Y] * pos[X]) + (data->player.plane[X] * pos[Y]));
 		// printf("transform[X] = %f\n", transform[X]);
 		// printf("transform[Y] = %f\n", transform[Y]);
 
-		spriteScreen[X] = (int)((WINX / 2) * (1 + transform[X] / transform[Y]));
-		// printf("spriteScreen[X] = %d\n", spriteScreen[X]);
+		get_sprite_transform(&d, &data->player, sprites[i]);
+		printf("newtransform[X] = %f\n", d.transform[X]);
+		printf("newtransform[Y] = %f\n", d.transform[Y]);
+		sprite_px = (int)((WINX / 2) * (1 + d.transform[X] / d.transform[Y]));
+		printf("sprite_px = %d\n", sprite_px);
 
-		spriteHeight = abs((int)(WINY / (transform[Y])));
-		// printf("spriteHeight = %d\n", spriteHeight);
+		// get_sprite_transform(X, data->player, dat)
+		d.size[Y] = abs((int)(WINY / d.transform[Y]));
+		// printf("d.size[Y] = %d\n", d.size[Y]);
+		d.size[X] = abs((int)(WINY / d.transform[Y]));
+		// printf("d.size[X] = %d\n", d.size[X]);
 
-		drawStart[Y] = -spriteHeight / 2 + WINY / 2;
+		drawStart[Y] = ((WINY - d.size[Y]) >> 1) + data->map.offset_y;
 		if (drawStart[Y] < 0)
 			drawStart[Y] = 0;
-		// printf("drawStart[Y] = %d\n", drawStart[Y]);
-		drawEnd[Y] = spriteHeight / 2 + WINY / 2;
+		printf("offset = %f\n", data->map.offset_y);
+		printf("drawStart[Y] = %d\n", drawStart[Y]);
+		drawEnd[Y] = d.size[Y] / 2 + WINY / 2;
 		if (drawEnd[Y] >= WINY)
 			drawEnd[Y] = WINY - 1;
-		// printf("drawEnd[Y] = %d\n", drawEnd[Y]);
+		printf("drawEnd[Y] = %d\n", drawEnd[Y]);
 
-		spriteWidth = abs((int)(WINY / transform[Y]));
-		// printf("spriteWidth = %d\n", spriteWidth);
 
-		drawStart[X] = -spriteWidth / 2 + spriteScreen[X];
+		drawStart[X] = -d.size[X] / 2 + sprite_px;
 		if (drawStart[X] < 0)
 			drawStart[X] = 0;
-		// printf("drawStart[X] = %d\n", drawStart[X]);
-		drawEnd[X] = spriteWidth / 2 + spriteScreen[X];
+		printf("drawStart[X] = %d\n", drawStart[X]);
+		drawEnd[X] = d.size[X] / 2 + sprite_px;
 		if (drawEnd[X] >= WINX)
 			drawEnd[X] = WINX - 1;
-		// printf("drawEnd[X] = %d\n", drawEnd[X]);
+		printf("drawEnd[X] = %d\n", drawEnd[X]);
 	
 		x = drawStart[X];
 		while (x < drawEnd[X])
 		{
 			// printf("x = %d\n", x);
-			tex[X] = (256 * (x - ((-spriteWidth / 2) + spriteScreen[X])) * texWidth / spriteWidth) / 256;
+			tex[X] = (256 * (x - ((-d.size[X] / 2) + sprite_px)) * texWidth / d.size[X]) / 256;
 			// printf("tex[X] = %d\n", tex[X]);
-			if (transform[Y] > 0 && x > 0 && x < WINX && transform[Y] < data->zbuffer[x])
+			if (d.transform[Y] > 0 && x > 0 && x < WINX && d.transform[Y] < data->zbuffer[x])
 			{
 				y = drawStart[Y];
 				while (y < drawEnd[Y])
 				{
 					// printf("y = %d\n", y);
-					d = y - (WINY / 2) + (spriteHeight / 2);
-					tex[Y] = ((d * texHeight) / spriteHeight);
+					dx = y - (WINY / 2) + (d.size[Y] / 2);
+					tex[Y] = ((dx * texHeight) / d.size[Y]);
 					// ft_printf("tex[%d][%d]\n", tex[X], tex[Y]);
 					color = *(data->map.elements.sprite.addr + (tex[Y] * texWidth) + tex[X]);
 					if (color)
-						put_pixel(data->mlx.win_img, x, y, color);
+						put_pixel(data->mlx.win_img, x, y - data->map.offset_y, color);
 					// data->mlx.win_img->addr[y * data->mlx.win_img->line/4 + x] = (t_uint)color;
 					y++;
 				}
@@ -158,7 +168,8 @@ static int	get_furthest_sprite(t_sprite *sprites, int count)
 		}
 		i++;
 	}
-	sprites[furthest].dist = 0.0;
+	printf("Sprite[%d].dist = %f\n", furthest, sprites[furthest].dist);
+	sprites[furthest].dist = -1.0;
 	return (furthest);
 }
 
@@ -203,25 +214,3 @@ static t_sprite	*get_sprites_array(t_data *data, int count)
 // 	player[Y] = data->player.pos[Y];
 	
 // }
-
-static int	get_sprite_count(char **map_grid, int size[2])
-{
-	int	count;
-	int	i;
-	int	j;
-
-	count = 0;
-	i = 0;
-	while (i < size[Y])
-	{
-		j = 0;
-		while (j < size[X])
-		{
-			if (map_grid[i][j] == 'O')
-				count++;
-			j++;
-		}
-		i++;
-	}
-	return (count);
-}

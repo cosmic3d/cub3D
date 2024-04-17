@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:43:23 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/17 15:17:22 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:11:22 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	render(t_data *data)
 	init_raycasting(data);
 	if (data->bonus)
 	{
-		bonus_draw_sprites(data);
+		if (data->sprite_count)
+			bonus_draw_sprites(data);
 		drawMinimap(data);
 	}
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.window, \

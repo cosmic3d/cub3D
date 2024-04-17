@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:32:00 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/16 15:51:55 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:52:01 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static int	get_map_height(char **file);
 static int	get_map_width(char **file);
 static void	copy_map(char **grid, char **file, int size[2]);
 
-char	**create_map_from_file(char **file, int size[2])
+char	**create_map_from_file(t_map *map, char **file)
 {
 	char	**grid;
 
-	size[Y] = get_map_height(file);
-	size[X] = get_map_width(file);
-	grid = (char **)ft_alloc_array(sizeof(char), size[Y], size[X]);
+	map->size[Y] = get_map_height(file);
+	map->size[X] = get_map_width(file);
+	grid = (char **)ft_alloc_array(sizeof(char), map->size[Y], map->size[X]);
 	if (!grid)
 		c3d_exit(ERR_MALLOC);
-	copy_map(grid, file, size);
+	copy_map(grid, file, map->size);
 	return (grid);
 }
 

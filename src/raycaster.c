@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/16 15:44:29 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:09:37 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_raycasting(t_data *data)
 		calculate_perp_dist(data, x);
 		texture = get_texture(data);
 		draw_vert_stripe(get_texture_addr(data, texture), window->addr + x, \
-				texture->size, (int)(WINY / data->ray.perp_wall_dist));
+				texture->size, data);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/16 14:02:42 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:17:30 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,32 @@ t_img	*get_texture(t_data *data)
 	return (&data->map.elements.east);
 }
 
-void	draw_vert_stripe(int *texture, int *win, int tx_size[2], int line_h)
+void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data)
 {
 	int		y;
 	int		draw_end;
 	double	step;
 	double	texture_iter_d;
+	int		line_h;
 
-	y = (WINY - line_h) >> 1;
+
+	line_h = (int)(WINY / data->ray.perp_wall_dist);
+	y = ((WINY - line_h) >> 1) - data->map.offset_y - 1;
 	texture_iter_d = 0.0;
 	step = (double)tx_size[Y] / line_h;
 	if (y < 0)
 	{
 		texture_iter_d = step * -y;
-		y = 0;
+		y = -1;
 	}
 	draw_end = y + line_h;
 	if (draw_end >= WINY)
 		draw_end = WINY - 1;
-	while (y < draw_end)
+	while (++y < draw_end - 1)
 	{
+		if (texture_iter_d >= tx_size[Y] || texture_iter_d < 0)
+			break ;
 		texture_iter_d += step;
 		win[y * WINX] = texture[(int)texture_iter_d * tx_size[X]];
-		y++;
 	}
 }

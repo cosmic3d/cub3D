@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 13:14:25 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:08:04 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	initialize_variables(t_data *data)
 	data->mouse.prev_pos[X] = 0;
 	data->mouse.prev_pos[Y] = 0;
 	data->mouse.pressed = 0;
-	data->mouse.max_rot = deg_to_rad(360);
+	data->frame_done = 1;
+	data->map.offset_y = WINY / 2;
 }
 
 void	init_mlx(t_data *data)

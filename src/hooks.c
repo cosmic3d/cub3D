@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/16 15:56:15 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:07:56 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	mousemove(int x, int y, t_data *data)
 		data->mouse.prev_pos[Y] = y;
 		return (0);
 	}
+	data->map.offset_y = (2 * y / (double)WINY - 1) * WINY;
 	difference = x - data->mouse.prev_pos[X];
 	if (difference == 0)
 		return (0);

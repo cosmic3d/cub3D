@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 13:29:17 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:07:39 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,12 @@ invalid tile"
 #define CYAN 0x00FFFF
 #define MAGENTA 0xFF00FF
 #define FLOOR WHITE
-#define CEILING CYAN
+#define CEILING RED
 
 //Macros for calculation values
 
-#define WINX 1920
-#define WINY 1080
+#define WINX 1920 //640
+#define WINY 1080 //360
 #define ROTATE_SPEED 0.05
 #define MOVE_SPEED 0.1
 #define TILE_SIZE 2
@@ -178,6 +178,7 @@ typedef struct	s_map
 	int			size[2];
 	int			spawn[2];
 	int			player_dir[2]; // [0] = x, [1] = y
+	double		offset_y;
 }				t_map;
 
 typedef struct s_ray
@@ -234,6 +235,7 @@ typedef struct s_data
 	int			bonus;
 	int			sprite_count;
 	double		zbuffer[WINX];
+	int			frame_done;
 }				t_data;
 
 // functions:
@@ -313,7 +315,7 @@ void	drawRect(t_data *data, int x, int y, int size, int color);
 int		*get_window(t_data *data, int x);
 t_img	*get_texture(t_data *data);
 int		*get_texture_addr(t_data *data, t_img *texture);
-void	draw_vert_stripe(int *texture, int *win, int tx_size[2], int line_h);
+void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data);
 
 // bonus_sprites.c
 void	bonus_draw_sprites(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:20:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 17:18:26 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:33:28 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,12 @@ void	bonus_draw_sprites(t_data *data)
 		d.size[X] = abs((int)(WINY / d.transform[Y]));
 		// printf("d.size[X] = %d\n", d.size[X]);
 
-		drawStart[Y] = ((WINY - d.size[Y]) >> 1) + data->map.offset_y;
+		drawStart[Y] = ((WINY - d.size[Y]) >> 1);
 		if (drawStart[Y] < 0)
-			drawStart[Y] = 0;
+			drawStart[Y] = 0 + data->map.offset_y;
 		printf("offset = %f\n", data->map.offset_y);
 		printf("drawStart[Y] = %d\n", drawStart[Y]);
-		drawEnd[Y] = d.size[Y] / 2 + WINY / 2;
+		drawEnd[Y] = ((WINY + d.size[Y]) >> 1);
 		if (drawEnd[Y] >= WINY)
 			drawEnd[Y] = WINY - 1;
 		printf("drawEnd[Y] = %d\n", drawEnd[Y]);
@@ -135,7 +135,7 @@ void	bonus_draw_sprites(t_data *data)
 				{
 					// printf("y = %d\n", y);
 					dx = y - (WINY / 2) + (d.size[Y] / 2);
-					tex[Y] = ((dx * texHeight) / d.size[Y]);
+					tex[Y] = ((dx * texHeight + (int)data->map.offset_y) / d.size[Y]);
 					// ft_printf("tex[%d][%d]\n", tex[X], tex[Y]);
 					color = *(data->map.elements.sprite.addr + (tex[Y] * texWidth) + tex[X]);
 					if (color)

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 23:08:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/12 19:33:53 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:15:09 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_img	*get_img(t_data *data, int width, int height)
 	img_p->addr = (int *)mlx_get_data_addr(img_p->img, \
 	&img_p->bpp, &img_p->line, &img_p->endian);
 	if (!img_p->addr)
-		c3d_exit("Failed to get image address");
+		c3d_exit(ERR_IMG_GET_ADDR);
 	return (img_p);
 }
 
@@ -44,6 +44,6 @@ t_uint	get_pixel_color(t_img *image, int x, int y)
 		c3d_exit("WARNING: get_pixel_color got out of bounds coordinatesA");
 	if (x < 0 || y < 0)
 		c3d_exit("WARNING: get_pixel_color got out of bounds coordinatesB");
-	//
+
 	return (*(image->addr + y * (image->line / 4) + x));
 }

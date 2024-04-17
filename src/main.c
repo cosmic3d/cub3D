@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/16 15:47:53 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:14:25 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	init_mlx(t_data *data)
 {
 	data->mlx.mlx = mlx_init();
 	if (!data->mlx.mlx)
-		c3d_exit("Error\nFailed to initialize mlx\n");
+		c3d_exit(ERR_MLX_INIT);
 	data->mlx.window = mlx_new_window(data->mlx.mlx, WINX, WINY, "QUAKE 3D");
 	if (!data->mlx.window)
-		c3d_exit("Error\nFailed to create window\n");
+		c3d_exit(ERR_MLX_WINDOW);
 	data->mlx.texture_size = 64;
 	data->mlx.win_img = get_img(data, WINX, WINY);
 	hook(data);

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/16 16:02:49 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:29:17 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,31 @@ found"
 incorrectly formatted"
 # define ERR_NOT_ENOUGH_ELEMENTS "Incorrect file format, not enough elements \
 were provided"
+# define ERR_NO_MAP_IN_FILE "The file provided does not contain a map"
+
+// MiniLibX errors
+# define ERR_XPM_TO_IMG "MiniLibX failed to convert an xpm to image"
+# define ERR_IMG_GET_ADDR "MiniLibX failed to get the addr for an image"
+# define ERR_MLX_INIT "MiniLibX failed to initialize mlx"
+# define ERR_MLX_WINDOW "MiniLibX failed to create a window"
 
 // Map errors
 # define ERR_MAP_NOT_ENCLOSED "Incorrect map format, the map provided is not \
 completely surrounded by walls"
+# define ERR_MAP_MULTIPLE_SPAWN "Incorrect map format, multiple spawn points \
+were found in the map"
+# define ERR_MAP_INVALID_CHAR "Incorrect map format, invalid characters were \
+found in the map"
+# define ERR_MAP_EMPTY_LINE "Incorrect map format, empty lines were found in \
+the map"
+# define ERR_MAP_NO_SPAWN "Incorrect map format, no spawn point was found in \
+the map"
+# define ERR_MAP_SPAWN_INVALID "Incorrect map format, the player spawn is \
+in an invalid tile"
+# define ERR_MAP_SPRITE_INVALID "Incorrect map format, a sprite was found \
+in an invalid tile"
+# define ERR_MAP_DOOR_INVALID "Incorrect map format, a door was found in an \
+invalid tile"
 
 // Fatal errors
 # define ERR_MALLOC "Memory allocation failed"

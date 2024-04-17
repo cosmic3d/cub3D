@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:27:03 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/09 17:18:17 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:31:55 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parse_map(t_data *data, char **file)
 	while (*file && **file == '\0')
 		++file;
 	if (!file)
-		c3d_exit("No map in file");
+		c3d_exit(ERR_NO_MAP_IN_FILE);
 	check_valid_map_characters(&data->map, file);
 	data->map.grid = create_map_from_file(file, data->map.size);
 	check_map_is_surrounded(data->map.grid, data->map.size);
@@ -44,16 +44,16 @@ static void	check_valid_map_characters(t_map *map, char **file)
 				if (map->spawn[X] == -1)
 					get_player_spawn_and_dir(map, file[i][j], i, j);
 				else
-					c3d_exit("Multiple spawn points in map");
+					c3d_exit(ERR_MAP_MULTIPLE_SPAWN);
 			}
 			if (!ft_strchr("10NSWE ", file[i][j]))
-				c3d_exit("Invalid characters found in map");
+				c3d_exit(ERR_MAP_INVALID_CHAR);
 		}
 		if (j == 0 || *ft_strnchr(file[i], ' ') == '\0')
-			c3d_exit("Empty lines in map found");
+			c3d_exit(ERR_MAP_EMPTY_LINE);
 	}
 	if (map->spawn[X] == -1)
-		c3d_exit("No spawn point in map");
+		c3d_exit(ERR_MAP_NO_SPAWN);
 }
 
 static void	get_player_spawn_and_dir(t_map *map, char player, int x, int y)
@@ -96,9 +96,9 @@ static void	check_map_is_surrounded(char **grid, int size[2])
 			if (tile_is_exterior(grid, i, j, size))
 			{
 				if (grid[i][j] == '0')
-					c3d_exit("Map is not surounded");
+					c3d_exit(ERR_MAP_NOT_ENCLOSED);
 				if (ft_strchr("NSWE", grid[i][j]))
-					c3d_exit("Player is out of bounds");
+					c3d_exit(ERR_MAP_SPAWN_INVALID);
 			}
 			j++;
 		}

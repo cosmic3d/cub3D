@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:32:00 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 16:52:01 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:52:45 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**create_map_from_file(t_map *map, char **file)
 	map->size[X] = get_map_width(file);
 	grid = (char **)ft_alloc_array(sizeof(char), map->size[Y], map->size[X]);
 	if (!grid)
-		c3d_exit(ERR_MALLOC);
+		return (NULL);
 	copy_map(grid, file, map->size);
 	return (grid);
 }

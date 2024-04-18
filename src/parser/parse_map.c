@@ -6,14 +6,14 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:27:03 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 16:53:20 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:03:18 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	check_valid_map_characters(t_map *map, char **file);
-static void	check_map_is_surrounded(char **grid, int size[2]);
+static int	check_valid_map_characters(t_map *map, char **file);
+static int	check_map_is_surrounded(char **grid, int size[2]);
 static int	tile_is_exterior(char **grid, int y, int x, int size[2]);
 
 void	parse_map(t_data *data, char **file)
@@ -21,13 +21,17 @@ void	parse_map(t_data *data, char **file)
 	while (*file && **file == '\0')
 		++file;
 	if (!file)
-		c3d_exit(ERR_NO_MAP_IN_FILE);
-	check_valid_map_characters(&data->map, file);
+		c3d_exit(ERR_NO_MAP_IN_FILE, data);
+	if (check_valid_map_characters(&data->map, file) == FAILURE)
+		c3d_exit(NULL, data);
 	data->map.grid = create_map_from_file(&data->map, file);
-	check_map_is_surrounded(data->map.grid, data->map.size);
+	if (!data->map.grid)
+		c3d_exit(ERR_MALLOC, data);
+	if (check_map_is_surrounded(data->map.grid, data->map.size) == FAILURE)
+		c3d_exit(NULL, data);
 }
 
-static void	check_valid_map_characters(t_map *map, char **file)
+static int	check_valid_map_characters(t_map *map, char **file)
 {
 	int	i;
 	int	j;
@@ -43,16 +47,17 @@ static void	check_valid_map_characters(t_map *map, char **file)
 				if (map->spawn[X] == -1)
 					get_player_spawn_and_dir(map, file[i][j], i, j);
 				else
-					c3d_exit(ERR_MAP_MULTIPLE_SPAWN);
+					return (c3d_error(ERR_MAP_MULTIPLE_SPAWN));
 			}
 			if (!ft_strchr("10NSWE ", file[i][j]))
-				c3d_exit(ERR_MAP_INVALID_CHAR);
+				return (c3d_error(ERR_MAP_INVALID_CHAR));
 		}
 		if (j == 0 || *ft_strnchr(file[i], ' ') == '\0')
-			c3d_exit(ERR_MAP_EMPTY_LINE);
+			return (c3d_error(ERR_MAP_EMPTY_LINE));
 	}
 	if (map->spawn[X] == -1)
-		c3d_exit(ERR_MAP_NO_SPAWN);
+		return (c3d_error(ERR_MAP_NO_SPAWN));
+	return (SUCCESS);
 }
 
 void	get_player_spawn_and_dir(t_map *map, char player, int x, int y)
@@ -81,7 +86,7 @@ void	get_player_spawn_and_dir(t_map *map, char player, int x, int y)
 	}
 }
 
-static void	check_map_is_surrounded(char **grid, int size[2])
+static int	check_map_is_surrounded(char **grid, int size[2])
 {
 	int	i;
 	int	j;
@@ -95,15 +100,15 @@ static void	check_map_is_surrounded(char **grid, int size[2])
 			if (tile_is_exterior(grid, i, j, size))
 			{
 				if (grid[i][j] == '0')
-					c3d_exit(ERR_MAP_NOT_ENCLOSED);
+					return (c3d_error(ERR_MAP_NOT_ENCLOSED));
 				if (ft_strchr("NSWE", grid[i][j]))
-					c3d_exit(ERR_MAP_SPAWN_INVALID);
+					return (c3d_error(ERR_MAP_SPAWN_INVALID));
 			}
 			j++;
 		}
 		i++;
 	}
-	return ;
+	return (SUCCESS);
 }
 
 static int	tile_is_exterior(char **grid, int y, int x, int size[2])

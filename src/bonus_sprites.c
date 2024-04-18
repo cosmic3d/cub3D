@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:20:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 17:33:28 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:05:21 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	bonus_draw_sprites(t_data *data)
 	t_sprite_data	d;
 
 	sprites = get_sprites_array(data, data->sprite_count);
+	data->sprites = sprites;
 	// double	pos[2];
 	int		i;
 	// double	invDet;
@@ -121,7 +122,7 @@ void	bonus_draw_sprites(t_data *data)
 		if (drawEnd[X] >= WINX)
 			drawEnd[X] = WINX - 1;
 		printf("drawEnd[X] = %d\n", drawEnd[X]);
-	
+
 		x = drawStart[X];
 		while (x < drawEnd[X])
 		{
@@ -181,9 +182,9 @@ static t_sprite	*get_sprites_array(t_data *data, int count)
 	int			k;
 
 	i = -1;
-	sprites = malloc(sizeof(t_sprite) * (count));
+	sprites = (t_sprite *)malloc(sizeof(t_sprite) * count);
 	if (!sprites)
-		c3d_exit(ERR_MALLOC);
+		c3d_exit(ERR_MALLOC, data);
 	k = 0;
 	i = -1;
 	while (++i < data->map.size[Y])

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 16:52:55 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:59:44 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ invalid tile"
 
 // Fatal errors
 # define ERR_MALLOC "Memory allocation failed"
+
+// Generic error for exit without printing an error message but EXIT_FAILURE
+# define ERR_GENERIC ""
 
 //Useful macros
 #define TRUE 1
@@ -230,6 +233,7 @@ typedef struct s_data
 {
 	char		**file;
 	int			fd;
+	t_sprite	*sprites;
 	t_mlx		mlx;
 	// t_elements	elements;
 	t_texture	textures;
@@ -251,11 +255,16 @@ int		parser(t_data *data, char *filepath);
 int		parse_argument(t_data *data, char *filepath);
 void	parse_file(t_data *data);
 // int		get_file_elements(t_data *data);
-int		get_file_elements(t_mlx *mlx, t_elements *elements, char **file);
-char	**store_file(char *filepath);
+// int		get_file_elements(t_mlx *mlx, t_elements *elements, char **file);
+int		get_file_elements(t_data *data, t_elements *elements, char **file);
+char	**store_file(char *filepath, t_data *data);
 int		verify_arguments(int argc, char **argv);
-int		c3d_error(char *error);
-int		c3d_exit(char *error);
+int		c3d_error(const char *error);
+// int		c3d_exit(char *error);
+int		c3d_exit(const char *error, t_data *data);
+
+// memory.c
+
 
 // parse_map.c
 void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);

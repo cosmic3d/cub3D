@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:04:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/03 17:18:57 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:51:24 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	clear_newlines(char **file);
 
 /* Returns a char** with the contents of the file indicated by filepath and
 removes the final newlines from it */
-char	**store_file(char *filepath)
+char	**store_file(char *filepath, t_data *data)
 {
 	char	**file;
 	int		fd;
@@ -24,16 +24,21 @@ char	**store_file(char *filepath)
 
 	fd = open(filepath, O_RDONLY);
 	if (fd == -1)
-		c3d_exit(ERR_CANNOT_OPEN_FILE);
+		c3d_exit(ERR_CANNOT_OPEN_FILE, data);
 	file_lines = ft_file_lines(fd);
 	if (close(fd) == -1)
-		c3d_exit(ERR_CANNOT_CLOSE_FILE);
+		c3d_exit(ERR_CANNOT_CLOSE_FILE, data);
 	fd = open(filepath, O_RDONLY);
 	if (fd == -1)
-		c3d_exit(ERR_CANNOT_OPEN_FILE);
+		c3d_exit(ERR_CANNOT_OPEN_FILE, data);
 	file = ft_store_file(fd, file_lines);
+	if (!file)
+		c3d_exit(ERR_MALLOC, data);
 	if (close(fd) == -1)
-		c3d_exit(ERR_CANNOT_CLOSE_FILE);
+	{
+		ft_free_array((void **)file);
+		c3d_exit(ERR_CANNOT_CLOSE_FILE, data);
+	}
 	clear_newlines(file);
 	return (file);
 }

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:52:17 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 17:11:43 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:45:35 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	parser(t_data *data, char *filepath)
 	data->bonus = 0;
 	if (ft_strncmp(filepath, "bonus_", 6) == 0)
 		data->bonus = 1;
-	data->file = store_file(filepath);
+	data->file = store_file(filepath, data);
 	init_map_variables(&data->map);
-	file_line = get_file_elements(&data->mlx, &data->map.elements, data->file);
+	file_line = get_file_elements(data, &data->map.elements, data->file);
 	if (data->bonus)
 		file_line += get_bonus_elements(data, data->file + file_line);
 	if (data->bonus)

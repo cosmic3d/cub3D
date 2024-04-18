@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/17 17:11:35 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:07:03 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	initialize_variables(t_data *data)
 {
+	// Esto es necesario
+	// data->sprites = malloc(sizeof(t_sprite) * data->sprite_count);
+	// if (!data->sprites)
+	// 	c3d_exit(ERR_MALLOC, data);
 	data->player.pos[X] = data->map.spawn[Y] + 0.5;
 	data->player.pos[Y] = data->map.spawn[X] + 0.5;
 	data->player.dir[X] = data->map.player_dir[X];
@@ -36,12 +40,13 @@ void	initialize_variables(t_data *data)
 
 void	init_mlx(t_data *data)
 {
+	data->mlx.window = NULL;
 	data->mlx.mlx = mlx_init();
 	if (!data->mlx.mlx)
-		c3d_exit(ERR_MLX_INIT);
+		c3d_exit(ERR_MLX_INIT, data);
 	data->mlx.window = mlx_new_window(data->mlx.mlx, WINX, WINY, "QUAKE 3D");
 	if (!data->mlx.window)
-		c3d_exit(ERR_MLX_WINDOW);
+		c3d_exit(ERR_MLX_WINDOW, data);
 	data->mlx.texture_size = 64;
 	data->mlx.win_img = get_img(data, WINX, WINY);
 	hook(data);
@@ -51,7 +56,8 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	verify_arguments(argc, argv);
+	if (verify_arguments(argc, argv) == FAILURE)
+		return (1);
 	init_mlx(&data);
 	parser(&data, argv[1]);
 	initialize_variables(&data);

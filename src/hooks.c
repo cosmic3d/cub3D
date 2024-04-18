@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/17 15:07:56 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:16:38 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	keypressed(int keycode, t_data *data)
 	else if (keycode == KEY_D)
 		move_right(data);
 	else if (keycode == KEY_ESC)
-		c3d_exit(NULL);
+		c3d_exit(NULL, data);
 	else if (keycode == KEY_E)
 		open_door(data);
 	else
 	if (keycode == KEY_ESC)
-		c3d_exit(NULL);
+		c3d_exit(NULL, data);
 	render(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/18 13:07:03 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:01:53 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	initialize_variables(t_data *data)
 {
-	// Esto es necesario
-	// data->sprites = malloc(sizeof(t_sprite) * data->sprite_count);
-	// if (!data->sprites)
-	// 	c3d_exit(ERR_MALLOC, data);
 	data->player.pos[X] = data->map.spawn[Y] + 0.5;
 	data->player.pos[Y] = data->map.spawn[X] + 0.5;
 	data->player.dir[X] = data->map.player_dir[X];
@@ -35,7 +31,8 @@ void	initialize_variables(t_data *data)
 	data->mouse.prev_pos[Y] = 0;
 	data->mouse.pressed = 0;
 	data->frame_done = 1;
-	data->map.offset_y = WINY / 2;
+	data->map.offset_y = WINY / 2;// mejor a 0 no?
+	data->map.offset_y = 0;
 }
 
 void	init_mlx(t_data *data)
@@ -49,6 +46,8 @@ void	init_mlx(t_data *data)
 		c3d_exit(ERR_MLX_WINDOW, data);
 	data->mlx.texture_size = 64;
 	data->mlx.win_img = get_img(data, WINX, WINY);
+	data->mlx.win_img->size[X] = WINX;
+	data->mlx.win_img->size[Y] = WINY;
 	hook(data);
 }
 

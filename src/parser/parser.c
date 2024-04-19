@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:52:17 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/18 12:45:35 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:15:21 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	parser(t_data *data, char *filepath)
 	int	file_line;
 
 	data->sprite_count = 0;
+	data->sprites = NULL;
 	data->bonus = 0;
 	if (ft_strncmp(filepath, "bonus_", 6) == 0)
 		data->bonus = 1;

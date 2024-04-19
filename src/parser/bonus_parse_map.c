@@ -6,16 +6,16 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:32:37 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/18 12:47:24 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:22:46 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	bonus_check_valid_map_characters(t_map *map, char **file);
-static int	bonus_check_map_is_surrounded(char **grid, int size[2]);
-static int	tile_is_exterior(char **grid, int y, int x, int size[2]);
-static int	count_sprites_in_map(int size[2], char **map);
+static int		bonus_check_valid_map_characters(t_map *map, char **file);
+static int		bonus_check_map_is_surrounded(char **grid, int size[2]);
+static int		count_sprites_in_map(int size[2], char **map);
+static t_sprite	*get_sprites_array(t_data *data, int count);
 
 void	bonus_parse_map(t_data *data, char **file)
 {
@@ -31,7 +31,38 @@ void	bonus_parse_map(t_data *data, char **file)
 	if (bonus_check_map_is_surrounded(data->map.grid, data->map.size) == 1)
 		c3d_exit(NULL, data);
 	data->sprite_count = count_sprites_in_map(data->map.size, data->map.grid);
+	data->sprites = get_sprites_array(data, data->sprite_count);
 }
+
+static t_sprite	*get_sprites_array(t_data *data, int count)
+{
+	t_sprite	*sprites;
+	int			i;
+	int			j;
+
+	sprites = malloc(sizeof(t_sprite) * count);
+	if (!sprites)
+		c3d_exit(ERR_MALLOC, data);
+	count = 0;
+	i = 0;
+	while (i < data->map.size[Y])
+	{
+		j = 0;
+		while (j < data->map.size[X])
+		{
+			if (data->map.grid[i][j] == 'O')
+			{
+				sprites[count].pos[X] = j + 0.5;
+				sprites[count].pos[Y] = i + 0.5;
+				sprites[count++].dist = 0.0;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (sprites);
+}
+
 static int	count_sprites_in_map(int size[2], char **map)
 {
 	int	count;
@@ -110,29 +141,4 @@ static int	bonus_check_map_is_surrounded(char **grid, int size[2])
 		i++;
 	}
 	return (SUCCESS);
-}
-
-static int	tile_is_exterior(char **grid, int y, int x, int size[2])
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (i <= 1)
-	{
-		j = -1;
-		while (j <= 1)
-		{
-			if (y + i != 0 && x + j != 0)
-			{
-				if (y + i >= size[Y] || y + i < 0 || \
-					x + j >= size[X] || x + j < 0 || \
-					grid[y + i][x + j] == ' ')
-					return (1);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (0);
 }

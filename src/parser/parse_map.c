@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:27:03 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/18 14:03:18 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:20:06 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	check_valid_map_characters(t_map *map, char **file);
 static int	check_map_is_surrounded(char **grid, int size[2]);
-static int	tile_is_exterior(char **grid, int y, int x, int size[2]);
 
 void	parse_map(t_data *data, char **file)
 {
@@ -111,7 +110,7 @@ static int	check_map_is_surrounded(char **grid, int size[2])
 	return (SUCCESS);
 }
 
-static int	tile_is_exterior(char **grid, int y, int x, int size[2])
+int	tile_is_exterior(char **grid, int y, int x, int size[2])
 {
 	int	i;
 	int	j;

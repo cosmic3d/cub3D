@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/19 17:20:26 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:45:08 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,11 +266,8 @@ int		get_file_elements(t_data *data, t_elements *elements, char **file);
 char	**store_file(char *filepath, t_data *data);
 int		verify_arguments(int argc, char **argv);
 int		c3d_error(const char *error);
-// int		c3d_exit(char *error);
 int		c3d_exit(const char *error, t_data *data);
-
-// memory.c
-
+int		c3d_close_window_exit(t_data *data);
 
 // parse_map.c
 void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);

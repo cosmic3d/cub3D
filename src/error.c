@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:33:53 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/18 13:59:16 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:44:52 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,26 @@ int	c3d_exit(const char *error, t_data *data)
 	}
 	exit(exit_status);
 	return (FAILURE);
+}
+
+int	c3d_close_window_exit(t_data *data)
+{
+	if (data->file)//init a NULL
+		ft_free_array((void **)data->file);
+	if (data->map.grid)//init a NULL
+		free_grid(data->map.grid, data->map.size);
+	if (data->sprites)//init a NULL
+		free(data->sprites);
+	destroy_images(data);
+	if (data->mlx.window)
+		mlx_destroy_window(data->mlx.mlx, data->mlx.window);
+	if (data->mlx.win_img)
+		free(data->mlx.win_img);
+	if (data->mlx.mlx)
+	{
+		mlx_destroy_display(data->mlx.mlx);
+		free(data->mlx.mlx);
+	}
+	exit(EXIT_SUCCESS);
+	return (SUCCESS);
 }

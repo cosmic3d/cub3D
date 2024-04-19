@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/19 17:45:08 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:55:05 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ completely surrounded by walls"
 # define ERR_MAP_MULTIPLE_SPAWN "Incorrect map format, multiple spawn points \
 were found in the map"
 # define ERR_MAP_INVALID_CHAR "Incorrect map format, invalid characters were \
-found in the map"
+found in the map\n(Tabulations are also not allowed)"
 # define ERR_MAP_EMPTY_LINE "Incorrect map format, empty lines were found in \
 the map"
 # define ERR_MAP_NO_SPAWN "Incorrect map format, no spawn point was found in \
@@ -163,6 +163,7 @@ typedef struct s_door_data
 	double	side_dist[2];
 	double	delta_dist[2];
 	int		map[2];
+	double	pos[2];
 }				t_door_data;
 
 typedef struct s_player

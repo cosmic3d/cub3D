@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:43:23 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/19 14:01:49 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:58:08 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ static void	set_ceiling_and_floor(t_data *data);
 
 void	render(t_data *data)
 {
-	if (!data->frame_done) //NO SE SI AFECTA O NO A LA PERFORMANCE
-		return ;
-	data->frame_done = 0;
 	set_ceiling_and_floor(data);
 	init_raycasting(data);
 	if (data->bonus)
@@ -29,7 +26,6 @@ void	render(t_data *data)
 	}
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.window, \
 	data->mlx.win_img->img, 0, 0);
-	data->frame_done = 1;
 }
 
 static void	set_ceiling_and_floor(t_data *data)

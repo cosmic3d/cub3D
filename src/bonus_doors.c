@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:20:28 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/16 15:32:33 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:19:05 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	check_player_is_looking_at_door(t_data *data, t_door_data *door);
 void	open_door(t_data *data)
 {
 	t_door_data	door_data;
-	double		squared_distance;
+	double		distance;
 
 	door_data.map[X] = (int)data->player.pos[X];
 	door_data.map[Y] = (int)data->player.pos[Y];
@@ -27,9 +27,11 @@ void	open_door(t_data *data)
 	calculate_door_step(data, &door_data);
 	if (!check_player_is_looking_at_door(data, &door_data))
 		return ;
-	squared_distance = pow(data->player.pos[X] - door_data.map[X], 2) + \
-		pow(data->player.pos[Y] - door_data.map[Y], 2);
-	if (squared_distance >= 2.0)
+	door_data.pos[X] = door_data.map[X] + 0.5;
+	door_data.pos[Y] = door_data.map[Y] + 0.5;
+	distance = sqrt(pow(data->player.pos[X] - (door_data.pos[X]), 2) + \
+		pow(data->player.pos[Y] - (door_data.pos[Y]), 2));
+	if (distance >= 1.55)
 		return ;
 	data->map.grid[door_data.map[Y]][door_data.map[X]] = '0';
 	return ;

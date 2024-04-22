@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 19:03:08 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/18 12:45:59 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:25:36 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	get_bonus_texture(t_data *data, char *line, t_img *texture)
 	if (texture->img)
 		c3d_exit(ERR_FILE_REPEATED_ELEMENT, data);
 	line = ft_strnchr(line + 2, ' ');
+	if (line[0] == '\t')
+		c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 	if (ft_strrcmp(line, ".xpm") != 0)
 		c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 	texture->img = mlx_xpm_file_to_image(data->mlx.mlx, line, \

@@ -1,18 +1,5 @@
 NAME = cub3D
 
-# -=-=-=-=-	CLRS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
-
-RESET		:= \033[0;39m
-BLACK		:= \033[0;30m
-RED			:= \033[0;91m
-GREEN		:= \033[0;92m
-YELLOW		:= \033[0;93m
-BLUE		:= \033[0;94m
-MAGENTA		:= \033[0;95m
-CYAN		:= \033[0;96m
-GRAY		:= \033[0;90m
-WHITE		:= \033[0;97m
-
 # OS
 OS = $(shell uname -s)
 # $(info $(OS))
@@ -23,50 +10,35 @@ SRC_DIR = src/
 SRC_FILES =	main.c \
 			error.c \
 			debug.c \
-			pixels.c \
-			raycaster.c \
 			hooks.c \
-			render.c \
 			movement.c \
-			utils.c \
-			draw.c \
-			texture_render.c \
-			bonus_sprites.c \
-			bonus_doors.c \
+			verify_arguments.c \
+			init/init.c \
+			init/init2.c \
 			parser/parser.c \
-			parser/verify_arguments.c \
 			parser/store_file.c \
 			parser/get_file_elements.c \
-			parser/bonus_get_file_elements.c \
 			parser/parse_map.c \
-			parser/bonus_parse_map.c \
-			parser/file_to_grid.c
+			parser/file_to_grid.c \
+			render/pixels.c \
+			render/raycaster.c \
+			render/render.c \
+			render/texture_render.c \
+			bonus/bonus_doors.c \
+			bonus/parser/bonus_get_file_elements.c \
+			bonus/parser/bonus_parse_map.c \
+			bonus/render/bonus_sprites.c \
+			bonus/render/bonus_minimap.c \
 
 # Format: subdir/file.c | For example: main.c map/init.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
-
-#DEBUG
-# $(info >	Source files info:)
-# $(info Source directory: [ $(SRC_DIR) ])
-# $(info Source files: [ $(SRC_FILES) ])
-# $(info Source full: [ $(SRC) ])
 
 # Object files
 OBJ_DIR = obj/
 OBJ    = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
 
-
-# $(info >	Object files info:)
-# $(info Object directory: [ $(OBJ_DIR) ])
-# $(info Object full: [ $(OBJ) ])
-
 # Dependency files
 DEPS = $(addprefix $(OBJ_DIR),$(SRC_FILES:%.c=%.d))
-
-# $(info >	Dependencies info:)
-# $(info Dependency directory: [ $(DEPS_DIR) ])
-# $(info Dependency full: [ $(DEPS) ])
-# $(info [  ])
 
 # Libraries
 LIBS_DIR = libs/
@@ -87,7 +59,7 @@ LIBS += $(MLX)
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -O3 -g #Puede que el 02 sea mejor
+CFLAGS = -Wall -Wextra -Werror #Puede que el 02 sea mejor
 DFLAGS = -MD -MF
 INCLUDE = -I include/ -I $(LIBFT_DIR) -I $(MLX_DIR)
 X11_FLAGS = -lXext -lX11
@@ -96,8 +68,6 @@ MATH_FLAGS = -lm
 LINUX_MLX_FLAGS = $(INCLUDE) $(MATH_FLAGS) $(X11_FLAGS)
 MACOS_FLAGS = $(INCLUDE) $(MATH_FLAGS) $(FRAMEWORK_FLAGS)
 MLX_FLAGS =
-
-# $(info Libs = $(LIBS))
 
 ifeq ($(OS),Linux)
 	MLX_FLAGS = -L$(MLX_DIR) -lmlx $(X11_FLAGS)
@@ -147,19 +117,8 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(MATH_FLAGS) $(LIBS) -o $(NAME) -lm
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(MK)
-#	@if [ ! -d $(@D) ]; then \
-		echo "$(MAGENTA)mkdir $(@D)$(RESET)"; \
-		$(MKDIR) $(@D); \
-	fi
 	$(MKDIR) $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@
-#	@printf "$(YELLOW)Compiling $(UNDERLINE)$@$(RESET)$(YELLOW)...$(RESET)\r"
-
-$(OBJ_DIR):
-#	@if [ ! -d $(OBJ_DIR) ]; then \
-		echo "$(MAGENTA)mkdir $(OBJ_DIR)"; \
-		$(MKDIR) $(OBJ_DIR); \
-	fi
 
 libft:
 	@echo "$(BLUE)Make $(HIGHLIGHT)Libft$(RESET)$(BLUE):$(RESET)"

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/19 17:45:30 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:26:57 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 void	hook(t_data *data)
 {
 	mlx_hook(data->mlx.window, DESTROY_NOTIFY, 0, c3d_close_window_exit, data);
-	mlx_hook(data->mlx.window, KEY_PRESS, 1L<<0, keypressed, data); //MÁSCARA NECESARIA, SINO NO FUNCIONA EN LINUX PERO EN MAC SÍ
-	// mlx_hook(data->mlx.window, BUTTON_MOUSEDOWN, 1L<<2, mousedown, data);
-	mlx_hook(data->mlx.window, BUTTON_MOUSEMOVE, 1L<<6, mousemove, data); //FUNCIONA RARO, NO DA VALORES CORRECTOS. TRATA DE USAR MLX_MOUSE_HOOK O OTRA COSA QUE FUNCIONE TANTO EN LINUX COMO EN MAC
-	// mlx_hook(data->mlx.window, BUTTON_MOUSEMOVE, 1L<<6, mousemove, data);
-	/* mlx_hook(data->mlx.window, BUTTON_MOUSEDOWN, 0, keypressed, data);
-	mlx_key_hook(data->mlx.window, keypressed, data); */
-	/* mlx_hook(sys->mlx_win, BUTTON_MOUSEDOWN, 0, mousedown, sys);
-	mlx_hook(sys->mlx_win, BUTTON_MOUSEUP, 0, mouseup, sys); */
+	mlx_hook(data->mlx.window, KEY_PRESS, 1L << 0, keypressed, data);
+	mlx_hook(data->mlx.window, BUTTON_MOUSEMOVE, 1L << 6, mousemove, data);
 }
 
 int	keypressed(int keycode, t_data *data)
@@ -39,13 +33,12 @@ int	keypressed(int keycode, t_data *data)
 		move_left(data);
 	else if (keycode == KEY_D)
 		move_right(data);
-	else if (keycode == KEY_ESC)
-		c3d_exit(NULL, data);
 	else if (keycode == KEY_E)
 		open_door(data);
-	else
-	if (keycode == KEY_ESC)
+	else if (keycode == KEY_ESC)
 		c3d_exit(NULL, data);
+	else
+		return (0);
 	render(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/17 15:09:37 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:23:49 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,15 @@ void	init_raycasting(t_data *data)
 {
 	int		x;
 	t_img	*texture;
-	t_img	*window;
 
-	window = data->mlx.win_img;
 	x = -1;
 	while (++x < WINX)
 	{
-		data->ray.camera[X] = 2 * x / (double)WINX - 1;
+		data->ray.camera = 2 * x / (double)WINX - 1;
 		data->ray.ray_dir[X] = data->player.dir[X] + data->player.plane[X] * \
-		data->ray.camera[X];
+		data->ray.camera;
 		data->ray.ray_dir[Y] = data->player.dir[Y] + data->player.plane[Y] * \
-		data->ray.camera[X];
+		data->ray.camera;
 		data->ray.map[X] = (int)data->player.pos[X];
 		data->ray.map[Y] = (int)data->player.pos[Y];
 		data->ray.delta_dist[X] = fabs(1 / data->ray.ray_dir[X]);
@@ -42,13 +40,11 @@ void	init_raycasting(t_data *data)
 		check_hit(data);
 		calculate_perp_dist(data, x);
 		texture = get_texture(data);
-		draw_vert_stripe(get_texture_addr(data, texture), window->addr + x, \
-				texture->size, data);
+		draw_vert_stripe(get_texture_addr(data, texture), \
+			data->mlx.win_img->addr + x, texture->size, data);
 	}
 }
 
-// Calculamos la primera distancia que recorre el rayo hasta la siguiente pared
-// en ambas direcciones
 static void	calculate_step(t_data *data)
 {
 	if (data->ray.ray_dir[X] < 0)
@@ -79,8 +75,7 @@ static void	calculate_step(t_data *data)
 
 static void	check_hit(t_data *data)
 {
-	data->ray.hit = 0;
-	while (data->ray.hit == 0)
+	while (42)
 	{
 		if (data->ray.side_dist[X] < data->ray.side_dist[Y])
 		{
@@ -102,7 +97,7 @@ static void	check_hit(t_data *data)
 		}
 		if (data->map.grid[data->ray.map[Y]][data->ray.map[X]] == WALL ||
 		data->map.grid[data->ray.map[Y]][data->ray.map[X]] == DOOR)
-			data->ray.hit = 1;
+			break ;
 	}
 }
 

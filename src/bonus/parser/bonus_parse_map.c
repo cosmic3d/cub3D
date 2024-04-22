@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:32:37 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/19 18:59:56 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:00:05 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	bonus_parse_map(t_data *data, char **file)
 	if (!file)
 		c3d_exit(ERR_NO_MAP_IN_FILE, data);
 	if (bonus_check_valid_map_characters(&data->map, file) == 1)
-		c3d_exit(NULL, data);
+		c3d_exit(ERR_GENERIC, data);
 	data->map.grid = create_map_from_file(&data->map, file);
 	if (!data->map.grid)
 		c3d_exit(ERR_MALLOC, data);
 	if (bonus_check_map_is_surrounded(data->map.grid, data->map.size) == 1)
-		c3d_exit(NULL, data);
+		c3d_exit(ERR_GENERIC, data);
 	data->sprite_count = count_sprites_in_map(data->map.size, data->map.grid);
 	data->sprites = get_sprites_array(data, data->sprite_count);
 }

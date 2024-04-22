@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:07:58 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/18 12:32:19 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:23:19 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static int	get_texture_element(char *line, t_data *data, t_img *texture)
 	if (texture->img)
 		c3d_exit(ERR_FILE_REPEATED_ELEMENT, data);
 	line = ft_strnchr(line + 2, ' ');
+	if (line[0] == '\t')
+		c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 	if (ft_strrcmp(line, ".xpm") != 0)
 		c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 	texture->img = mlx_xpm_file_to_image(data->mlx.mlx, line, \
@@ -91,7 +93,7 @@ static int	get_color_element(char *line, t_data *data, int *color)
 		c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 	*color = rgb_to_int(ft_atoi(red), ft_atoi(green), ft_atoi(blue));
 	if (*color == -1)
-		c3d_exit(NULL, data);
+		c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 	return (1);
 }
 
@@ -116,7 +118,6 @@ static int	rgb_to_int(int red, int green, int blue)
 	|| (green > 255 || green < 0) \
 	|| (blue > 255 || blue < 0))
 	{
-		c3d_error(ERR_FILE_FORMAT_ELEMENT);
 		return (-1);
 	}
 	value = (red << 16) | (green << 8) | blue;

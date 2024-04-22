@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keycodes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:46:59 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/03/29 11:48:16 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:12:34 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@
 #  define KEY_CMD 65513
 
 # endif
-/*  ---------------------------------- MOUSE --------------------------------- */
+/*  --------------------------------- MOUSE --------------------------------- */
 # define MOUSE_LEFTCLICK 1
 # define MOUSE_RIGHTCLICK 2
 # define MOUSE_MIDDLECLICK 3

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   albert_home_render.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:43:23 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/16 15:45:02 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:05:20 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	set_ceiling_and_floor(t_img *window, t_elements elements);
 
 // Al menos para linux esto está guay
-static time_t	get_time()
+static time_t	get_time(void)
 {
 	static time_t	start_time;
 	struct timeval	time;
@@ -33,14 +33,15 @@ void	render(t_data *data)
 	time_t			elapsed_time;
 
 	elapsed_time = get_time() - last_render;
-	if (last_render && elapsed_time < 5000) //200 FPS
+	if (last_render && elapsed_time < 5000)
 		return ;
 	set_ceiling_and_floor(data->mlx.win_img, data->map.elements);
 	init_raycasting(data);
-	bonus_draw_sprites(data);
+	bonus_draw_sprites(data, data->sprites);
 	if (data->bonus)
-		drawMinimap(data);
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.window, data->mlx.win_img->img, 0, 0);
+		draw_minimap(data);
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.window, \
+		data->mlx.win_img->img, 0, 0);
 	last_render = get_time();
 }
 
@@ -59,28 +60,4 @@ static void	set_ceiling_and_floor(t_img *window, t_elements elements)
 			put_pixel(window, i, j++, elements.floor);
 		i++;
 	}
-}
-
-void	drawMinimap(t_data *data)
-{
-	int	i;
-	int	j;
-	int	tile_size;
-
-	tile_size = fmax(WINX, WINY) / fmax(data->map.size[X], data->map.size[Y]) / 4;
-	i = 0;
-	while (i < data->map.size[Y])
-	{
-		j = 0;
-		while (j < data->map.size[X])
-		{
-			if (data->map.grid[i][j] == '1')
-				drawRect(data, j * tile_size, i * tile_size, tile_size, YELLOW);
-			else if (data->map.grid[i][j] != SPACE)
-				drawRect(data, j * tile_size, i * tile_size, tile_size, BLUE);
-			j++;
-		}
-		i++;
-	}
-	drawRect(data, data->player.pos[X] * tile_size, data->player.pos[Y] * tile_size, tile_size, 0x00FF00);
 }

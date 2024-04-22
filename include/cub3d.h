@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/19 18:55:05 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:41:52 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,35 +99,35 @@ invalid tile"
 # define ERR_GENERIC ""
 
 //Useful macros
-#define TRUE 1
-#define FALSE 0
-#define X 0
-#define Y 1
-#define WALL '1'
-#define EMPTY '0'
-#define SPACE 32
-#define DOOR 'D'
-#define SPRITE 'O'
+# define TRUE 1
+# define FALSE 0
+# define X 0
+# define Y 1
+# define WALL '1'
+# define EMPTY '0'
+# define SPACE 32
+# define DOOR 'D'
+# define SPRITE 'O'
 
 //COLORS IN INT
-#define RED 0xFF0000
-#define GREEN 0x00FF00
-#define BLUE 0x0000FF
-#define WHITE 0xFFFFFF
-#define BLACK 0x000000
-#define YELLOW 0xFFFF00
-#define CYAN 0x00FFFF
-#define MAGENTA 0xFF00FF
-#define FLOOR WHITE
-#define CEILING RED
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define WHITE 0xFFFFFF
+# define BLACK 0x000000
+# define YELLOW 0xFFFF00
+# define CYAN 0x00FFFF
+# define MAGENTA 0xFF00FF
+# define FLOOR WHITE
+# define CEILING RED
 
 //Macros for calculation values
 
-#define WINX 1920 //640
-#define WINY 1080 //360
-#define ROTATE_SPEED 0.05
-#define MOVE_SPEED 0.1
-#define TILE_SIZE 2
+# define WINX 1440 //640
+# define WINY 1080 //360
+# define ROTATE_SPEED 0.05
+# define MOVE_SPEED 0.1
+# define TILE_SIZE 2
 
 typedef struct s_sprite
 {
@@ -168,11 +168,11 @@ typedef struct s_door_data
 
 typedef struct s_player
 {
-	double pos[2]; //Puede que venga mejor float
-	double dir[2];
-	double plane[2];
-	double move_speed;
-	double rot_speed;
+	double	pos[2];
+	double	dir[2];
+	double	plane[2];
+	double	move_speed;
+	double	rot_speed;
 }				t_player;
 
 typedef struct s_map_elements
@@ -187,34 +187,32 @@ typedef struct s_map_elements
 	int		ceiling;
 }				t_elements;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char		**grid;
 	t_elements	elements;
 	int			size[2];
 	int			spawn[2];
-	int			player_dir[2]; // [0] = x, [1] = y
+	int			player_dir[2];
 	double		offset_y;
 }				t_map;
 
 typedef struct s_ray
 {
-	double	camera[2];
+	double	camera;
 	double	ray_dir[2];
 	int		map[2];
 	double	side_dist[2];
 	double	delta_dist[2];
 	double	perp_wall_dist;
 	int		step[2];
-	int		hit;
 	int		side[2];
 }				t_ray;
 
 typedef struct s_mouse
 {
-	int	prev_pos[2];
-	int	pressed;
-	double	max_rot;
+	int		prev_pos[2];
+	int		pressed;
 }				t_mouse;
 
 typedef struct s_mlx_data
@@ -222,8 +220,6 @@ typedef struct s_mlx_data
 	void	*mlx;
 	void	*window;
 	t_img	*win_img;
-	//t_img	*fc_img; //Floor and ceiling
-	int		texture_size;
 }				t_mlx;
 
 typedef struct s_texture
@@ -239,87 +235,78 @@ typedef struct s_texture
 typedef struct s_data
 {
 	char		**file;
-	int			fd;
 	t_sprite	*sprites;
 	t_mlx		mlx;
-	// t_elements	elements;
-	t_texture	textures;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
 	t_mouse		mouse;
-	int			texture_size;//
 	int			bonus;
 	int			sprite_count;
 	double		zbuffer[WINX];
-	int			frame_done;
 }				t_data;
 
 // functions:
 
-void	init_data_struct(t_data *data);
-int		parser(t_data *data, char *filepath);
-int		parse_argument(t_data *data, char *filepath);
-void	parse_file(t_data *data);
-// int		get_file_elements(t_data *data);
-// int		get_file_elements(t_mlx *mlx, t_elements *elements, char **file);
-int		get_file_elements(t_data *data, t_elements *elements, char **file);
-char	**store_file(char *filepath, t_data *data);
+// verify_arguments.c
 int		verify_arguments(int argc, char **argv);
-int		c3d_error(const char *error);
-int		c3d_exit(const char *error, t_data *data);
-int		c3d_close_window_exit(t_data *data);
 
-// parse_map.c
-void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);
-int		tile_is_exterior(char **grid, int y, int x, int size[2]);
+// init.c
+void	init_data(t_data *data);
+
+// init2.c
+void	init_ray_variables(t_ray *ray);
+void	init_mouse_variables(t_mouse *mouse);
+
+// parser.c
+int		parser(t_data *data, char *filepath);
+
+// store_file.c
+char	**store_file(char *filepath, t_data *data);
+
+// get_file_elements.c
+int		get_file_elements(t_data *data, t_elements *elements, char **file);
 
 // bonus_get_file_elements.c
 int		get_bonus_elements(t_data *data, char **file);
 
-// bonus_door.c
-void	open_door(t_data *data);
+// parse_map.c
+void	parse_map(t_data *data, char **file);
+void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);
+int		tile_is_exterior(char **grid, int y, int x, int size[2]);
 
-// main.c
-void	initialize_variables(t_data *data);
-void	init_mlx(t_data *data);
+// file_to_grid.c
+char	**create_map_from_file(t_map *map, char **file);
+
+// bonus_parse_map.c
+void	bonus_parse_map(t_data *data, char **file);
+
+// render.c
+void	render(t_data *data);
 
 // raycaster.c
 void	init_raycasting(t_data *data);
-// void	calculate_step(t_data *data);
-// void 	check_hit(t_data *data);
-// void calculate_perp_dist(t_data *data, int x);
-// void 	calculate_perp_dist(t_data *data);
+
+// texture_render.c
+t_img	*get_texture(t_data *data);
+int		*get_texture_addr(t_data *data, t_img *texture);
+void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data);
+
+// bonus_sprites.c
+void	bonus_draw_sprites(t_data *data, t_sprite *sprite);
+
+// bonus_minimap.c
+void	draw_minimap(t_data *data, int *window);
+
+// error.c
+int		c3d_error(const char *error);
+int		c3d_exit(const char *error, t_data *data);
+int		c3d_close_window_exit(t_data *data);
 
 // hooks.c
 void	hook(t_data *data);
 int		keypressed(int keycode, t_data *data);
 int		mousemove(int x, int y, t_data *data);
-
-// pixels.c
-t_img	*get_img(t_data *data, int width, int height);
-void	put_pixel(t_img *img, int x, int y, int color);
-t_uint	get_pixel_color(t_img *image, int x, int y);
-
-// render.c
-void	render(t_data *data);
-void	drawMinimap(t_data *data);
-
-// parse_map.c
-void	parse_map(t_data *data, char **file);
-
-// bonus_parse_map.c
-void	bonus_parse_map(t_data *data, char **file);
-
-// file_to_grid.c
-char	**create_map_from_file(t_map *map, char **file);
-
-// debug.c
-void	print_map_grid(t_data *data);
-void	print_map_elements(t_data *data);
-void	debug_check(void);
-void	print_data(t_data *data);
-void	imprimirArray2D(t_data *data);
 
 // movement.c
 void	rotate_player(t_data *data, double angle);
@@ -328,19 +315,22 @@ void	move_back(t_data *d);
 void	move_left(t_data *d);
 void	move_right(t_data *d);
 
-//utils.c
-double	deg_to_rad(double deg);
+// bonus_door.c
+void	open_door(t_data *data);
 
-//draw.c
-void	drawRect(t_data *data, int x, int y, int size, int color);
+// pixels.c
+t_img	*get_img(t_data *data, int width, int height);
+void	put_pixel(t_img *img, int x, int y, int color);
+t_uint	get_pixel_color(t_img *image, int x, int y);
 
-// texture_render.c
-int		*get_window(t_data *data, int x);
-t_img	*get_texture(t_data *data);
-int		*get_texture_addr(t_data *data, t_img *texture);
-void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data);
+// // debug.c
+// void	print_map_grid(t_data *data);
+// void	print_map_elements(t_data *data);
+// void	debug_check(void);
+// void	print_data(t_data *data);
+// void	imprimirArray2D(t_data *data);
 
-// bonus_sprites.c
-void	bonus_draw_sprites(t_data *data, t_sprite *sprite);
+// //utils.c
+// double	deg_to_rad(double deg);
 
 #endif // CUB3D_H

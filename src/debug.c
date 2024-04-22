@@ -6,13 +6,13 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:01:28 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/09 16:56:44 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:25:50 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_map_grid(t_data *data)
+/* void	print_map_grid(t_data *data)
 {
 	ft_printf("----------------------------\n");
 	ft_printf("DEBUG: Map grid:\n");
@@ -59,12 +59,14 @@ void	print_data(t_data *data)
 	ft_printf("DEBUG: Print data\n");
 	print_map_elements(data);
 	print_map_grid(data);
-	ft_printf("Player Position = [%d][%d]\n", data->map.spawn[X], data->map.spawn[Y]);
-	ft_printf("Player direction = [%d][%d]\n", data->map.player_dir[X], data->map.player_dir[Y]);
+	ft_printf("Player Position = [%d][%d]\n", data->map.spawn[X], \
+		data->map.spawn[Y]);
+	ft_printf("Player direction = [%d][%d]\n", data->map.player_dir[X], \
+		data->map.player_dir[Y]);
 	ft_printf("----------------------------\n");
 }
 
-/* void imprimirArray2D(t_data *data) {
+void imprimirArray2D(t_data *data) {
     for (int i = 0; i < data->map.size[Y]; i++) {
         for (int j = 0; j < data->map.size[X]; j++) {
             printf("%c ", data->map.grid[i][j]);
@@ -72,4 +74,4 @@ void	print_data(t_data *data)
         printf("\n");
     }
 }
- */
+*/

@@ -6,26 +6,28 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:20:28 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/19 18:19:05 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:04:56 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void	calculate_door_step(t_data *data, t_door_data *door);
-static int	check_player_is_looking_at_door(t_data *data, t_door_data *door);
+static int	player_is_looking_at(char **grid, t_door_data *door_data);
 
-void	open_door(t_data *data)
+void	interact_door(t_data *data)
 {
 	t_door_data	door_data;
 	double		distance;
+	int			door;
 
 	door_data.map[X] = (int)data->player.pos[X];
 	door_data.map[Y] = (int)data->player.pos[Y];
 	door_data.delta_dist[X] = fabs(1 / data->player.dir[X]);
 	door_data.delta_dist[Y] = fabs(1 / data->player.dir[Y]);
 	calculate_door_step(data, &door_data);
-	if (!check_player_is_looking_at_door(data, &door_data))
+	door = player_is_looking_at(data->map.grid, &door_data);
+	if (door != 'D' && door != 'd')
 		return ;
 	door_data.pos[X] = door_data.map[X] + 0.5;
 	door_data.pos[Y] = door_data.map[Y] + 0.5;
@@ -33,7 +35,10 @@ void	open_door(t_data *data)
 		pow(data->player.pos[Y] - (door_data.pos[Y]), 2));
 	if (distance >= 1.55)
 		return ;
-	data->map.grid[door_data.map[Y]][door_data.map[X]] = '0';
+	if (door == 'D')
+		data->map.grid[door_data.map[Y]][door_data.map[X]] = 'd';
+	else
+		data->map.grid[door_data.map[Y]][door_data.map[X]] = 'D';
 	return ;
 }
 
@@ -65,24 +70,26 @@ static void	calculate_door_step(t_data *data, t_door_data *door)
 	}
 }
 
-static int	check_player_is_looking_at_door(t_data *data, t_door_data *door)
+static int	player_is_looking_at(char **grid, t_door_data *door_data)
 {
 	while (1)
 	{
-		if (door->side_dist[X] < door->side_dist[Y])
+		if (door_data->side_dist[X] < door_data->side_dist[Y])
 		{
-			door->side_dist[X] += door->delta_dist[X];
-			door->map[X] += door->step[X];
+			door_data->side_dist[X] += door_data->delta_dist[X];
+			door_data->map[X] += door_data->step[X];
 		}
 		else
 		{
-			door->side_dist[Y] += door->delta_dist[Y];
-			door->map[Y] += door->step[Y];
+			door_data->side_dist[Y] += door_data->delta_dist[Y];
+			door_data->map[Y] += door_data->step[Y];
 		}
-		if (data->map.grid[door->map[Y]][door->map[X]] == WALL)
+		if (grid[door_data->map[Y]][door_data->map[X]] == WALL)
 			return (0);
-		if (data->map.grid[door->map[Y]][door->map[X]] == DOOR)
-			return (1);
+		if (grid[door_data->map[Y]][door_data->map[X]] == 'D')
+			return ('D');
+		if (grid[door_data->map[Y]][door_data->map[X]] == 'd')
+			return ('d');
 	}
 	return (0);
 }

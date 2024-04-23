@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/22 20:41:52 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:20:24 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,29 +123,30 @@ invalid tile"
 
 //Macros for calculation values
 
-# define WINX 1440 //640
-# define WINY 1080 //360
-# define ROTATE_SPEED 0.05
+# define WINX 640
+# define WINY 360
+# define ROTATE_SPEED 0.02
 # define MOVE_SPEED 0.1
 # define TILE_SIZE 2
+# define FPS 60
 
-typedef struct s_sprite
+typedef struct s_object
 {
 	double	pos[2];
 	double	dist;
-}				t_sprite;
+}				t_object;
 
-typedef struct s_sprite_drawing_data
-{
-	double	transform[2];
-	double	iter[2];
-	double	step[2];
-	double	iter_start_y;
-	int		on_screen_size[2];
-	int		size[2];
-	int		draw_start[2];
-	int		draw_end[2];
-}				t_sprite_data;
+// typedef struct s_sprite_drawing_data
+// {
+// 	double	transform[2];
+// 	double	iter[2];
+// 	double	step[2];
+// 	double	iter_start_y;
+// 	int		on_screen_size[2];
+// 	int		size[2];
+// 	int		draw_start[2];
+// 	int		draw_end[2];
+// }				t_sprite_data;
 
 typedef struct s_img
 {
@@ -195,6 +196,7 @@ typedef struct s_map
 	int			spawn[2];
 	int			player_dir[2];
 	double		offset_y;
+	int			objects;
 }				t_map;
 
 typedef struct s_ray
@@ -232,18 +234,29 @@ typedef struct s_texture
 	int		size[2];
 }				t_texture;
 
+//
+typedef struct s_sprite
+{
+	t_img	*img;
+	int		transparency_color;
+	int		frames;
+	int		i;
+	int		framerate;
+}				t_sprite;
+
 typedef struct s_data
 {
 	char		**file;
-	t_sprite	*sprites;
+	t_object	*objects;
 	t_mlx		mlx;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
 	t_mouse		mouse;
+	t_sprite	sprite;
 	int			bonus;
-	int			sprite_count;
 	double		zbuffer[WINX];
+	int			frame;// unnecessary
 }				t_data;
 
 // functions:
@@ -253,6 +266,9 @@ int		verify_arguments(int argc, char **argv);
 
 // init.c
 void	init_data(t_data *data);
+
+// bonus_sprites2.c
+void	init_sprite_images(t_data *data);// recolocar
 
 // init2.c
 void	init_ray_variables(t_ray *ray);
@@ -266,9 +282,16 @@ char	**store_file(char *filepath, t_data *data);
 
 // get_file_elements.c
 int		get_file_elements(t_data *data, t_elements *elements, char **file);
+int		rgb_to_int(int red, int green, int blue);
 
 // bonus_get_file_elements.c
 int		get_bonus_elements(t_data *data, char **file);
+
+// bonus_get_file_elements2.c
+int		get_transparency_color(char **line, t_data *data);
+int		get_sprite_texture_count(char **line, t_data *data);
+char	*get_path_prefix(char *line, t_data *data);
+char	*get_full_path(char *prefix, int i, t_data *data);
 
 // parse_map.c
 void	parse_map(t_data *data, char **file);
@@ -277,7 +300,7 @@ int		tile_is_exterior(char **grid, int y, int x, int size[2]);
 
 // file_to_grid.c
 char	**create_map_from_file(t_map *map, char **file);
-
+  
 // bonus_parse_map.c
 void	bonus_parse_map(t_data *data, char **file);
 
@@ -293,7 +316,7 @@ int		*get_texture_addr(t_data *data, t_img *texture);
 void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data);
 
 // bonus_sprites.c
-void	bonus_draw_sprites(t_data *data, t_sprite *sprite);
+void	bonus_draw_sprites(t_data *data, t_object *obj);
 
 // bonus_minimap.c
 void	draw_minimap(t_data *data, int *window);
@@ -316,7 +339,7 @@ void	move_left(t_data *d);
 void	move_right(t_data *d);
 
 // bonus_door.c
-void	open_door(t_data *data);
+void	interact_door(t_data *data);
 
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);

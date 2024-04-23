@@ -44,6 +44,8 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_isspace(int c);
 int		ft_istype_iter(const char *s, int (*f)(int));
+int		ft_istype_skip(char *line, int (*f)(int));
+int		ft_istype_skip_p(char **line, int (*f)(int));
 int		ft_match_ch(int c, const char *pattern);
 int		ft_match_str(char *str, const char *pattern);
 int		ft_chrcount(char *str, int c);
@@ -81,10 +83,17 @@ char	*ft_strdup(const char *s1);
 char	*ft_strndup(const char *s1, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin_3(const char *s1, const char *s2, const char *s3);
+char	*ft_strjoin_4(const char *s1, \
+	const char *s2, \
+	const char *s3, \
+	const char *s4);
 char	*ft_strljoin(char const *s1, long s1_n, char const *s2, long s2_n);
 char	*ft_strtrim(char const *s1, char const *set);
 size_t	ft_strspn(const char *str, const char *accept);
 size_t	ft_strcspn(const char *str, const char *reject);
+size_t	ft_strspn_skip(char **s, const char *accept);
+size_t	ft_strcspn_skip(char **s, const char *reject);
 char	*ft_strtok(char *str, const char *delim);
 char	*ft_strtok_r(char *str, const char *delim, char **saveptr);
 char	*ft_strpbrk(const char *s, const char *accept);

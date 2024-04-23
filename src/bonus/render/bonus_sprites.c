@@ -6,28 +6,40 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:20:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/19 17:17:15 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:14:24 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	sort_sprites_by_distance(t_sprite *sprites, t_player p, int count);
-static void	get_sprite_transform(t_sprite_data *d, t_player *p, t_sprite s);
-static void	get_draw_limits(int xy, t_sprite_data *sd, t_data *d, int offset);
-static void	draw_sprite_column(t_sprite_data *sdata, t_data *data, int x);
-
-void	bonus_draw_sprites(t_data *data, t_sprite *sprite)
+typedef struct s_sprite_utils_data
 {
-	t_sprite_data	sdata;
+	double	transform[2];
+	double	iter[2];
+	double	step[2];
+	double	iter_start_y;
+	int		on_screen_size[2];
+	int		size[2];
+	int		draw_start[2];
+	int		draw_end[2];
+}				t_sprite_d;
+
+static void	sort_objects_by_distance(t_object *sprites, t_player p, int count);
+static void	get_sprite_transform(t_sprite_d *d, t_player *p, t_object s);
+static void	get_draw_limits(int xy, t_sprite_d *sd, t_data *d, int offset);
+static void	draw_sprite_column(t_sprite_d *sdata, t_data *data, int x);
+
+void	bonus_draw_sprites(t_data *data, t_object *obj)
+{
+	t_sprite_d		sdata;
 	int				i;
 	int				x;
 
-	sort_sprites_by_distance(sprite, data->player, data->sprite_count);
+	sort_objects_by_distance(obj, data->player, data->map.objects);
 	i = -1;
-	while (++i < data->sprite_count)
+	while (++i < data->map.objects)
 	{
-		get_sprite_transform(&sdata, &data->player, sprite[i]);
+		get_sprite_transform(&sdata, &data->player, obj[i]);
 		if (sdata.transform[Y] <= 0)
 			continue ;
 		get_draw_limits(X, &sdata, data, data->map.offset_y);
@@ -43,17 +55,17 @@ void	bonus_draw_sprites(t_data *data, t_sprite *sprite)
 	}
 }
 
-static void	sort_sprites_by_distance(t_sprite *sprites, t_player p, int count)
+static void	sort_objects_by_distance(t_object *obj, t_player p, int count)
 {
-	t_sprite	tmp;
+	t_object	tmp;
 	int			i;
 	int			j;
 
 	i = -1;
 	while (++i < count)
 	{
-		sprites[i].dist = fabs(pow(p.pos[X] - sprites[i].pos[X], 2) + \
-		pow(p.pos[Y] - sprites[i].pos[Y], 2));
+		obj[i].dist = fabs(pow(p.pos[X] - obj[i].pos[X], 2) + \
+		pow(p.pos[Y] - obj[i].pos[Y], 2));
 	}
 	i = -1;
 	while (++i < count - 1)
@@ -61,18 +73,18 @@ static void	sort_sprites_by_distance(t_sprite *sprites, t_player p, int count)
 		j = -1;
 		while (++j < count - i - 1)
 		{
-			if (sprites[j].dist < sprites[j + 1].dist)
+			if (obj[j].dist < obj[j + 1].dist)
 			{
-				tmp = sprites[j];
-				sprites[j] = sprites[j + 1];
-				sprites[j + 1] = tmp;
+				tmp = obj[j];
+				obj[j] = obj[j + 1];
+				obj[j + 1] = tmp;
 			}
 		}
 	}
 	return ;
 }
 
-static void	get_sprite_transform(t_sprite_data *d, t_player *p, t_sprite s)
+static void	get_sprite_transform(t_sprite_d *d, t_player *p, t_object s)
 {
 	double	sprite_offset[2];
 	double	inverse_determinant;
@@ -88,14 +100,14 @@ static void	get_sprite_transform(t_sprite_data *d, t_player *p, t_sprite s)
 	return ;
 }
 
-static void	get_draw_limits(int xy, t_sprite_data *sd, t_data *d, int offset)
+static void	get_draw_limits(int xy, t_sprite_d *sd, t_data *d, int offset)
 {
 	int	center_on_screen;
 
 	if (xy == X)
 		center_on_screen = (int)((WINX / 2) * \
 		(1 + sd->transform[X] / sd->transform[Y]));
-	sd->size[xy] = d->map.elements.sprite.size[xy];
+	sd->size[xy] = d->sprite.img[d->sprite.i].size[xy];
 	sd->on_screen_size[xy] = abs((int)(WINY / sd->transform[Y]));
 	sd->step[xy] = 1.0 * sd->size[xy] / sd->on_screen_size[xy];
 	sd->iter[xy] = 0.0;
@@ -117,7 +129,7 @@ static void	get_draw_limits(int xy, t_sprite_data *sd, t_data *d, int offset)
 	sd->iter_start_y = sd->iter[Y];
 }
 
-static void	draw_sprite_column(t_sprite_data *sdata, t_data *data, int x)
+static void	draw_sprite_column(t_sprite_d *sdata, t_data *data, int x)
 {
 	int	*window;
 	int	*texture;
@@ -125,13 +137,13 @@ static void	draw_sprite_column(t_sprite_data *sdata, t_data *data, int x)
 	int	color;
 
 	window = data->mlx.win_img->addr + x;
-	texture = data->map.elements.sprite.addr + (int)sdata->iter[X];
+	texture = data->sprite.img[data->sprite.i].addr + (int)sdata->iter[X];
 	y = sdata->draw_start[Y];
 	sdata->iter[Y] = sdata->iter_start_y;
 	while (y <= sdata->draw_end[Y] && (int)sdata->iter[Y] < sdata->size[Y])
 	{
 		color = texture[(int)sdata->iter[Y] * sdata->size[X]];
-		if (color)
+		if (color != data->sprite.transparency_color)
 			window[y * WINX] = color;
 		sdata->iter[Y] += sdata->step[Y];
 		y++;

@@ -31,7 +31,8 @@ FT_TYPE_SRC =	$(FT_TYPE_DIR)ft_isdigit.c \
 				$(FT_TYPE_DIR)ft_isprint.c \
 				$(FT_TYPE_DIR)ft_isascii.c \
 				$(FT_TYPE_DIR)ft_isalnum.c \
-				$(FT_TYPE_DIR)ft_tolower.c
+				$(FT_TYPE_DIR)ft_tolower.c \
+				$(FT_TYPE_DIR)ft_istype_skip.c
 
 FT_OTHER_DIR = ft_other/
 FT_OTHER_SRC =	$(FT_OTHER_DIR)ft_split.c \
@@ -83,6 +84,7 @@ FT_STRING_SRC =	$(FT_STRING_DIR)ft_strlcpy.c \
 				$(FT_STRING_DIR)ft_memcpy.c \
 				$(FT_STRING_DIR)ft_strdup.c \
 				$(FT_STRING_DIR)ft_strjoin.c \
+				$(FT_STRING_DIR)ft_strjoin_m.c \
 				$(FT_STRING_DIR)ft_strncmp.c \
 				$(FT_STRING_DIR)ft_strchr.c \
 				$(FT_STRING_DIR)ft_strlcat.c \
@@ -104,7 +106,9 @@ FT_STRING_SRC =	$(FT_STRING_DIR)ft_strlcpy.c \
 				$(FT_STRING_DIR)ft_strtok.c \
 				$(FT_STRING_DIR)ft_strtok_r.c \
 				$(FT_STRING_DIR)ft_strspn.c \
+				$(FT_STRING_DIR)ft_strspn_skip.c \
 				$(FT_STRING_DIR)ft_strcspn.c \
+				$(FT_STRING_DIR)ft_strcspn_skip.c \
 				$(FT_STRING_DIR)ft_strpbrk.c \
 				$(FT_STRING_DIR)ft_strnchr.c \
 				$(FT_STRING_DIR)ft_strnchr_i.c

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:07:58 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/22 18:23:19 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:02:24 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	get_texture_element(char *line, t_data *data, t_img *texture);
 static int	get_color_element(char *line, t_data *data, int *color);
 static int	rgb_token_check(char *channel);
-static int	rgb_to_int(int red, int green, int blue);
 
 /* Stores in the appropriate pointers the values of all the elements that
 a valid file.cub must have. */
@@ -110,7 +109,7 @@ static int	rgb_token_check(char *channel)
 }
 
 /* Converts the given red, green and blue values into a single integer value */
-static int	rgb_to_int(int red, int green, int blue)
+int	rgb_to_int(int red, int green, int blue)
 {
 	int	value;
 

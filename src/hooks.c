@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/22 20:26:57 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:15:27 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,11 @@ int	keypressed(int keycode, t_data *data)
 	else if (keycode == KEY_D)
 		move_right(data);
 	else if (keycode == KEY_E)
-		open_door(data);
+		interact_door(data);
 	else if (keycode == KEY_ESC)
 		c3d_exit(NULL, data);
 	else
 		return (0);
-	render(data);
 	return (0);
 }
 
@@ -61,6 +60,5 @@ int	mousemove(int x, int y, t_data *data)
 	rotate_player(data, (data->player.rot_speed / 4) * difference);
 	data->mouse.prev_pos[X] = x;
 	data->mouse.prev_pos[Y] = y;
-	render(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:11:37 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/22 20:22:14 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:10:31 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,17 @@ void	init_data(t_data *data)
 	int	i;
 
 	data->file = NULL;
-	data->sprites = NULL;
+	data->objects = NULL;
 	init_mlx(data);
 	init_map_variables(&data->map);
 	init_player_variables(&data->player);
 	init_ray_variables(&data->ray);
 	init_mouse_variables(&data->mouse);
+	data->sprite.i = 0;
+	data->sprite.transparency_color = 0;
+	data->sprite.frames = 0;
 	data->bonus = 0;
-	data->sprite_count = 0;
+	data->frame = 0;
 	i = 0;
 	while (i < WINX)
 		data->zbuffer[i++] = 0.0;
@@ -72,6 +75,7 @@ static void	init_map_variables(t_map *map)
 	map->player_dir[X] = -2;
 	map->player_dir[Y] = -2;
 	map->offset_y = 0.0;
+	map->objects = 0;
 }
 
 /* Initialises the texture variables */

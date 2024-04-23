@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:33:53 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/22 20:39:04 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:11:48 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,15 @@ int	c3d_exit(const char *error, t_data *data)
 		ft_free_array((void **)data->file);
 	if (data->map.grid)
 		free_grid(data->map.grid, data->map.size);
-	if (data->sprites)
-		free(data->sprites);
+	if (data->objects)
+		free(data->objects);
 	destroy_images(data);
 	if (data->mlx.window)
 		mlx_destroy_window(data->mlx.mlx, data->mlx.window);
 	if (data->mlx.win_img)
 		free(data->mlx.win_img);
 	if (data->mlx.mlx)
-	{
-		mlx_destroy_display(data->mlx.mlx);
 		free(data->mlx.mlx);
-	}
 	exit(exit_status);
 	return (FAILURE);
 }
@@ -60,24 +57,23 @@ int	c3d_close_window_exit(t_data *data)
 		ft_free_array((void **)data->file);
 	if (data->map.grid)
 		free_grid(data->map.grid, data->map.size);
-	if (data->sprites)
-		free(data->sprites);
+	if (data->objects)
+		free(data->objects);
 	destroy_images(data);
 	if (data->mlx.window)
 		mlx_destroy_window(data->mlx.mlx, data->mlx.window);
 	if (data->mlx.win_img)
 		free(data->mlx.win_img);
 	if (data->mlx.mlx)
-	{
-		mlx_destroy_display(data->mlx.mlx);
 		free(data->mlx.mlx);
-	}
 	exit(EXIT_SUCCESS);
 	return (SUCCESS);
 }
 
 static void	destroy_images(t_data *data)
 {
+	int	i;
+
 	if (data->map.elements.north.img)
 		mlx_destroy_image(data->mlx.mlx, data->map.elements.north.img);
 	if (data->map.elements.south.img)
@@ -92,6 +88,15 @@ static void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx.mlx, data->map.elements.sprite.img);
 	if (data->mlx.win_img->img)
 		mlx_destroy_image(data->mlx.mlx, data->mlx.win_img->img);
+	if (!data->sprite.img)
+		return ;
+	i = -1;
+	while (++i < data->sprite.frames)
+	{
+		if (data->sprite.img[i].img)
+			mlx_destroy_image(data->mlx.mlx, data->sprite.img[i].img);
+	}
+	free(data->sprite.img);
 }
 
 static void	free_grid(char **grid, int size[2])

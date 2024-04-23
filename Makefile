@@ -26,9 +26,11 @@ SRC_FILES =	main.c \
 			render/texture_render.c \
 			bonus/bonus_doors.c \
 			bonus/parser/bonus_get_file_elements.c \
+			bonus/parser/bonus_get_file_elements2.c \
 			bonus/parser/bonus_parse_map.c \
 			bonus/render/bonus_sprites.c \
 			bonus/render/bonus_minimap.c \
+			bonus/render/bonus_sprites2.c \
 
 # Format: subdir/file.c | For example: main.c map/init.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -59,7 +61,7 @@ LIBS += $(MLX)
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #Puede que el 02 sea mejor
+CFLAGS = -Wall -Wextra -Werror -g #Puede que el 02 sea mejor
 DFLAGS = -MD -MF
 INCLUDE = -I include/ -I $(LIBFT_DIR) -I $(MLX_DIR)
 X11_FLAGS = -lXext -lX11
@@ -170,5 +172,5 @@ bonus_run: all
 val: all
 	valgrind ./$(NAME) test.cub
 
-.PHONY: all libft minilibx clean fclean re title run
+.PHONY: all libft minilibx clean fclean re title run bonus_run val
 -include $(DEPS)

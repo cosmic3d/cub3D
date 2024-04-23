@@ -6,14 +6,15 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:25:33 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/22 20:29:56 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:08:31 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #define WALL_COLOR 0xFFFF00
-#define DOOR_COLOR 0xAAAA22
+#define CLOSED_DOOR_COLOR 0xBBBB22
+#define OPEN_DOOR_COLOR 0x5555FF
 #define BG_COLOR 0x0000FF
 #define PLAYER_COLOR 0x00FF00
 #define SPRITE_COLOR 0xFF5555
@@ -59,7 +60,9 @@ static void	draw_tile(int *window, char id, int pos[2], int size)
 	if (id == '1')
 		color = WALL_COLOR;
 	else if (id == 'D')
-		color = DOOR_COLOR;
+		color = CLOSED_DOOR_COLOR;
+	else if (id == 'd')
+		color = OPEN_DOOR_COLOR;
 	else if (id == 'P')
 		color = PLAYER_COLOR;
 	else if (id == 'O')

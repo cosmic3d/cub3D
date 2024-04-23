@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:33:53 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/22 20:39:04 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:41:53 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	c3d_exit(const char *error, t_data *data)
 		free(data->mlx.win_img);
 	if (data->mlx.mlx)
 	{
-		mlx_destroy_display(data->mlx.mlx);
+		//mlx_destroy_display(data->mlx.mlx); //COMENTADO PORQUE EN MAC NO EXISTE ESTA FUNCION
 		free(data->mlx.mlx);
 	}
 	exit(exit_status);
@@ -69,7 +69,7 @@ int	c3d_close_window_exit(t_data *data)
 		free(data->mlx.win_img);
 	if (data->mlx.mlx)
 	{
-		mlx_destroy_display(data->mlx.mlx);
+		//mlx_destroy_display(data->mlx.mlx); //COMENTADO PORQUE EN MAC NO EXISTE ESTA FUNCION
 		free(data->mlx.mlx);
 	}
 	exit(EXIT_SUCCESS);

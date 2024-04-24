@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/23 20:20:24 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:17:12 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,7 @@ int		tile_is_exterior(char **grid, int y, int x, int size[2]);
 
 // file_to_grid.c
 char	**create_map_from_file(t_map *map, char **file);
-  
+
 // bonus_parse_map.c
 void	bonus_parse_map(t_data *data, char **file);
 
@@ -330,6 +330,8 @@ int		c3d_close_window_exit(t_data *data);
 void	hook(t_data *data);
 int		keypressed(int keycode, t_data *data);
 int		mousemove(int x, int y, t_data *data);
+int		mousepressed(int button, int x, int y, t_data *data);
+int		mousereleased(int button, int x, int y, t_data *data);
 
 // movement.c
 void	rotate_player(t_data *data, double angle);

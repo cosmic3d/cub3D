@@ -1,12 +1,12 @@
-NO                 textures/test/bloquexculo.xpm
-C 28,28,36
-EA       textures/test/bloquexculo.xpm
-F               44,43,59
-WE                      textures/test/bloquexculo.xpm
-SO  textures/test/bloquexculo.xpm
+NO                 textures/spelunky_textures/norte.xpm
+C         64,46,22
+EA       textures/spelunky_textures/este.xpm
+F              153,118,23
+WE                      textures/spelunky_textures/oeste.xpm
+SO  textures/spelunky_textures/sur.xpm
 
-SP                   0,0,0           1   1      textures/test/damnatus_test/
-DR textures/door.xpm
+SP                   0,0,255           9   9      textures/spelunky_sprites/
+DR textures/spelunky_textures/puerta.xpm
 
 111111
 111101
@@ -25,7 +25,7 @@ DR textures/door.xpm
      101    1O0001    101  101     1100001
      10111111000011111101111011   11000001
      1000000000000000000000000111110000011
-     1000N000000O00000000000000000D000011
+     1000S000000O00000000000000000D000011
     110000000000000000000O00000000D00011
    110011111111111111111111111111111111
    11111                      1

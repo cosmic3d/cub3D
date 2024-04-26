@@ -5,7 +5,7 @@ F              153,118,23
 WE                      textures/spelunky_textures/oeste.xpm
 SO  textures/spelunky_textures/sur.xpm
 
-SP                   0,0,255           9   9      textures/spelunky_sprites/
+SP                   0,0,255           9   27      textures/spelunky_sprites/
 DR textures/spelunky_textures/puerta.xpm
 
 111111

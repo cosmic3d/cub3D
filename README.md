@@ -1,3 +1,6 @@
+<head>
+	<link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+</head>
 <p align="center">
 <h1 align="center">CUB3D</h1>
 </p>
@@ -15,8 +18,10 @@
 </p>
 <p align="center">
 	<img src="https://img.shields.io/badge/GNU%20Bash-4EAA25.svg?style=flat&logo=GNU-Bash&logoColor=white" alt="GNU%20Bash">
-	<img src="https://img.shields.io/badge/C-A8B9CC.svg?style=flat&logo=C&logoColor=black" alt="C">
-	<img src="https://img.shields.io/badge/Perl-39457E.svg?style=flat&logo=Perl&logoColor=white" alt="Perl">
+	<img src="https://img.shields.io/badge/programming_language-blue.svg?style=flat&logo=C&logoColor=white" alt="C">
+	<img src="https://img.shields.io/badge/MinilibX-de65e0.svg?style=flat&logo=42&logoColor=white" alt="42 MLX">
+	<img src="https://img.shields.io/badge/Makefile-fc9d21.svg?style=flat&logo=gnu&logoColor=white&logoSize=auto" alt="Makefile">
+          
 <!-- 	Añadir más herramientas como Makefile o MinilibX -->
  
   
@@ -32,6 +37,7 @@
 > - [🚀 Getting Started](#-getting-started)
 >   - [⚙️ Installation](#️-installation)
 >   - [🤖 Running cub3D](#-running-cub3D)
+>   - [🎮 Controls](#-controls)
 > - [🛠 Project Roadmap](#-project-roadmap)
 > - [🤝 Contributing](#-contributing)
 > - [📄 License](#-license)
@@ -49,7 +55,11 @@
 
 ## 📦 Features
 
-<code>► INSERT-TEXT-HERE</code>
+- Raycasting technique used to draw walls
+- Player and camera movement on X and Y axes
+- Wall colisions
+- Wall textures
+- Animated sprites and interactive doors
 
 ---
 
@@ -59,7 +69,19 @@
 
 Ensure you have the following dependencies installed on your system:
 
-* **C**: `version x.y.z`
+- Requirements for MacOs
+	- clang
+	- make
+	- This native version no longer uses X.org, XQuartez or X11 but uses **Mac OSX's Cocoa (AppKit)** and modern **OpenGL** features.
+
+- Requirements for Linux
+    - MinilibX only support TrueColor visual type (8,15,16,24 or 32 bits depth)
+    - gcc
+    - make
+    - X11 include files (package xorg)
+    - XShm extension must be present (package libxext-dev)
+    - Utility functions from BSD systems - development files (package libbsd-dev)
+    - e.g. sudo apt-get install gcc make xorg libxext-dev libbsd-dev (Debian/Ubuntu)
 
 ### ⚙️ Installation
 
@@ -75,10 +97,10 @@ git clone https://github.com/apresas-97/cub3D.git
 cd cub3D
 ```
 
-3. Install the dependencies:
+3. Compile the project:
 
 ```sh
-gcc -o myapp main.c
+make
 ```
 
 ### 🤖 Running cub3D
@@ -86,17 +108,30 @@ gcc -o myapp main.c
 Use the following command to run cub3D:
 
 ```sh
-./myapp
+./cub3D <map>
 ```
+
+Where *\<map\>* is a file with the .cub extension
+
+---
+
+## 🎮 Controls
+- `WASD` for moving the player
+- `⬅️➡️` or `🖱️ and left click` for moving the camera
+- `E` for opening doors
+- `ESC` for closing the game
 
 ---
 
 ## 🛠 Project Roadmap
 
-- [X] `► INSERT-TASK-1`
-- [ ] `► INSERT-TASK-2`
-- [ ] `► ...`
-
+- [X] `► Raycasting technique used to draw walls`
+- [X] `► Camera and player movement`
+- [X] `► Textures are correctly drawn on the walls`
+- [X] `► Better map parser`
+- [X] `► Animated sprites and doors added`
+- [X] `► Some custom maps added`
+- [ ] `► Multiplayer`
 ---
 
 ## 🤝 Contributing
@@ -138,7 +173,7 @@ Once your PR is reviewed and approved, it will be merged into the main branch.
 
 ## 📄 License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the [MIT]([https://choosealicense.com/licenses](https://opensource.org/license/mit/)) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
 
 ---
 

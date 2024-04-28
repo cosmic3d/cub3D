@@ -14,7 +14,7 @@
 	<img src="https://img.shields.io/github/languages/count/apresas-97/cub3D.git?style=flat&color=0080ff" alt="repo-language-count">
 <p>
 <p align="center">
-		<em>Developed with the software and tools below.</em>
+		<p align="center">Developed by <a href="https://github.com/apresas-97">😼​apresas-97</a> and <a href="https://github.com/cosmic3d">🌚​cosmic3d</a> with the software and tools below.</p>
 </p>
 <p align="center">
 	<img src="https://img.shields.io/badge/GNU%20Bash-4EAA25.svg?style=flat&logo=GNU-Bash&logoColor=white" alt="GNU%20Bash">
@@ -38,6 +38,7 @@
 >   - [⚙️ Installation](#️-installation)
 >   - [🤖 Running cub3D](#-running-cub3D)
 >   - [🎮 Controls](#-controls)
+> - [📹 Game footage](#-game-footage)
 > - [🛠 Project Roadmap](#-project-roadmap)
 > - [🤝 Contributing](#-contributing)
 > - [📄 License](#-license)
@@ -123,6 +124,21 @@ Where *\<map\>* is a file with the .cub extension
 
 ---
 
+## 📹 Game footage
+
+<div align="center">
+	<img style="width: 100%" src="https://github.com/apresas-97/cub3D/assets/68190267/eefaf14a-2c99-4ad3-b362-37de0425fd9d">
+</div>
+<div align="center">
+	<img style="width: 100%" src="https://github.com/apresas-97/cub3D/assets/68190267/f153068b-7130-4a3b-a985-ce95e729a5ae">
+</div>
+<div align="center">
+	<img style="width: 100%" src="https://github.com/apresas-97/cub3D/assets/68190267/ba18ff3e-68f2-4036-be0d-a554bd9484b2">
+</div>
+
+
+---
+
 ## 🛠 Project Roadmap
 
 - [X] `► Raycasting technique used to draw walls`
@@ -173,13 +189,13 @@ Once your PR is reviewed and approved, it will be merged into the main branch.
 
 ## 📄 License
 
-This project is protected under the [MIT]([https://choosealicense.com/licenses](https://opensource.org/license/mit/)) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the [MIT]([https://choosealicense.com/licenses](https://opensource.org/license/mit/)) License. For more details, refer to the [LICENSE](LICENSE) file.
 
 ---
 
 ## 👏 Acknowledgments
 
-- List any resources, contributors, inspiration, etc. here.
+- List any resources, contributors, inspiration, etc. here. ALBERT SI VES ESTO PON AQUÍ LO QUE QUIERAS QUE YO NO SÉ QUÉ PONER
 
 [**Return**](#-quick-links)
 

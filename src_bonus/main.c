@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init2.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 13:53:41 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:21:46 by apresas-         ###   ########.fr       */
+/*   Created: 2024/03/25 19:23:55 by apresas-          #+#    #+#             */
+/*   Updated: 2024/04/30 15:40:59 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
-void	init_ray_variables(t_ray *ray)
+int	main(int argc, char **argv)
 {
-	ray->camera = 0.0;
-	ray->ray_dir[X] = 0.0;
-	ray->ray_dir[Y] = 0.0;
-	ray->map[X] = 0;
-	ray->map[Y] = 0;
-	ray->side_dist[X] = 0.0;
-	ray->side_dist[Y] = 0.0;
-	ray->delta_dist[X] = 0.0;
-	ray->delta_dist[Y] = 0.0;
-	ray->perp_wall_dist = 0.0;
-	ray->step[X] = 0;
-	ray->step[Y] = 0;
-	ray->side[X] = 0;
-	ray->side[Y] = 0;
-	return ;
+	t_data	data;
+
+	if (verify_arguments(argc, argv) == FAILURE)
+		return (1);
+	init_data(&data);
+	parser(&data, argv[1]);
+	mlx_loop_hook(data.mlx.mlx, game_loop, &data);
+	mlx_loop(data.mlx.mlx);
+	return (0);
 }

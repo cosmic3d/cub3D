@@ -6,11 +6,11 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:11:37 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:22:00 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:10:31 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
 static void	init_mlx(t_data *data);
 static void	init_map_variables(t_map *map);
@@ -20,11 +20,23 @@ static void	init_player_variables(t_player *player);
 /* Initialises all variables in the data struct and its children */
 void	init_data(t_data *data)
 {
+	int	i;
+
 	data->file = NULL;
+	data->objects = NULL;
 	init_mlx(data);
 	init_map_variables(&data->map);
 	init_player_variables(&data->player);
 	init_ray_variables(&data->ray);
+	init_mouse_variables(&data->mouse);
+	data->sprite.i = 0;
+	data->sprite.transparency_color = 0;
+	data->sprite.frames = 0;
+	data->bonus = 0;
+	data->frame = 0;
+	i = 0;
+	while (i < WINX)
+		data->zbuffer[i++] = 0.0;
 	return ;
 }
 
@@ -52,6 +64,8 @@ static void	init_map_variables(t_map *map)
 	init_texture(&map->elements.south);
 	init_texture(&map->elements.west);
 	init_texture(&map->elements.east);
+	init_texture(&map->elements.sprite);
+	init_texture(&map->elements.door);
 	map->elements.ceiling = -1;
 	map->elements.floor = -1;
 	map->size[X] = -1;
@@ -60,6 +74,8 @@ static void	init_map_variables(t_map *map)
 	map->spawn[Y] = -1;
 	map->player_dir[X] = -2;
 	map->player_dir[Y] = -2;
+	map->offset_y = 0.0;
+	map->objects = 0;
 }
 
 /* Initialises the texture variables */

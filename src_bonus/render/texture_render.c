@@ -6,11 +6,11 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:38:39 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:07:54 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
 int	*get_texture_addr(t_data *data, t_img *texture)
 {
@@ -34,6 +34,8 @@ int	*get_texture_addr(t_data *data, t_img *texture)
 
 t_img	*get_texture(t_data *data)
 {
+	if (data->map.grid[data->ray.map[Y]][data->ray.map[X]] == DOOR)
+		return (&data->map.elements.door);
 	if (data->ray.side[X] == 0)
 	{
 		if (data->ray.side[Y] == 1)
@@ -55,7 +57,7 @@ void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data)
 	int		line_h;
 
 	line_h = (int)(WINY / data->ray.perp_wall_dist);
-	y = ((WINY - line_h) >> 1);
+	y = ((WINY - line_h) >> 1) - data->map.offset_y;
 	texture_iter_d = 0.0;
 	step = (double)tx_size[Y] / line_h;
 	if (y < 0)

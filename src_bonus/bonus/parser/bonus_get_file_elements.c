@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
 static int	get_bonus_texture(t_data *data, char *line, t_img *texture);
 static int	get_sprites(t_data *data, char *line);

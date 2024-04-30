@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
 /* static int	get_sprite_img(char *path, t_data *data, int i)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   bonus_cub3d.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:40:54 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:51:45 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@
 # include "libft.h"
 # include "eventcodes.h"
 # include "keycodes.h"
-
-// For debugging
-# include <time.h>
-# define FPS_TEST_CYCLES 5000
 
 # ifdef __linux__
 #  include "../libs/minilibx_linux/mlx.h"
@@ -130,6 +126,24 @@ invalid tile"
 # define TILE_SIZE 2
 # define FPS 60
 
+typedef struct s_object
+{
+	double	pos[2];
+	double	dist;
+}				t_object;
+
+// typedef struct s_sprite_drawing_data
+// {
+// 	double	transform[2];
+// 	double	iter[2];
+// 	double	step[2];
+// 	double	iter_start_y;
+// 	int		on_screen_size[2];
+// 	int		size[2];
+// 	int		draw_start[2];
+// 	int		draw_end[2];
+// }				t_sprite_data;
+
 typedef struct s_img
 {
 	void	*img;
@@ -139,6 +153,15 @@ typedef struct s_img
 	int		endian;
 	int		size[2];
 }					t_img;
+
+typedef struct s_door_data
+{
+	double	step[2];
+	double	side_dist[2];
+	double	delta_dist[2];
+	int		map[2];
+	double	pos[2];
+}				t_door_data;
 
 typedef struct s_player
 {
@@ -155,6 +178,8 @@ typedef struct s_map_elements
 	t_img	south;
 	t_img	west;
 	t_img	east;
+	t_img	sprite;
+	t_img	door;
 	int		floor;
 	int		ceiling;
 }				t_elements;
@@ -166,6 +191,8 @@ typedef struct s_map
 	int			size[2];
 	int			spawn[2];
 	int			player_dir[2];
+	double		offset_y;
+	int			objects;
 }				t_map;
 
 typedef struct s_ray
@@ -193,13 +220,39 @@ typedef struct s_mlx_data
 	t_img	*win_img;
 }				t_mlx;
 
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line;
+	int		endian;
+	int		size[2];
+}				t_texture;
+
+//
+typedef struct s_sprite
+{
+	t_img	*img;
+	int		transparency_color;
+	int		frames;
+	int		i;
+	int		framerate;
+}				t_sprite;
+
 typedef struct s_data
 {
 	char		**file;
+	t_object	*objects;
 	t_mlx		mlx;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
+	t_mouse		mouse;
+	t_sprite	sprite;
+	int			bonus;
+	double		zbuffer[WINX];
+	int			frame;// unnecessary
 }				t_data;
 
 // functions:
@@ -212,6 +265,9 @@ int		verify_arguments(int argc, char **argv);
 
 // init.c
 void	init_data(t_data *data);
+
+// bonus_sprites2.c
+void	init_sprite_images(t_data *data);// recolocar
 
 // init2.c
 void	init_ray_variables(t_ray *ray);
@@ -227,6 +283,15 @@ char	**store_file(char *filepath, t_data *data);
 int		get_file_elements(t_data *data, t_elements *elements, char **file);
 int		rgb_to_int(int red, int green, int blue);
 
+// bonus_get_file_elements.c
+int		get_bonus_elements(t_data *data, char **file);
+
+// bonus_get_file_elements2.c
+int		get_transparency_color(char **line, t_data *data);
+int		get_sprite_texture_count(char **line, t_data *data);
+char	*get_path_prefix(char *line, t_data *data);
+char	*get_full_path(char *prefix, int i, t_data *data);
+
 // parse_map.c
 void	parse_map(t_data *data, char **file);
 void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);
@@ -234,6 +299,9 @@ int		tile_is_exterior(char **grid, int y, int x, int size[2]);
 
 // file_to_grid.c
 char	**create_map_from_file(t_map *map, char **file);
+
+// bonus_parse_map.c
+void	bonus_parse_map(t_data *data, char **file);
 
 // render.c
 void	render(t_data *data);
@@ -245,6 +313,12 @@ void	init_raycasting(t_data *data);
 t_img	*get_texture(t_data *data);
 int		*get_texture_addr(t_data *data, t_img *texture);
 void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data);
+
+// bonus_sprites.c
+void	bonus_draw_sprites(t_data *data, t_object *obj);
+
+// bonus_minimap.c
+void	draw_minimap(t_data *data, int *window);
 
 // error.c
 int		c3d_error(const char *error);
@@ -265,6 +339,9 @@ void	move_back(t_data *d);
 void	move_left(t_data *d);
 void	move_right(t_data *d);
 
+// bonus_door.c
+void	interact_door(t_data *data);
+
 // pixels.c
 t_img	*get_img(t_data *data, int width, int height);
 void	put_pixel(t_img *img, int x, int y, int color);
@@ -276,5 +353,8 @@ t_uint	get_pixel_color(t_img *image, int x, int y);
 // void	debug_check(void);
 // void	print_data(t_data *data);
 // void	imprimirArray2D(t_data *data);
+
+// //utils.c
+// double	deg_to_rad(double deg);
 
 #endif // CUB3D_H

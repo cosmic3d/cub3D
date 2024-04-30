@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
 static void	calculate_door_step(t_data *data, t_door_data *door);
 static int	player_is_looking_at(char **grid, t_door_data *door_data);

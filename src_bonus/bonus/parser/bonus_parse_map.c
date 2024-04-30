@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
 static int		bonus_check_valid_map_characters(t_map *map, char **file);
 static int		bonus_check_map_is_surrounded(char **grid, int size[2]);

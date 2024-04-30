@@ -6,11 +6,11 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 23:51:36 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/30 18:32:49 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:23:58 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
 void	rotate_player(t_data *data, double angle)
 {
@@ -40,13 +40,13 @@ void	move_forward(t_data *d)
 
 	y = (int)(d->player.pos[Y] + d->player.dir[Y] * fabs(d->player.move_speed));
 	x = (int)d->player.pos[X];
-	if (d->map.grid[y][x] != '1')
+	if (d->map.grid[y][x] != '1' && d->map.grid[y][x] != 'D')
 	{
 		d->player.pos[Y] += d->player.dir[Y] * fabs(d->player.move_speed);
 	}
 	y = (int)d->player.pos[Y];
 	x = (int)(d->player.pos[X] + d->player.dir[X] * fabs(d->player.move_speed));
-	if (d->map.grid[y][x] != '1')
+	if (d->map.grid[y][x] != '1' && d->map.grid[y][x] != 'D')
 	{
 		d->player.pos[X] += d->player.dir[X] * fabs(d->player.move_speed);
 	}
@@ -59,13 +59,13 @@ void	move_back(t_data *d)
 
 	y = (int)(d->player.pos[Y] - d->player.dir[Y] * fabs(d->player.move_speed));
 	x = (int)d->player.pos[X];
-	if (d->map.grid[y][x] != '1')
+	if (d->map.grid[y][x] != '1' && d->map.grid[y][x] != 'D')
 	{
 		d->player.pos[Y] -= d->player.dir[Y] * fabs(d->player.move_speed);
 	}
 	y = (int)d->player.pos[Y];
 	x = (int)(d->player.pos[X] - d->player.dir[X] * fabs(d->player.move_speed));
-	if (d->map.grid[y][x] != '1')
+	if (d->map.grid[y][x] != '1' && d->map.grid[y][x] != 'D')
 	{
 		d->player.pos[X] -= d->player.dir[X] * fabs(d->player.move_speed);
 	}
@@ -78,13 +78,13 @@ void	move_left(t_data *d)
 
 	y = (int)(d->player.pos[Y] - d->player.dir[X] * d->player.move_speed);
 	x = (int)d->player.pos[X];
-	if (d->map.grid[y][x] != '1')
+	if (d->map.grid[y][x] != '1' && d->map.grid[y][x] != 'D')
 	{
 		d->player.pos[Y] -= d->player.dir[X] * d->player.move_speed;
 	}
 	y = (int)d->player.pos[Y];
 	x = (int)(d->player.pos[X] + d->player.dir[Y] * d->player.move_speed);
-	if (d->map.grid[y][x] != '1')
+	if (d->map.grid[y][x] != '1' && d->map.grid[y][x] != 'D')
 	{
 		d->player.pos[X] += d->player.dir[Y] * d->player.move_speed;
 	}
@@ -97,13 +97,13 @@ void	move_right(t_data *d)
 
 	y = (int)(d->player.pos[Y] + d->player.dir[X] * d->player.move_speed);
 	x = (int)d->player.pos[X];
-	if (d->map.grid[y][x] != '1')
+	if (d->map.grid[y][x] != '1' && d->map.grid[y][x] != 'D')
 	{
 		d->player.pos[Y] += d->player.dir[X] * d->player.move_speed;
 	}
 	y = (int)d->player.pos[Y];
 	x = (int)(d->player.pos[X] - d->player.dir[Y] * d->player.move_speed);
-	if (d->map.grid[y][x] != '1')
+	if (d->map.grid[y][x] != '1' && d->map.grid[y][x] != 'D')
 	{
 		d->player.pos[X] -= d->player.dir[Y] * d->player.move_speed;
 	}

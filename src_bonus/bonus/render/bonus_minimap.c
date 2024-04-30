@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
 #define WALL_COLOR 0xFFFF00
 #define CLOSED_DOOR_COLOR 0xBBBB22

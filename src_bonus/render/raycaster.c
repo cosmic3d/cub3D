@@ -6,15 +6,18 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:54:53 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/30 18:31:35 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:23:49 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+/* EN ESTE ARCHIVO SE REALIZARÁN ALGUNAS FUNCIONES QUE CREA UTILES PARA EL 
+RAYCASTER, INCLUSO EL PROPIO RAYCASTER */
+
+#include "bonus_cub3d.h"
 
 static void	calculate_step(t_data *data);
 static void	check_hit(t_data *data);
-static void	calculate_perp_dist(t_data *data);
+static void	calculate_perp_dist(t_data *data, int x);
 
 void	init_raycasting(t_data *data)
 {
@@ -35,7 +38,7 @@ void	init_raycasting(t_data *data)
 		data->ray.delta_dist[Y] = fabs(1 / data->ray.ray_dir[Y]);
 		calculate_step(data);
 		check_hit(data);
-		calculate_perp_dist(data);
+		calculate_perp_dist(data, x);
 		texture = get_texture(data);
 		draw_vert_stripe(get_texture_addr(data, texture), \
 			data->mlx.win_img->addr + x, texture->size, data);
@@ -92,12 +95,13 @@ static void	check_hit(t_data *data)
 			if (data->ray.step[Y] < 0)
 				data->ray.side[Y] = -1;
 		}
-		if (data->map.grid[data->ray.map[Y]][data->ray.map[X]] == WALL)
+		if (data->map.grid[data->ray.map[Y]][data->ray.map[X]] == WALL ||
+		data->map.grid[data->ray.map[Y]][data->ray.map[X]] == DOOR)
 			break ;
 	}
 }
 
-static void	calculate_perp_dist(t_data *data)
+static void	calculate_perp_dist(t_data *data, int x)
 {
 	if (data->ray.side[X] != 0)
 		data->ray.perp_wall_dist = \
@@ -105,4 +109,5 @@ static void	calculate_perp_dist(t_data *data)
 	else
 		data->ray.perp_wall_dist = \
 		data->ray.side_dist[Y] - data->ray.delta_dist[Y];
+	data->zbuffer[x] = data->ray.perp_wall_dist;
 }

@@ -6,11 +6,11 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:53:41 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:21:46 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:18:33 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus_cub3d.h"
 
 void	init_ray_variables(t_ray *ray)
 {
@@ -28,5 +28,13 @@ void	init_ray_variables(t_ray *ray)
 	ray->step[Y] = 0;
 	ray->side[X] = 0;
 	ray->side[Y] = 0;
+	return ;
+}
+
+void	init_mouse_variables(t_mouse *mouse)
+{
+	mouse->prev_pos[X] = 0;
+	mouse->prev_pos[Y] = 0;
+	mouse->pressed = 0;
 	return ;
 }

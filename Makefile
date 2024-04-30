@@ -8,6 +8,7 @@ OS = $(shell uname -s)
 # Source files
 SRC_DIR = src/
 SRC_FILES =	main.c \
+			game_loop.c \
 			error.c \
 			debug.c \
 			hooks.c \

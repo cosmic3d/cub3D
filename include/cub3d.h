@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/24 13:17:12 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:43:01 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ invalid tile"
 
 # define WINX 640
 # define WINY 360
-# define ROTATE_SPEED 0.02
+# define ROTATE_SPEED 0.1
 # define MOVE_SPEED 0.1
 # define TILE_SIZE 2
 # define FPS 60
@@ -260,6 +260,9 @@ typedef struct s_data
 }				t_data;
 
 // functions:
+
+// game_loop.c
+int	game_loop(t_data *data);
 
 // verify_arguments.c
 int		verify_arguments(int argc, char **argv);

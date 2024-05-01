@@ -1,8 +1,8 @@
 NAME = cub3D
+BONUS_NAME = cub3D_bonus
 
 # OS
 OS = $(shell uname -s)
-# $(info $(OS))
 
 ### Files
 # Source files
@@ -42,12 +42,13 @@ BONUS_SRC = $(addprefix $(BONUS_SRC_DIR), $(BONUS_SRC_FILES))
 
 # Object files
 OBJ_DIR = obj/
-OBJ    = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
-BONUS_OBJ = $(addprefix $(OBJ_DIR), $(BONUS_SRC_FILES:.c=.o))
+OBJ    = $(addprefix $(OBJ_DIR), $(SRC_FILES:%.c=%.o))
+BONUS_OBJ_DIR = obj_bonus/
+BONUS_OBJ = $(addprefix $(BONUS_OBJ_DIR), $(BONUS_SRC_FILES:%.c=%.o))
 
 # Dependency files
 DEPS = $(addprefix $(OBJ_DIR),$(SRC_FILES:%.c=%.d))
-BONUS_DEPS = $(addprefix $(OBJ_DIR),$(BONUS_SRC_FILES:%.c=%.d))
+BONUS_DEPS = $(addprefix $(BONUS_OBJ_DIR),$(BONUS_SRC_FILES:%.c=%.d))
 
 # Libraries
 LIBS_DIR = libs/
@@ -113,14 +114,14 @@ BMAGENTA = $(BOLD)$(MAGENTA)
 BCYAN = $(BOLD)$(CYAN)
 
 all: title libft minilibx
-	@$(MAKE) --no-print-directory $(NAME) > .tmp_cub3d
-	@echo "make[1]: 'cub3D' is up to date." > .tmp_expected_cub3d
-	@if diff -q .tmp_cub3d .tmp_expected_cub3d > /dev/null; then \
+	@$(MAKE) --no-print-directory $(NAME) > .tmp_out
+	@echo "make[1]: 'cub3D' is up to date." > .tmp_expected
+	@if diff -q .tmp_out .tmp_expected > /dev/null; then \
 		echo "$(YELLOW)'cub3D' is up to date.$(RESET)"; \
 	else \
 		echo "$(GREEN)'cub3D' was compiled succesfully.$(RESET)                                    "; \
 	fi
-	@$(RM) .tmp_cub3d .tmp_expected_cub3d
+	@$(RM) .tmp_out .tmp_expected
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(MATH_FLAGS) $(LIBS) -o $(NAME) -lm
@@ -129,49 +130,59 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(MK)
 	@$(MKDIR) $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@
 
-bonus: clean_cub3d_files title_bonus libft minilibx
-	@$(MAKE) --no-print-directory $(NAME) SRC_DIR=$(BONUS_SRC_DIR) SRC="$(BONUS_SRC)" OBJ="$(BONUS_OBJ)" DEPS="$(BONUS_DEPS)"
-	@echo "$(GREEN)'cub3D' was compiled succesfully.$(RESET)                                    "
+$(BONUS_NAME): $(BONUS_OBJ)
+	@$(CC) $(CFLAGS) $(BONUS_OBJ) $(MLX_FLAGS) $(MATH_FLAGS) $(LIBS) -o $(BONUS_NAME) -lm
 
-clean_cub3d_files:
-	@$(RM) $(NAME)
-	@$(RM) $(OBJ)
-	@$(RM) $(DEPS)
-	@$(RM) $(OBJ_DIR)
+$(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c $(MK)
+	@$(MKDIR) $(@D)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(DFLAGS) $(BONUS_OBJ_DIR)$*.d -c $< -o $@
+
+bonus: title_bonus libft minilibx
+	@$(MAKE) --no-print-directory $(BONUS_NAME) > .tmp_out
+	@echo "make[1]: 'cub3D_bonus' is up to date." > .tmp_expected
+	@if diff -q .tmp_out .tmp_expected > /dev/null; then \
+		echo "$(YELLOW)'cub3D_bonus' is up to date.$(RESET)"; \
+	else \
+		echo "$(GREEN)'cub3D_bonus' was compiled succesfully.$(RESET)                                    "; \
+	fi
+	@$(RM) .tmp_out .tmp_expected
 
 libft:
 	@echo "$(BLUE)Make $(HIGHLIGHT)Libft$(RESET)$(BLUE):$(RESET)"
-	@echo "make[1]: Nothing to be done for 'all'." > .tmp_expected_libft
-	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) > .tmp_libft
-	@if diff -q .tmp_libft .tmp_expected_libft > /dev/null; then \
+	@echo "make[1]: Nothing to be done for 'all'." > .tmp_expected
+	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) > .tmp_out
+	@if diff -q .tmp_out .tmp_expected > /dev/null; then \
 		echo "$(GREEN)Libft is up to date$(RESET)"; \
 	else \
 		echo "$(GREEN)Libft compiled succesfully$(RESET)"; \
 	fi
-	@$(RM) .tmp_expected_libft .tmp_libft
+	@$(RM) .tmp_expected .tmp_out
 
 minilibx:
 	@echo "$(BLUE)Make $(HIGHLIGHT)MiniLibX$(RESET)$(BLUE):$(RESET)"
-	@$(MAKE) --no-print-directory -sC $(MLX_DIR) > /dev/null
+	@$(MAKE) --no-print-directory -sC $(MLX_DIR) &> /dev/null
 	@echo "$(GREEN)MiniLibX compiled succesfully$(RESET)";
 
 clean:
 	@echo "$(BOLD)clean :$(RESET)"
-	@$(RM) $(OBJ)
+	@$(RM) $(OBJ) $(BONUS_OBJ)
 	@echo "$(RED)Object files removed$(RESET)"
-	@$(RM) $(DEPS)
+	@$(RM) $(DEPS) $(BONUS_DEPS)
 	@echo "$(RED)Dependency files removed$(RESET)"
-	@$(RM) $(OBJ_DIR)
-	@echo "$(RED)'$(OBJ_DIR)' directory removed$(RESET)"
+	@$(RM) $(OBJ_DIR) $(BONUS_OBJ_DIR)
+	@echo "$(RED)Object directories removed$(RESET)"
 	@$(MAKE) clean -sC $(LIBFT_DIR)
 	@echo "$(RED)'libft' library cleaned$(RESET)"
 	@$(MAKE) clean -sC $(MLX_DIR) > /dev/null
 	@echo "$(RED)'MiniLibX' library cleaned$(RESET)"
+	@$(RM) .tmp_out .tmp_expected
 
 fclean: clean
 	@echo "$(BOLD)fclean :$(RESET)"
 	@$(RM) $(NAME)
 	@echo "$(RED)'$(NAME)' executable removed$(RESET)"
+	@$(RM) $(BONUS_NAME)
+	@echo "$(RED)'$(BONUS_NAME)' executable removed$(RESET)"
 	@$(MAKE) fclean -sC $(LIBFT_DIR)
 	@echo "$(RED)'libft' library fcleaned$(RESET)"
 
@@ -181,7 +192,7 @@ title:
 	@echo "$(BCYAN)> Compiling $(BOLD)$(UNDERLINE)cub3D$(RESET)$(BCYAN) <$(RESET)"
 
 title_bonus:
-	@printf "$(BCYAN)> Compiling $(BOLD)$(UNDERLINE)cub3D$(RESET)$(BCYAN): $(BOLD)$(ITALIC)$(RED)B$(GREEN)O$(YELLOW)N$(CYAN)U$(BLUE)S $(BCYAN)<\r$(RESET)"
+	@echo "$(BCYAN)> Compiling $(BOLD)$(UNDERLINE)cub3D$(RESET)$(BCYAN): $(BOLD)$(ITALIC)$(RED)B$(GREEN)O$(YELLOW)N$(CYAN)U$(BLUE)S $(BCYAN)<$(RESET)"
 
 run: all
 	./$(NAME) test.cub
@@ -194,3 +205,4 @@ val: all
 
 .PHONY: all libft minilibx clean fclean re title run bonus_run val
 -include $(DEPS)
+-include $(BONUS_DEPS)

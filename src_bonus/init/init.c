@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:11:37 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/23 19:10:31 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:02:24 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ static void	init_player_variables(t_player *player)
 	player->dir[Y] = 0.0;
 	player->plane[X] = 0.0;
 	player->plane[Y] = 0.0;
-	player->move_speed = MOVE_SPEED;
+	if (MOVE_SPEED >= 1 || MOVE_SPEED < 0)
+		player->move_speed = 0.1542;
+	else
+		player->move_speed = MOVE_SPEED;
 	player->rot_speed = ROTATE_SPEED;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_cub3d.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:51:45 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:06:31 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,11 @@ invalid tile"
 
 //Macros for calculation values
 
-# define WINX 640
-# define WINY 360
+# define WINX 1920 //640
+# define WINY 1080 //360
 # define ROTATE_SPEED 0.1
-# define MOVE_SPEED 0.1
+// # define MOVE_SPEE0D 0.1542
+# define MOVE_SPEED 0.1542
 # define TILE_SIZE 2
 # define FPS 60
 

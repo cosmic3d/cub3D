@@ -10,7 +10,6 @@ SRC_DIR = src/
 SRC_FILES =	main.c \
 			game_loop.c \
 			error.c \
-			debug.c \
 			hooks.c \
 			movement.c \
 			verify_arguments.c \
@@ -27,14 +26,32 @@ SRC_FILES =	main.c \
 			render/texture_render.c \
 
 BONUS_SRC_DIR = src_bonus/
-BONUS_SRC_FILES =	$(SRC_FILES) \
-					bonus/parser/bonus_get_file_elements.c \
-					bonus/parser/bonus_get_file_elements2.c \
-					bonus/parser/bonus_parse_map.c \
-					bonus/render/bonus_minimap.c \
-					bonus/render/bonus_sprites.c \
-					bonus/render/bonus_sprites2.c \
-					bonus/bonus_doors.c \
+BONUS_SRC_FILES = \
+    bonus/doors_bonus.c \
+    bonus/parser/get_file_elements2_bonus.c \
+    bonus/parser/get_file_elements_bonus.c \
+    bonus/parser/parse_map_bonus.c \
+    bonus/render/minimap_bonus.c \
+    bonus/render/sprites2_bonus.c \
+    bonus/render/sprites_bonus.c \
+    error_bonus.c \
+    game_loop_bonus.c \
+    hooks_bonus.c \
+    init/init2_bonus.c \
+    init/init_bonus.c \
+    main_bonus.c \
+    movement_bonus.c \
+    parser/file_to_grid_bonus.c \
+    parser/get_file_elements_bonus.c \
+    parser/parse_map_bonus.c \
+    parser/parser_bonus.c \
+    parser/store_file_bonus.c \
+    render/pixels_bonus.c \
+    render/raycaster_bonus.c \
+    render/render_bonus.c \
+    render/texture_render_bonus.c \
+    verify_arguments_bonus.c
+
 
 # Format: subdir/file.c | For example: main.c map/init.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -68,7 +85,7 @@ LIBS += $(MLX)
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g #Puede que el 02 sea mejor
+CFLAGS = -Wall -Wextra -Werror -g -O2
 DFLAGS = -MD -MF
 INCLUDE = -I include/ -I $(LIBFT_DIR) -I $(MLX_DIR)
 X11_FLAGS = -lXext -lX11

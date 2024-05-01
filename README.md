@@ -129,12 +129,23 @@ Where *\<map\>* is a file with the .cub extension
 <div align="center">
 	<img style="width: 100%" src="https://github.com/apresas-97/cub3D/assets/68190267/eefaf14a-2c99-4ad3-b362-37de0425fd9d">
 </div>
+<!--
+<div align="center">
+	<video width="99%" height="1080" autoplay loop muted>
+        	<source src="https://github.com/cosmic3d/cub3D/assets/68190267/44b6f3c2-4084-4c21-979b-e7a6c41a5e63">
+	</video>
+</div> -->
+
+https://github.com/cosmic3d/cub3D/assets/68190267/c74a56b6-a072-4d12-984f-d52c965c2e14
+
+
 <div align="center">
 	<img style="width: 100%" src="https://github.com/apresas-97/cub3D/assets/68190267/f153068b-7130-4a3b-a985-ce95e729a5ae">
 </div>
-<div align="center">
-	<img style="width: 100%" src="https://github.com/apresas-97/cub3D/assets/68190267/ba18ff3e-68f2-4036-be0d-a554bd9484b2">
-</div>
+
+
+https://github.com/cosmic3d/cub3D/assets/68190267/0e381db3-f263-491b-9305-0a32b5b700a7
+
 
 
 ---

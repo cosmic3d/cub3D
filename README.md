@@ -42,7 +42,6 @@
 > - [🛠 Project Roadmap](#-project-roadmap)
 > - [🤝 Contributing](#-contributing)
 > - [📄 License](#-license)
-> - [👏 Acknowledgments](#-acknowledgments)
 
 ---
 
@@ -203,10 +202,6 @@ Once your PR is reviewed and approved, it will be merged into the main branch.
 This project is protected under the [MIT]([https://choosealicense.com/licenses](https://opensource.org/license/mit/)) License. For more details, refer to the [LICENSE](LICENSE) file.
 
 ---
-
-## 👏 Acknowledgments
-
-- List any resources, contributors, inspiration, etc. here. ALBERT SI VES ESTO PON AQUÍ LO QUE QUIERAS QUE YO NO SÉ QUÉ PONER
 
 [**Return**](#-quick-links)
 

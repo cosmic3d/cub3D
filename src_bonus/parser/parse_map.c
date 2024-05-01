@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:27:03 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/22 18:03:15 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:15:01 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	check_valid_map_characters(t_map *map, char **file)
 					return (c3d_error(ERR_MAP_MULTIPLE_SPAWN));
 			}
 			if (!ft_strchr("10NSWE ", file[i][j]))
-				return (c3d_error(ERR_MAP_INVALID_CHAR));
+				return (printf("(REG)Invalid char = %c | %d\n", file[i][j], file[i][j]), c3d_error(ERR_MAP_INVALID_CHAR));
 		}
 		if (j == 0 || *ft_strnchr(file[i], ' ') == '\0')
 			return (c3d_error(ERR_MAP_EMPTY_LINE));

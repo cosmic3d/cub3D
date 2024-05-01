@@ -27,17 +27,27 @@ SRC_FILES =	main.c \
 			render/texture_render.c \
 
 BONUS_SRC_DIR = src_bonus/
-
+BONUS_SRC_FILES =	$(SRC_FILES) \
+					bonus/parser/bonus_get_file_elements.c \
+					bonus/parser/bonus_get_file_elements2.c \
+					bonus/parser/bonus_parse_map.c \
+					bonus/render/bonus_minimap.c \
+					bonus/render/bonus_sprites.c \
+					bonus/render/bonus_sprites2.c \
+					bonus/bonus_doors.c \
 
 # Format: subdir/file.c | For example: main.c map/init.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
+BONUS_SRC = $(addprefix $(BONUS_SRC_DIR), $(BONUS_SRC_FILES))
 
 # Object files
 OBJ_DIR = obj/
 OBJ    = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
+BONUS_OBJ = $(addprefix $(OBJ_DIR), $(BONUS_SRC_FILES:.c=.o))
 
 # Dependency files
 DEPS = $(addprefix $(OBJ_DIR),$(SRC_FILES:%.c=%.d))
+BONUS_DEPS = $(addprefix $(OBJ_DIR),$(BONUS_SRC_FILES:%.c=%.d))
 
 # Libraries
 LIBS_DIR = libs/
@@ -116,8 +126,18 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(MATH_FLAGS) $(LIBS) -o $(NAME) -lm
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(MK)
-	$(MKDIR) $(@D)
+	@$(MKDIR) $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(DFLAGS) $(OBJ_DIR)$*.d -c $< -o $@
+
+bonus: clean_cub3d_files title_bonus libft minilibx
+	@$(MAKE) --no-print-directory $(NAME) SRC_DIR=$(BONUS_SRC_DIR) SRC="$(BONUS_SRC)" OBJ="$(BONUS_OBJ)" DEPS="$(BONUS_DEPS)"
+	@echo "$(GREEN)'cub3D' was compiled succesfully.$(RESET)                                    "
+
+clean_cub3d_files:
+	@$(RM) $(NAME)
+	@$(RM) $(OBJ)
+	@$(RM) $(DEPS)
+	@$(RM) $(OBJ_DIR)
 
 libft:
 	@echo "$(BLUE)Make $(HIGHLIGHT)Libft$(RESET)$(BLUE):$(RESET)"
@@ -160,10 +180,13 @@ re: fclean all
 title:
 	@echo "$(BCYAN)> Compiling $(BOLD)$(UNDERLINE)cub3D$(RESET)$(BCYAN) <$(RESET)"
 
+title_bonus:
+	@printf "$(BCYAN)> Compiling $(BOLD)$(UNDERLINE)cub3D$(RESET)$(BCYAN): $(BOLD)$(ITALIC)$(RED)B$(GREEN)O$(YELLOW)N$(CYAN)U$(BLUE)S $(BCYAN)<\r$(RESET)"
+
 run: all
 	./$(NAME) test.cub
 
-bonus_run: all
+bonus_run: bonus
 	./$(NAME) bonus_test.cub
 
 val: all

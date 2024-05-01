@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:27:03 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 18:04:23 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:04:53 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	check_valid_map_characters(t_map *map, char **file)
 					return (c3d_error(ERR_MAP_MULTIPLE_SPAWN));
 			}
 			if (!ft_strchr("10NSWE ", file[i][j]))
-				return (printf("(REG)Invalid char = %c | %d\n", file[i][j], file[i][j]), c3d_error(ERR_MAP_INVALID_CHAR));
+				return (c3d_error(ERR_MAP_INVALID_CHAR));
 		}
 		if (j == 0 || *ft_strnchr(file[i], ' ') == '\0')
 			return (c3d_error(ERR_MAP_EMPTY_LINE));

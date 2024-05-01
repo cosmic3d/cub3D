@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:20:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 17:51:40 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:05:46 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus_cub3d.h"
-
-typedef struct s_sprite_utils_data
-{
-	double	transform[2];
-	double	iter[2];
-	double	step[2];
-	double	iter_start_y;
-	int		on_screen_size[2];
-	int		size[2];
-	int		draw_start[2];
-	int		draw_end[2];
-}				t_sprite_d;
 
 static void	sort_objects_by_distance(t_object *sprites, t_player p, int count);
 static void	get_sprite_transform(t_sprite_d *d, t_player *p, t_object s);

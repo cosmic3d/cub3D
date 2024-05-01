@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:52:17 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 18:22:31 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:05:23 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,10 @@ int	parser(t_data *data, char *filepath)
 {
 	int	file_line;
 
-	/* if (ft_strncmp(filepath, "bonus_", 6) == 0)
-		data->bonus = 1; */
-	data->bonus = 1;
 	data->file = store_file(filepath, data);
 	file_line = get_file_elements(data, &data->map.elements, data->file);
 	file_line += get_bonus_elements(data, data->file + file_line);
 	bonus_parse_map(data, data->file + file_line);
-	// parse_map(data, data->file + file_line);
 	update_variables(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:33:53 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:34:15 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:26:58 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	c3d_exit(const char *error, t_data *data)
 		mlx_destroy_window(data->mlx.mlx, data->mlx.window);
 	if (data->mlx.win_img)
 		free(data->mlx.win_img);
-	if (data->mlx.mlx)
-		free(data->mlx.mlx);
 	exit(exit_status);
 	return (FAILURE);
 }

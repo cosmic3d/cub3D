@@ -28,8 +28,8 @@ SRC_FILES =	main.c \
 BONUS_SRC_DIR = src_bonus/
 BONUS_SRC_FILES = \
     bonus/doors_bonus.c \
-    bonus/parser/get_file_elements2_bonus.c \
-    bonus/parser/get_file_elements_bonus.c \
+    bonus/parser/get_bonus_elements_bonus.c \
+    bonus/parser/get_bonus_elements2_bonus.c \
     bonus/parser/parse_map_bonus.c \
     bonus/render/minimap_bonus.c \
     bonus/render/sprites2_bonus.c \
@@ -51,7 +51,6 @@ BONUS_SRC_FILES = \
     render/render_bonus.c \
     render/texture_render_bonus.c \
     verify_arguments_bonus.c
-
 
 # Format: subdir/file.c | For example: main.c map/init.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))

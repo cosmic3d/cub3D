@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:38:39 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:05:42 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	*get_texture_addr(t_data *data, t_img *texture)
 	int		*texture_addr;
 	double	wall_x;
 
+	// printf("addr = %p\n", texture->addr);
+	// printf("last = %p\n", texture->addr + texture->size[X] * texture->size[Y]);
 	if (data->ray.side[X] == 0)
 	{
 		wall_x = data->player.pos[X] + data->ray.perp_wall_dist * \
@@ -57,7 +59,7 @@ void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data)
 	line_h = (int)(WINY / data->ray.perp_wall_dist);
 	y = ((WINY - line_h) >> 1);
 	texture_iter_d = 0.0;
-	step = (double)tx_size[Y] / line_h;
+	step = (double)tx_size[Y] / (line_h + 1);
 	if (y < 0)
 	{
 		texture_iter_d = step * -y;
@@ -66,7 +68,7 @@ void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data)
 	draw_end = y + line_h;
 	if (draw_end >= WINY)
 		draw_end = WINY - 1;
-	while (y <= draw_end && texture_iter_d < tx_size[Y])
+	while (y <= draw_end)
 	{
 		win[y * WINX] = texture[(int)texture_iter_d * tx_size[X]];
 		texture_iter_d += step;

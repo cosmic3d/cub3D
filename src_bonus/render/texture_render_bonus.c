@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_render_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 17:51:03 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:07:12 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data)
 	line_h = (int)(WINY / data->ray.perp_wall_dist);
 	y = ((WINY - line_h) >> 1) - data->map.offset_y;
 	texture_iter_d = 0.0;
-	step = (double)tx_size[Y] / line_h;
+	step = (double)tx_size[Y] / (line_h + 1);
 	if (y < 0)
 	{
 		texture_iter_d = step * -y;
@@ -68,7 +68,7 @@ void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data)
 	draw_end = y + line_h;
 	if (draw_end >= WINY)
 		draw_end = WINY - 1;
-	while (y <= draw_end && texture_iter_d < tx_size[Y])
+	while (y <= draw_end)
 	{
 		win[y * WINX] = texture[(int)texture_iter_d * tx_size[X]];
 		texture_iter_d += step;

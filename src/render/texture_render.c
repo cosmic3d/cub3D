@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/02 18:05:42 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:57:30 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	*get_texture_addr(t_data *data, t_img *texture)
 	int		*texture_addr;
 	double	wall_x;
 
-	// printf("addr = %p\n", texture->addr);
-	// printf("last = %p\n", texture->addr + texture->size[X] * texture->size[Y]);
 	if (data->ray.side[X] == 0)
 	{
 		wall_x = data->player.pos[X] + data->ray.perp_wall_dist * \

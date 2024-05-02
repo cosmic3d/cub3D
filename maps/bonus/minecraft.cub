@@ -1,0 +1,26 @@
+NO textures/minecraft/wood.xpm
+SO textures/minecraft/stone.xpm
+EA textures/minecraft/mossy.xpm
+WE textures/minecraft/brick.xpm
+F 30,170,70
+C 145,216,245
+
+DR textures/minecraft/door.xpm
+SP 0,0,0 6 20 textures/minecraft/diamond/
+
+111
+1O1111
+101101
+1011O11111111
+1011011110001
+1011011010O01
+1000001000001111
+100000000O00D001
+1000000000001101
+1100011D10010001
+ 110001000010111
+  1110001111011
+    10001  10O1
+    10001111001
+    1000W000011
+    1111111111

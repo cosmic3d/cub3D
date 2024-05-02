@@ -1,10 +1,10 @@
-NO ./resources/Rocky.xpm
-SO ./resources/Water.xpm
-WE ./resources/Magma.xpm
-EA ./resources/Brick_Wall_Cracked.xpm
+NO ./textures/minecraft/dirt.xpm
+SO ./textures/minecraft/cobblestone.xpm
+WE ./textures/minecraft/wood.xpm
+EA ./textures/minecraft/stone2.xpm
 
-F 255,255,255
-C ,,,
+F 0,0,0
+C 255,255,255
 
 1111111111111111111111111
 1000000000110000000000001

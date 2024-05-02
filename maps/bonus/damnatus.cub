@@ -6,7 +6,7 @@ WE                      textures/test/bloquexculo.xpm
 SO  textures/test/bloquexculo.xpm
 
 SP                   0,0,0           1   1      textures/test/damnatus_test/
-DR textures/door.xpm
+DR textures/wolf3d/door.xpm
 
 111111
 111101

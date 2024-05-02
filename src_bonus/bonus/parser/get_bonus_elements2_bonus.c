@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_get_file_elements2.c                         :+:      :+:    :+:   */
+/*   get_bonus_elements2_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:59:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/23 19:59:34 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:56:30 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ static int	get_color(char **line, t_data *data)
 	{
 		ft_strspn_skip(line, " \t");
 		if (!ft_isdigit(**line))
-			c3d_exit("1", data);
+			c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 		rgb[i] = ft_atoi(*line);
 		if (rgb[i] < 0 || rgb[i] > 255)
-			c3d_exit("2", data);
+			c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 		while (ft_isdigit(**line))
 			*line += 1;
 		if (i < 2 && **line != ',')
-			c3d_exit("3", data);
+			c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 		if (i == 2 && **line != ' ' && **line != '\t')
-			c3d_exit("4", data);
+			c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 		if (i < 2)
 			*line += 1;
 		i++;

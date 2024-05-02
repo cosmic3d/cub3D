@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/04/24 13:18:07 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:04:08 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	mousepressed(int button, int x, int y, t_data *data)
 	return (0);
 }
 
-int mousereleased(int button, int x, int y, t_data *data)
+int	mousereleased(int button, int x, int y, t_data *data)
 {
 	if (button == MOUSE_LEFTCLICK && x >= 0 && x < WINX && y >= 0 && y < WINY)
 		data->mouse.pressed = 0;

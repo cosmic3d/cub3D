@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   error_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:33:53 by apresas-          #+#    #+#             */
-/*   Updated: 2024/04/23 20:32:56 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:29:22 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int	c3d_close_window_exit(t_data *data)
 		mlx_destroy_window(data->mlx.mlx, data->mlx.window);
 	if (data->mlx.win_img)
 		free(data->mlx.win_img);
-	if (data->mlx.mlx)
-		free(data->mlx.mlx);
 	exit(EXIT_SUCCESS);
 	return (SUCCESS);
 }

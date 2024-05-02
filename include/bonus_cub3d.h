@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_cub3d.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 15:06:31 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:05:43 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,17 +133,17 @@ typedef struct s_object
 	double	dist;
 }				t_object;
 
-// typedef struct s_sprite_drawing_data
-// {
-// 	double	transform[2];
-// 	double	iter[2];
-// 	double	step[2];
-// 	double	iter_start_y;
-// 	int		on_screen_size[2];
-// 	int		size[2];
-// 	int		draw_start[2];
-// 	int		draw_end[2];
-// }				t_sprite_data;
+typedef struct s_sprite_utils_data
+{
+	double	transform[2];
+	double	iter[2];
+	double	step[2];
+	double	iter_start_y;
+	int		on_screen_size[2];
+	int		size[2];
+	int		draw_start[2];
+	int		draw_end[2];
+}				t_sprite_d;
 
 typedef struct s_img
 {
@@ -251,7 +251,6 @@ typedef struct s_data
 	t_ray		ray;
 	t_mouse		mouse;
 	t_sprite	sprite;
-	int			bonus;
 	double		zbuffer[WINX];
 	int			frame;// unnecessary
 }				t_data;

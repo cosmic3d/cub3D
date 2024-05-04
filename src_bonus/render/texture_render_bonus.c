@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_render_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:24:38 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/02 18:07:12 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/04 02:53:39 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,14 @@ void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data)
 		draw_end = WINY - 1;
 	while (y <= draw_end)
 	{
-		win[y * WINX] = texture[(int)texture_iter_d * tx_size[X]];
+		if (!inRange((int)texture_iter_d * tx_size[X], tx_size[X] * tx_size[Y]))
+			break ;
+		win[y++ * WINX] = texture[(int)texture_iter_d * tx_size[X]];
 		texture_iter_d += step;
-		y++;
 	}
+}
+
+int	inRange(int index, int texture_size)
+{
+	return (index >= 0 && index < texture_size);
 }

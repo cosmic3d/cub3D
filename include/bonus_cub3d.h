@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/04 01:57:44 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/04 02:53:28 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ invalid tile"
 
 //Macros for calculation values
 
-# define WINX 1920 //640
-# define WINY 1080 //360
+# define WINX 640 //640
+# define WINY 360 //360
 # define ROTATE_SPEED 0.1
 // # define MOVE_SPEE0D 0.1542
 # define MOVE_SPEED 0.1542
@@ -314,6 +314,7 @@ t_img		*get_texture(t_data *data);
 int			*get_texture_addr(t_data *data, t_img *texture);
 void		draw_vert_stripe(int *texture, int *win, \
 int tx_size[2], t_data *data);
+int			inRange(int index, int texture_size);
 
 // bonus_sprites.c
 void		bonus_draw_sprites(t_data *data, t_object *obj);

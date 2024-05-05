@@ -1,7 +1,7 @@
-NO ./resources/Wooden_Floor_Horizontal.xpm
-SO ./resources/Wooden_Floor_Horizontal.xpm
-WE ./resources/Wooden_Floor_Horizontal.xpm
-EA ./resources/Wooden_Floor_Horizontal.xpm
+NO textures/doom/STARTAN3.xpm
+SO textures/spelunky/este.xpm
+WE textures/wolf3d/south.xpm
+EA textures/test/bloquexculo.xpm
 
 C 171,118,30
 F 194,144,63

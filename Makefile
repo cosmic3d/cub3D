@@ -176,7 +176,7 @@ libft:
 
 minilibx:
 	@echo "$(BLUE)Make $(HIGHLIGHT)MiniLibX$(RESET)$(BLUE):$(RESET)"
-	@$(MAKE) --no-print-directory -sC $(MLX_DIR) &> /dev/null
+	@$(MAKE) --no-print-directory -sC $(MLX_DIR) > /dev/null
 	@echo "$(GREEN)MiniLibX compiled succesfully$(RESET)";
 
 clean:
@@ -219,6 +219,6 @@ bonus_run: bonus
 val: all
 	valgrind ./$(NAME) test.cub
 
-.PHONY: all libft minilibx clean fclean re title run bonus_run val
+.PHONY: all libft minilibx clean fclean re title title_bonus run bonus_run val
 -include $(DEPS)
 -include $(BONUS_DEPS)

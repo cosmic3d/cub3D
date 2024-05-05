@@ -1,7 +1,7 @@
-NO ./resources/Brick_Wall.xpm
-SO ./resources/Metal.xpm
-WE ./resources/Glowing_Square.xpm
-EA ./resources/Wooden_Floor_Vertical.xpm
+NO ./textures/minecraft/brick.xpm
+SO ./textures/minecraft/tnt.xpm
+WE ./textures/minecraft/diamond_ore.xpm
+EA ./textures/minecraft/sand.xpm
 
 F 255,0,255
 C 100,50,200

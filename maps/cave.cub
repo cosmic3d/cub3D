@@ -1,7 +1,7 @@
-NO ./resources/Rocky.xpm
-SO ./resources/Rocky.xpm
-WE ./resources/Rocky.xpm
-EA ./resources/Rocky.xpm
+NO ./textures/minecraft/cobblestone.xpm
+SO ./textures/minecraft/cobblestone.xpm
+WE ././././textures/.././textures/./minecraft/cobblestone.xpm
+EA ./../././cub3D/textures/minecraft/cobblestone.xpm
 
 F 136,134,130
 C 165,162,158

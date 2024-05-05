@@ -1,7 +1,7 @@
-NO textures/north.xpm
-SO textures/south.xpm
-WE textures/west.xpm
-EA textures/east.xpm
+NO textures/wolf3d/north.xpm
+SO textures/wolf3d/south.xpm
+WE textures/wolf3d/west.xpm
+EA textures/wolf3d/east.xpm
 
 C 165,162,158
 F 136,134,130

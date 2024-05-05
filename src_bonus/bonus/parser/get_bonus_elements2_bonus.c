@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:59:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 18:56:30 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:54:14 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	get_sprite_texture_count(char **line, t_data *data)
 	if (!ft_isdigit(**line))
 		c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 	sprite_texture_count = ft_atoi(*line);
-	if (sprite_texture_count < 0 || sprite_texture_count > 99)
+	if (sprite_texture_count <= 0 || sprite_texture_count > 99)
 		c3d_exit(ERR_FILE_FORMAT_ELEMENT, data);
 	ft_istype_skip_p(line, ft_isdigit);
 	ft_strspn_skip(line, " \t");

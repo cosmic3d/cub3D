@@ -8,10 +8,10 @@
     <em><code>The supreme raycaster</code></em>
 </p>
 <p align="center">
-	<img src="https://img.shields.io/github/license/apresas-97/cub3D.git?style=flat&color=0080ff" alt="license">
-	<img src="https://img.shields.io/github/last-commit/apresas-97/cub3D.git?style=flat&logo=git&logoColor=white&color=0080ff" alt="last-commit">
-	<img src="https://img.shields.io/github/languages/top/apresas-97/cub3D.git?style=flat&color=0080ff" alt="repo-top-language">
-	<img src="https://img.shields.io/github/languages/count/apresas-97/cub3D.git?style=flat&color=0080ff" alt="repo-language-count">
+	<img src="https://img.shields.io/github/license/apresas-97/cub3D?style=flat&color=fc2f0f" alt="license">
+	<img src="https://img.shields.io/github/last-commit/apresas-97/cub3D?style=flat&logo=git&logoColor=white&color=00afb5" alt="last-commit">
+	<img src="https://img.shields.io/github/languages/top/apresas-97/cub3D?style=flat&color=0080ff" alt="repo-top-language">
+	<img src="https://img.shields.io/github/languages/count/apresas-97/cub3D?style=flat&color=d611c9" alt="repo-language-count">
 <p>
 <p align="center">
 		<p align="center">Developed by <a href="https://github.com/apresas-97">😼​apresas-97</a> and <a href="https://github.com/cosmic3d">🌚​cosmic3d</a> with the software and tools below.</p>

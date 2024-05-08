@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_cub3d.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/04 02:53:28 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:29:48 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ invalid tile"
 
 //Macros for calculation values
 
-# define WINX 640 //640
-# define WINY 360 //360
+# define WINX 1920 //640
+# define WINY 1080 //360
 # define ROTATE_SPEED 0.1
 // # define MOVE_SPEE0D 0.1542
 # define MOVE_SPEED 0.1542
@@ -221,17 +221,6 @@ typedef struct s_mlx_data
 	t_img	*win_img;
 }				t_mlx;
 
-typedef struct s_texture
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line;
-	int		endian;
-	int		size[2];
-}				t_texture;
-
-//
 typedef struct s_sprite
 {
 	t_img	*img;
@@ -252,10 +241,7 @@ typedef struct s_data
 	t_mouse		mouse;
 	t_sprite	sprite;
 	double		zbuffer[WINX];
-	int			frame;// unnecessary
 }				t_data;
-
-// functions:
 
 // game_loop.c
 int			game_loop(t_data *data);

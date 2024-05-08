@@ -214,7 +214,7 @@ run: all
 	./$(NAME) test.cub
 
 bonus_run: bonus
-	./$(NAME) bonus_test.cub
+	./$(BONUS_NAME) maps/bonus/map.cub
 
 val: all
 	valgrind ./$(NAME) test.cub

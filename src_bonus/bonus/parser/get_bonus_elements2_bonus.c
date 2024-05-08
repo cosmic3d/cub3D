@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:59:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/02 14:54:14 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:39:26 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	*get_path_prefix(char *line, t_data *data)
 	if (path_aux[ft_strlen(path_aux) - 1] != '/')
 	{
 		free(path_aux);
-		c3d_exit("Sprite directory path must end with a '/'", data);
+		c3d_exit(ERR_SPRITE_PATH_FORMAT, data);
 	}
 	path_aux2 = ft_strjoin(path_aux, "sprite_");
 	free(path_aux);

@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:33:53 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 19:29:22 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:40:42 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	c3d_error(const char *error)
 }
 
 /* If an error is provided, c3d_error() will display it. Then, exit(1) is called
-If ERR_GENERIC is provided, no error is displayed, then exit(1) is called
+If ERR_NULL is provided, no error is displayed, then exit(1) is called
 If no error is provided, no error is displayed, then exit(0) is called */
 int	c3d_exit(const char *error, t_data *data)
 {

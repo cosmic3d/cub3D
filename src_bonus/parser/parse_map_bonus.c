@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:27:03 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 19:04:53 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:40:42 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	parse_map(t_data *data, char **file)
 	if (!file)
 		c3d_exit(ERR_NO_MAP_IN_FILE, data);
 	if (check_valid_map_characters(&data->map, file) == FAILURE)
-		c3d_exit(ERR_GENERIC, data);
+		c3d_exit(ERR_NULL, data);
 	data->map.grid = create_map_from_file(&data->map, file);
 	if (!data->map.grid)
 		c3d_exit(ERR_MALLOC, data);
 	if (check_map_is_surrounded(data->map.grid, data->map.size) == FAILURE)
-		c3d_exit(ERR_GENERIC, data);
+		c3d_exit(ERR_NULL, data);
 }
 
 static int	check_valid_map_characters(t_map *map, char **file)

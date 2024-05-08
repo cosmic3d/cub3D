@@ -1,12 +1,12 @@
-NO  textures/spelunky_textures/norte.xpm
+NO  textures/spelunky/norte.xpm
 C   64,46,22
-EA  textures/spelunky_textures/este.xpm
+EA  textures/spelunky/este.xpm
 F   153,118,23
-WE  textures/spelunky_textures/oeste.xpm
-SO  textures/spelunky_textures/sur.xpm
+WE  textures/spelunky/oeste.xpm
+SO  textures/spelunky/sur.xpm
 
-SP 0,0,255 9 6 textures/spelunky_sprites/
-DR textures/spelunky_textures/puerta.xpm
+SP 0,0,255 9 6 textures/spelunky/sprites/
+DR textures/spelunky/puerta.xpm
 
 111111
 111101

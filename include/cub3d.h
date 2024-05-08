@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 14:45:45 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/04 01:59:24 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,70 +205,71 @@ typedef struct s_data
 // functions:
 
 // game_loop.c
-int	game_loop(t_data *data);
+int			game_loop(t_data *data);
 
 // verify_arguments.c
-int		verify_arguments(int argc, char **argv);
+int			verify_arguments(int argc, char **argv);
 
 // init.c
-void	init_data(t_data *data);
+void		init_data(t_data *data);
 
 // init2.c
-void	init_ray_variables(t_ray *ray);
-void	init_mouse_variables(t_mouse *mouse);
+void		init_ray_variables(t_ray *ray);
+void		init_mouse_variables(t_mouse *mouse);
 
 // parser.c
-int		parser(t_data *data, char *filepath);
+int			parser(t_data *data, char *filepath);
 
 // store_file.c
-char	**store_file(char *filepath, t_data *data);
+char		**store_file(char *filepath, t_data *data);
 
 // get_file_elements.c
-int		get_file_elements(t_data *data, t_elements *elements, char **file);
-int		rgb_to_int(int red, int green, int blue);
+int			get_file_elements(t_data *data, t_elements *elements, char **file);
+int			rgb_to_int(int red, int green, int blue);
 
 // parse_map.c
-void	parse_map(t_data *data, char **file);
-void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);
-int		tile_is_exterior(char **grid, int y, int x, int size[2]);
+void		parse_map(t_data *data, char **file);
+void		get_player_spawn_and_dir(t_map *map, char player, int x, int y);
+int			tile_is_exterior(char **grid, int y, int x, int size[2]);
 
 // file_to_grid.c
-char	**create_map_from_file(t_map *map, char **file);
+char		**create_map_from_file(t_map *map, char **file);
 
 // render.c
-void	render(t_data *data);
+void		render(t_data *data);
 
 // raycaster.c
-void	init_raycasting(t_data *data);
+void		init_raycasting(t_data *data);
 
 // texture_render.c
-t_img	*get_texture(t_data *data);
-int		*get_texture_addr(t_data *data, t_img *texture);
-void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data);
+t_img		*get_texture(t_data *data);
+int			*get_texture_addr(t_data *data, t_img *texture);
+void		draw_vert_stripe(int *texture, int *win, \
+int tx_size[2], t_data *data);
 
 // error.c
-int		c3d_error(const char *error);
-int		c3d_exit(const char *error, t_data *data);
-int		c3d_close_window_exit(t_data *data);
+int			c3d_error(const char *error);
+int			c3d_exit(const char *error, t_data *data);
+int			c3d_close_window_exit(t_data *data);
 
 // hooks.c
-void	hook(t_data *data);
-int		keypressed(int keycode, t_data *data);
-int		mousemove(int x, int y, t_data *data);
-int		mousepressed(int button, int x, int y, t_data *data);
-int		mousereleased(int button, int x, int y, t_data *data);
+void		hook(t_data *data);
+int			keypressed(int keycode, t_data *data);
+int			mousemove(int x, int y, t_data *data);
+int			mousepressed(int button, int x, int y, t_data *data);
+int			mousereleased(int button, int x, int y, t_data *data);
 
 // movement.c
-void	rotate_player(t_data *data, double angle);
-void	move_forward(t_data *d);
-void	move_back(t_data *d);
-void	move_left(t_data *d);
-void	move_right(t_data *d);
+void		rotate_player(t_data *data, double angle);
+void		move_forward(t_data *d);
+void		move_back(t_data *d);
+void		move_left(t_data *d);
+void		move_right(t_data *d);
 
 // pixels.c
-t_img	*get_img(t_data *data, int width, int height);
-void	put_pixel(t_img *img, int x, int y, int color);
-t_uint	get_pixel_color(t_img *image, int x, int y);
+t_img		*get_img(t_data *data, int width, int height);
+void		put_pixel(t_img *img, int x, int y, int color);
+t_uint		get_pixel_color(t_img *image, int x, int y);
 
 // // debug.c
 // void	print_map_grid(t_data *data);

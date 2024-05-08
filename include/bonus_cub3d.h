@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_cub3d.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 19:05:43 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/04 02:53:28 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef BONUS_CUB3D_H
+# define BONUS_CUB3D_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -119,8 +119,8 @@ invalid tile"
 
 //Macros for calculation values
 
-# define WINX 1920 //640
-# define WINY 1080 //360
+# define WINX 640 //640
+# define WINY 360 //360
 # define ROTATE_SPEED 0.1
 // # define MOVE_SPEE0D 0.1542
 # define MOVE_SPEED 0.1542
@@ -258,94 +258,96 @@ typedef struct s_data
 // functions:
 
 // game_loop.c
-int	game_loop(t_data *data);
+int			game_loop(t_data *data);
 
 // verify_arguments.c
-int		verify_arguments(int argc, char **argv);
+int			verify_arguments(int argc, char **argv);
 
 // init.c
-void	init_data(t_data *data);
+void		init_data(t_data *data);
 
 // bonus_sprites2.c
-void	init_sprite_images(t_data *data);// recolocar
+void		init_sprite_images(t_data *data);// recolocar
 
 // init2.c
-void	init_ray_variables(t_ray *ray);
-void	init_mouse_variables(t_mouse *mouse);
+void		init_ray_variables(t_ray *ray);
+void		init_mouse_variables(t_mouse *mouse);
 
 // parser.c
-int		parser(t_data *data, char *filepath);
+int			parser(t_data *data, char *filepath);
 
 // store_file.c
-char	**store_file(char *filepath, t_data *data);
+char		**store_file(char *filepath, t_data *data);
 
 // get_file_elements.c
-int		get_file_elements(t_data *data, t_elements *elements, char **file);
-int		rgb_to_int(int red, int green, int blue);
+int			get_file_elements(t_data *data, t_elements *elements, char **file);
+int			rgb_to_int(int red, int green, int blue);
 
 // bonus_get_file_elements.c
-int		get_bonus_elements(t_data *data, char **file);
+int			get_bonus_elements(t_data *data, char **file);
 
 // bonus_get_file_elements2.c
-int		get_transparency_color(char **line, t_data *data);
-int		get_sprite_texture_count(char **line, t_data *data);
-char	*get_path_prefix(char *line, t_data *data);
-char	*get_full_path(char *prefix, int i, t_data *data);
+int			get_transparency_color(char **line, t_data *data);
+int			get_sprite_texture_count(char **line, t_data *data);
+char		*get_path_prefix(char *line, t_data *data);
+char		*get_full_path(char *prefix, int i, t_data *data);
 
 // parse_map.c
-void	parse_map(t_data *data, char **file);
-void	get_player_spawn_and_dir(t_map *map, char player, int x, int y);
-int		tile_is_exterior(char **grid, int y, int x, int size[2]);
+void		parse_map(t_data *data, char **file);
+void		get_player_spawn_and_dir(t_map *map, char player, int x, int y);
+int			tile_is_exterior(char **grid, int y, int x, int size[2]);
 
 // file_to_grid.c
-char	**create_map_from_file(t_map *map, char **file);
+char		**create_map_from_file(t_map *map, char **file);
 
 // bonus_parse_map.c
-void	bonus_parse_map(t_data *data, char **file);
+void		bonus_parse_map(t_data *data, char **file);
 
 // render.c
-void	render(t_data *data);
+void		render(t_data *data);
 
 // raycaster.c
-void	init_raycasting(t_data *data);
+void		init_raycasting(t_data *data);
 
 // texture_render.c
-t_img	*get_texture(t_data *data);
-int		*get_texture_addr(t_data *data, t_img *texture);
-void	draw_vert_stripe(int *texture, int *win, int tx_size[2], t_data *data);
+t_img		*get_texture(t_data *data);
+int			*get_texture_addr(t_data *data, t_img *texture);
+void		draw_vert_stripe(int *texture, int *win, \
+int tx_size[2], t_data *data);
+int			inRange(int index, int texture_size);
 
 // bonus_sprites.c
-void	bonus_draw_sprites(t_data *data, t_object *obj);
+void		bonus_draw_sprites(t_data *data, t_object *obj);
 
 // bonus_minimap.c
-void	draw_minimap(t_data *data, int *window);
+void		draw_minimap(t_data *data, int *window);
 
 // error.c
-int		c3d_error(const char *error);
-int		c3d_exit(const char *error, t_data *data);
-int		c3d_close_window_exit(t_data *data);
+int			c3d_error(const char *error);
+int			c3d_exit(const char *error, t_data *data);
+int			c3d_close_window_exit(t_data *data);
 
 // hooks.c
-void	hook(t_data *data);
-int		keypressed(int keycode, t_data *data);
-int		mousemove(int x, int y, t_data *data);
-int		mousepressed(int button, int x, int y, t_data *data);
-int		mousereleased(int button, int x, int y, t_data *data);
+void		hook(t_data *data);
+int			keypressed(int keycode, t_data *data);
+int			mousemove(int x, int y, t_data *data);
+int			mousepressed(int button, int x, int y, t_data *data);
+int			mousereleased(int button, int x, int y, t_data *data);
 
 // movement.c
-void	rotate_player(t_data *data, double angle);
-void	move_forward(t_data *d);
-void	move_back(t_data *d);
-void	move_left(t_data *d);
-void	move_right(t_data *d);
+void		rotate_player(t_data *data, double angle);
+void		move_forward(t_data *d);
+void		move_back(t_data *d);
+void		move_left(t_data *d);
+void		move_right(t_data *d);
 
 // bonus_door.c
-void	interact_door(t_data *data);
+void		interact_door(t_data *data);
 
 // pixels.c
-t_img	*get_img(t_data *data, int width, int height);
-void	put_pixel(t_img *img, int x, int y, int color);
-t_uint	get_pixel_color(t_img *image, int x, int y);
+t_img		*get_img(t_data *data, int width, int height);
+void		put_pixel(t_img *img, int x, int y, int color);
+t_uint		get_pixel_color(t_img *image, int x, int y);
 
 // // debug.c
 // void	print_map_grid(t_data *data);

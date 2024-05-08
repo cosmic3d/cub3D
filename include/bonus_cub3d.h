@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:29:48 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:32:30 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@
 # ifdef __APPLE__
 #  include "../libs/minilibx_macos/mlx.h"
 # endif
-
-// Textures
-/*
-int	rgb_floor(int range)
-{
-	return ((FLOOR >> range) & 0xFF);
-}
-// Where range is RED, GREEN or BLUE
-*/
 
 // Redefining macros that for some reason in my case are wanky
 # ifdef __linux__

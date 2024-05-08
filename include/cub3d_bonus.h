@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_cub3d.h                                      :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:41:41 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:50:28 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BONUS_CUB3D_H
-# define BONUS_CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -327,14 +327,4 @@ t_img		*get_img(t_data *data, int width, int height);
 void		put_pixel(t_img *img, int x, int y, int color);
 t_uint		get_pixel_color(t_img *image, int x, int y);
 
-// // debug.c
-// void	print_map_grid(t_data *data);
-// void	print_map_elements(t_data *data);
-// void	debug_check(void);
-// void	print_data(t_data *data);
-// void	imprimirArray2D(t_data *data);
-
-// //utils.c
-// double	deg_to_rad(double deg);
-
-#endif // CUB3D_H
+#endif // CUB3D_BONUS_H

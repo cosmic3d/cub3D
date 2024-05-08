@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:44:58 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:48:32 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,11 +260,5 @@ t_img		*get_img(t_data *data, int width, int height);
 void		put_pixel(t_img *img, int x, int y, int color);
 t_uint		get_pixel_color(t_img *image, int x, int y);
 
-// // debug.c
-// void	print_map_grid(t_data *data);
-// void	print_map_elements(t_data *data);
-// void	debug_check(void);
-// void	print_data(t_data *data);
-// void	imprimirArray2D(t_data *data);
 
 #endif // CUB3D_H

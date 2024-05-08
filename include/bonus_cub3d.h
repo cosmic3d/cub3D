@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:32:30 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:41:41 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,13 @@ in an invalid tile"
 in an invalid tile"
 # define ERR_MAP_DOOR_INVALID "Incorrect map format, a door was found in an \
 invalid tile"
+# define ERR_SPRITE_PATH_FORMAT "Sprite directory path must end with a '/'"
 
 // Fatal errors
 # define ERR_MALLOC "Memory allocation failed"
 
-// Generic error for exit without printing an error message but EXIT_FAILURE
-# define ERR_GENERIC ""
+// Empty error message for exit with EXIT_FAILURE without printing an error
+# define ERR_NULL ""
 
 //Useful macros
 # define TRUE 1

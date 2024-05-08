@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:40:42 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:44:58 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,8 +192,6 @@ typedef struct s_data
 	t_player	player;
 	t_ray		ray;
 }				t_data;
-
-// functions:
 
 // game_loop.c
 int			game_loop(t_data *data);

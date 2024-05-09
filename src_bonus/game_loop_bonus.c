@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:40:42 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:49:41 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:56:46 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	game_loop(t_data *data)
 {
 	static int	frame;
+
 	frame++;
 	render(data);
 	if (frame % data->sprite.framerate == 0)

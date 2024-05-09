@@ -32,7 +32,6 @@ BONUS_SRC_FILES = \
     bonus/parser/get_bonus_elements2_bonus.c \
     bonus/parser/parse_map_bonus.c \
     bonus/render/minimap_bonus.c \
-    bonus/render/sprites2_bonus.c \
     bonus/render/sprites_bonus.c \
     error_bonus.c \
     game_loop_bonus.c \

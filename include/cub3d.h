@@ -6,7 +6,7 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:48:32 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:53:08 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,5 @@ void		move_right(t_data *d);
 t_img		*get_img(t_data *data, int width, int height);
 void		put_pixel(t_img *img, int x, int y, int color);
 t_uint		get_pixel_color(t_img *image, int x, int y);
-
 
 #endif // CUB3D_H

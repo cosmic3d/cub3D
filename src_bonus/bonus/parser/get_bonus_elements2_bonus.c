@@ -6,11 +6,11 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:59:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/02 14:54:14 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:49:41 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus_cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	get_color(char **line, t_data *data);
 
@@ -104,7 +104,7 @@ char	*get_path_prefix(char *line, t_data *data)
 	if (path_aux[ft_strlen(path_aux) - 1] != '/')
 	{
 		free(path_aux);
-		c3d_exit("Sprite directory path must end with a '/'", data);
+		c3d_exit(ERR_SPRITE_PATH_FORMAT, data);
 	}
 	path_aux2 = ft_strjoin(path_aux, "sprite_");
 	free(path_aux);

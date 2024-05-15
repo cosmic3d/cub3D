@@ -6,11 +6,11 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:11:37 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 19:05:15 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:49:41 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus_cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	init_mlx(t_data *data);
 static void	init_map_variables(t_map *map);
@@ -33,7 +33,6 @@ void	init_data(t_data *data)
 	data->sprite.img = NULL;
 	data->sprite.transparency_color = 0;
 	data->sprite.frames = 0;
-	data->frame = 0;
 	i = 0;
 	while (i < WINX)
 		data->zbuffer[i++] = 0.0;

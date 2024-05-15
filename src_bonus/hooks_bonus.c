@@ -6,11 +6,11 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:42:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2024/05/01 19:04:08 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:49:41 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus_cub3d.h"
+#include "cub3d_bonus.h"
 
 void	hook(t_data *data)
 {

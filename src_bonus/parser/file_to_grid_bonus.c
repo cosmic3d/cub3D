@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   file_to_grid_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:32:00 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 17:51:14 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:49:41 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus_cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	get_map_height(char **file);
 static int	get_map_width(char **file);

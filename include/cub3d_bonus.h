@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_cub3d.h                                      :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/04 02:53:28 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:50:28 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BONUS_CUB3D_H
-# define BONUS_CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -31,15 +31,6 @@
 # ifdef __APPLE__
 #  include "../libs/minilibx_macos/mlx.h"
 # endif
-
-// Textures
-/*
-int	rgb_floor(int range)
-{
-	return ((FLOOR >> range) & 0xFF);
-}
-// Where range is RED, GREEN or BLUE
-*/
 
 // Redefining macros that for some reason in my case are wanky
 # ifdef __linux__
@@ -87,12 +78,13 @@ in an invalid tile"
 in an invalid tile"
 # define ERR_MAP_DOOR_INVALID "Incorrect map format, a door was found in an \
 invalid tile"
+# define ERR_SPRITE_PATH_FORMAT "Sprite directory path must end with a '/'"
 
 // Fatal errors
 # define ERR_MALLOC "Memory allocation failed"
 
-// Generic error for exit without printing an error message but EXIT_FAILURE
-# define ERR_GENERIC ""
+// Empty error message for exit with EXIT_FAILURE without printing an error
+# define ERR_NULL ""
 
 //Useful macros
 # define TRUE 1
@@ -119,8 +111,8 @@ invalid tile"
 
 //Macros for calculation values
 
-# define WINX 640 //640
-# define WINY 360 //360
+# define WINX 1920 //640
+# define WINY 1080 //360
 # define ROTATE_SPEED 0.1
 // # define MOVE_SPEE0D 0.1542
 # define MOVE_SPEED 0.1542
@@ -221,17 +213,6 @@ typedef struct s_mlx_data
 	t_img	*win_img;
 }				t_mlx;
 
-typedef struct s_texture
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line;
-	int		endian;
-	int		size[2];
-}				t_texture;
-
-//
 typedef struct s_sprite
 {
 	t_img	*img;
@@ -252,10 +233,7 @@ typedef struct s_data
 	t_mouse		mouse;
 	t_sprite	sprite;
 	double		zbuffer[WINX];
-	int			frame;// unnecessary
 }				t_data;
-
-// functions:
 
 // game_loop.c
 int			game_loop(t_data *data);
@@ -349,14 +327,4 @@ t_img		*get_img(t_data *data, int width, int height);
 void		put_pixel(t_img *img, int x, int y, int color);
 t_uint		get_pixel_color(t_img *image, int x, int y);
 
-// // debug.c
-// void	print_map_grid(t_data *data);
-// void	print_map_elements(t_data *data);
-// void	debug_check(void);
-// void	print_data(t_data *data);
-// void	imprimirArray2D(t_data *data);
-
-// //utils.c
-// double	deg_to_rad(double deg);
-
-#endif // CUB3D_H
+#endif // CUB3D_BONUS_H

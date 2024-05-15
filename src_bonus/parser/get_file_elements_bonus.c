@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_elements_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:07:58 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 17:51:15 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:49:41 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus_cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	get_texture_element(char *line, t_data *data, t_img *texture);
 static int	get_color_element(char *line, t_data *data, int *color);

@@ -6,11 +6,11 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:32:37 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 19:04:41 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:49:41 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus_cub3d.h"
+#include "cub3d_bonus.h"
 
 static int		bonus_check_valid_map_characters(t_map *map, char **file);
 static int		bonus_check_map_is_surrounded(char **grid, int size[2]);
@@ -24,12 +24,12 @@ void	bonus_parse_map(t_data *data, char **file)
 	if (!file)
 		c3d_exit(ERR_NO_MAP_IN_FILE, data);
 	if (bonus_check_valid_map_characters(&data->map, file) == 1)
-		c3d_exit(ERR_GENERIC, data);
+		c3d_exit(ERR_NULL, data);
 	data->map.grid = create_map_from_file(&data->map, file);
 	if (!data->map.grid)
 		c3d_exit(ERR_MALLOC, data);
 	if (bonus_check_map_is_surrounded(data->map.grid, data->map.size) == 1)
-		c3d_exit(ERR_GENERIC, data);
+		c3d_exit(ERR_NULL, data);
 	data->map.objects = count_objects_in_map(data->map.size, data->map.grid);
 	data->objects = get_objects_array(data, data->map.objects);
 }

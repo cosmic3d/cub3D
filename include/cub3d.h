@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:40:32 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/04 01:59:24 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:53:08 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,6 @@
 # ifdef __APPLE__
 #  include "../libs/minilibx_macos/mlx.h"
 # endif
-
-// Textures
-/*
-int	rgb_floor(int range)
-{
-	return ((FLOOR >> range) & 0xFF);
-}
-// Where range is RED, GREEN or BLUE
-*/
 
 // Redefining macros that for some reason in my case are wanky
 # ifdef __linux__
@@ -96,7 +87,7 @@ invalid tile"
 # define ERR_MALLOC "Memory allocation failed"
 
 // Generic error for exit without printing an error message but EXIT_FAILURE
-# define ERR_GENERIC ""
+# define ERR_NULL ""
 
 //Useful macros
 # define TRUE 1
@@ -202,8 +193,6 @@ typedef struct s_data
 	t_ray		ray;
 }				t_data;
 
-// functions:
-
 // game_loop.c
 int			game_loop(t_data *data);
 
@@ -270,12 +259,5 @@ void		move_right(t_data *d);
 t_img		*get_img(t_data *data, int width, int height);
 void		put_pixel(t_img *img, int x, int y, int color);
 t_uint		get_pixel_color(t_img *image, int x, int y);
-
-// // debug.c
-// void	print_map_grid(t_data *data);
-// void	print_map_elements(t_data *data);
-// void	debug_check(void);
-// void	print_data(t_data *data);
-// void	imprimirArray2D(t_data *data);
 
 #endif // CUB3D_H

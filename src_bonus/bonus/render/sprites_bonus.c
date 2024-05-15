@@ -6,11 +6,11 @@
 /*   By: apresas- <apresas-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:20:23 by apresas-          #+#    #+#             */
-/*   Updated: 2024/05/01 19:05:46 by apresas-         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:49:41 by apresas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus_cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	sort_objects_by_distance(t_object *sprites, t_player p, int count);
 static void	get_sprite_transform(t_sprite_d *d, t_player *p, t_object s);
